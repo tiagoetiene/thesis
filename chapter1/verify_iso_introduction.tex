@@ -1,0 +1,85 @@
+\section{Introduction}
+\label{chap1:sec:intro}
+
+In this age of scientific computing, 
+the simulation science pipeline of mathematical
+modeling, simulation and evaluation is
+a rendition of the scientific method as commonly employed as
+the traditional experimental pipeline.
+Critical to this simulation approach is
+the evaluation stage in which numerical
+data are post-processed, visualized and 
+then examined in order to answer the original
+queries that instigated the investigation.
+In fact, visualization of scientific results has become
+as much a part of the scientific process as 
+mathematical modeling or numerical simulation.  
+% CITATION NEEDED.
+
+Despite its growing importance in the
+scientific computing process, visualization has not fallen under the same
+rigorous scrutiny as other components of the pipeline
+like mathematical modeling and numerical simulation.
+Unlike in traditional computational science and engineering areas,
+there is no commonly accepted framework for verifying the accuracy, reliability, 
+and robustness of visualization tools. This precludes
+a precise quantification of the visualization error budget in the 
+larger scientific pipeline.
+Furthermore, very few investigations have focused on how the error originating from 
+other components of the computational pipeline
+impacts visualization algorithms. % CITATION NEEDED
+
+In this work, we advocate the use of techniques from the
+\emph{verification and validation} process used in the engineering
+community (Section~\ref{chap1:sec:vv} presents V\&V in more detail). While
+the lack of a well-established framework for verifying visualization
+tools has meant that a variety of analysis techniques have been
+developed~\cite{zhou01,tory04}, we believe that visualization 
+has achieved sufficient importance to warrant investigation of
+stricter verification methodologies. Several authors have
+already asserted this need~\cite{globus95,kirby-vv-08}, and in this work we
+present techniques that are a concrete step towards reducing the
+gap between best practices in simulation science and visualization.
+
+
+The purpose of this work is to present a verification methodology
+for visualization tools that has comparable rigor to that of other 
+components of the computational scientific pipeline. More specifically, we set out
+to define a verification methodology in the mold of the area of V\&V, 
+in the context of visualization.
+Furthermore, we illustrate our proposal by testing several publicly 
+available isosurface extraction
+codes to the verification procedure, giving a detailed 
+description of the steps involved in the process.
+
+It is important to emphasize that the point of verification procedures
+is not to compare algorithms to one other with
+the hope of finding the best alternative.
+This procedure equips developers of new algorithms and/or 
+implementations with a process that provides a systematic way 
+of identifying and correcting errors in both algorithms and implementations.
+The goal is to provide users with a methodology that will give them a
+more concrete model for the behavior of the implementation, which will
+increase confidence in the visualization tools. 
+As we will show, a fair verification analysis can 
+bring out unforeseen behavior, and quickly detect implementation problems that
+might not be caught through standard comparisons or visual inspection.
+
+The contributions of this work are threefold. To the best of our
+knowledge, we, for the first time, apply the framework of 
+verification to assess the correctness of visualization tools.
+Furthermore, we provide a detailed description of how to accomplish the 
+verification procedure by subjecting different isosurfacing tools 
+to the battery of tests comprising the V\&V process. 
+Our second contribution is the underlying mathematical analysis and associated 
+manufactured solutions developed to analyze the isosurfacing methods.
+We should clarify that when applying MMS for other techniques (even in
+the case of isosurface extraction), the theoretical analysis should be
+tailored to the particular features of these algorithms.
+
+The manufactured solutions presented here are simple but
+general enough to be promptly employed for evaluating other 
+visualization tools besides isosurfacing.
+Our third contribution is a comprehensive set of results obtained
+using the technique, including the finding of implementation errors in
+two publicly available isosurface extraction codes.

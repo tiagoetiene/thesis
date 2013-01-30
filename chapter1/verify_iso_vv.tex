@@ -1,0 +1,147 @@
+\section{Validation and Verification}
+\label{chap1:sec:vv}
+
+In this section we provide a brief introduction to the idea of
+\emph{verification and validation} (V\&V), and in particular, its
+application in visualization scenarios. We will also review 
+efforts to verify implementations in the specific context of
+isosurface extraction.
+% In the specific context of
+% isosurface extraction, we 
+% In this section we provide a brief discussion as to what is meant by
+% validation and verification (V\&V) in visualization, and also to
+% point out what is not meant by V\&V in visualization.  Both are
+% equally important issues to clarify.
+% As we are proposing a framework to verify isosurface extraction 
+% codes, this section also brings an overview of works
+% devoted to analyze the behavior and properties of some
+% isosurfacing algorithms without worrying though with the
+% correctness of the codes.
+
+% \subsection{Validation and Verification within Visualization}
+
+Babu\v{s}ka and Oden define verification as ``the process of determining
+if a computational model obtained by discretizing a mathematical model
+of a physical event and the code implementing the computational model
+can be used to represent the mathematical model of the event with
+sufficient accuracy'' \cite{babuska04}.  Although they review the concept 
+only in the context of computational science and engineering applications, 
+it is important to appreciate that the same idea applies to
+scientific visualization. \emph{Verification is about investigating to
+what extent a (numerical) approximation scheme -- both in algorithm
+and corresponding implementation -- represents the desired mathematical
+model}. Validation, on the other hand, is about ensuring that the
+model represents physical reality. In this paper, we will concern
+ourselves only with verification, under the assumption that the 
+model has been validated by the user of the technique. This is the
+perspective Kirby and Silva suggest for ``Verifiable Visualization''
+\cite{kirby-vv-08}.
+
+% A solid introduction to the concepts of validation and verification 
+% as they apply to computational science and engineering was
+% provided by Babuska and Oden in \cite{BabuskaO4}. 
+% In accordance with Babuska and Oden verification can be defined as
+
+% Although verification is only one component comprising the
+% V\&V process (for the complete description of the V\&V process
+% see~\cite{BabuskaO4}), it represents the core element as to inspect the
+% computational side of the modern scientific experimentation. As visualization mostly
+% relies on computational procedures, Kirby and Silva \cite{kirby-vv-08} 
+% suggest recently to extend the V\&V idea to what they call ``Verifiable Visualization''.
+
+One of the main requirements for verifiable visualization is to have 
+a rigorous analysis which predicts the results of the algorithm and
+its implementation when evaluating it on a known model problem.  The
+more complete this analysis is, the more thorough the testing procedures
+can be. This \emph{continuous process} of verification through refinement
+of key controllable input parameters of the method (such as grid spacing) 
+and testing is different from a one-shot process.
+%
+% The purpose of verifiable visualization is not to declare, at the outset, that
+% a particular algorithm and implementation has been verified
+% in the same way that a drug is declared FDA approved; rather,
+%
+The verification process should involve a suite of tests with
+corresponding results from which one can
+progressively increase reliance on the method under analysis. 
+When appropriately applied, verification 
+provides ways to appreciate the nuances of the applicability of the
+method. As we will see in this paper, writing down the analysis for the
+expected result of isosurface extraction gives us concrete
+bounds on what features we can expect the resulting surface to have,
+and these are extremely important for users.
+
+% carlos: This is a really angry paragraph - we'll piss off readers
+% this way.
+%
+% A common practice by the visualization community is to attempt a form of 
+% verification through elementary tests towards 
+% verifying the basic running of a visualization technique, 
+% and then use that visualization technique on 
+% ``real-world'' data.  
+% What is the value of running on
+% realistic data?  Many have convinced themselves that this
+% is the means of convincing their intended audience of
+% the wide applicability of their methodology.  However,
+% from the computational science and engineering perspective, 
+% the value of ``real data'' is that it helps to provide
+% a scenario in which things can fail -- a scenario 
+% that provides insight into how the method performs.
+% The challenge, in part, within the visualization community 
+% is to devise manufactured test cases which by
+% application of a visualization technique provide a
+% quantitative means of assessing success or failure 
+% (or gradations therein).
+%
+% carlos: this is the structure 
+% People typically use ``real data'' to test techniques. They should
+% instead write down a model, expected outcomes, and see if their algos
+% satisfy that. As we will show in Section foo, this not only helps pin
+% down the characteristics of the technique, but is very effective at
+% uncovering subtle bugs in the implementation.
+
+A common practice in the visualization community is to test
+implementations by using complicated, ``real-world'' datasets. The
+value of these tests is that they provide evidence of the algorithm's applicability. We
+advocate a complementary approach: developers should carefully
+manufacture test cases that can be mathematically modeled and
+analyzed, called \emph{manufactured solutions}. These manufactured
+solutions can then be used to test the implementations. In this paper, we present
+analysis that describe the expected rate of convergence of several
+isosurface features, and test implementations acting on our model problems
+using simple analytical volumes. As we show in Sections~\ref{chap1:sec:iea} 
+and~\ref{chap1:sec:res}, this method helps pin down the mathematical characteristics 
+of the technique, and, more practically, it is quite effective at uncovering 
+implementation bugs.
+
+%between simple to ``real'' to 
+%be populated with manufactured solutions which by
+%application of a visualization technique provide a
+%quantitative means of assessing success or failure 
+%(or gradations therein).  
+% The key is to appreciate that
+% all forms of approximation require compromise, and that
+% it is imperative to the scientific effort to know
+% both the strengths and weaknesses of the methods 
+% which we employ.
+
+% Manufactured solutions should not be those solutions
+% which help demonstrate the features of a method.  
+% These solutions, often generated and
+% prominently displaced as the motivation or teaser
+% of a method are often numerous and easy to construct.  
+
+The challenge behind manufactured solutions is to construct them in a
+way that allows us to predict the expected behavior of the method
+under investigation.  Moreover, the manufactured solutions should tax
+the method vigorously, bringing out potential problems. In
+Section~\ref{chap1:sec:dis}, we will present some situations where
+incorrectly chosen manufactured solutions have a big impact in the
+results.  We do so to emphasize that all components of the pipeline,
+even the construction and evaluation of the manufactured solutions,
+must be meticulously handled to maintain the rigor of the verification
+process.
+
+
+%
+

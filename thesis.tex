@@ -1,0 +1,114 @@
+\documentclass[11pt,Chicago]{uuthesis}
+\usepackage{amsfonts,amsthm,mathrsfs}
+\usepackage{amsmath,amssymb}
+\usepackage[mathscr]{euscript}
+\usepackage{thesis}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{latexsym}
+\usepackage{flafter}
+\usepackage{afterpage}
+\usepackage{algorithm}
+\usepackage{clrscode}
+\usepackage{wrapfig}
+\usepackage{multirow}
+ \usepackage{booktabs}
+
+
+
+\usepackage{color}
+\usepackage[table]{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.4, 0.0}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
+\definecolor{darkred}{rgb}{0.6, 0.0, 0.0}
+
+% Make sure subfigures have parentheses around them everywhere
+%\renewcommand\thesubfigure{(\alph{subfigure})}
+% Make sure subfigures have parentheses around them everywhere
+%\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\usepackage{lscape}
+%\usepackage{diagram}
+%\usepackage{tgrind}
+\let \tenrm = \rm 		% This is used in fig*.tex
+%\includeonly{}                    % Only front matter and back matter
+%\includeonly{chap1}               %  plus chapter 1
+%\includeonly{chap2}                %  plus chapter 2
+%\includeonly{chap3}                %  plus chapter 3
+%\includeonly{appA}                %  plus chapter 3
+%\includeonly{chap1,chap2,chap3,chap4}   %  plus all chapters
+%\includeonly{chap1,chap2,chap3,chap4,appA}   %  plus all chapters & appendix
+%
+%\tracingstats=2                % show TeX memory usage
+\title{Towards the Theory and Practice of \protect\\ Verifying Visualizations}
+\author{Tiago Etiene}
+\thesistype{thesis} % or dissertation
+\graduatedean{Graduate Dean's name}
+\department{Computer Science}
+\degree{Doctor of Philosophy}  % of Doctor of Philosophy
+\departmentchair{First M. Last}
+\committeechair{First M. Last}
+\firstreader{First M. Last}
+\secondreader{First M. Last}
+%\thirdreader{First M. Last}
+%\fourthreader{First M. Last}
+\chairtitle{Professor}
+\submitdate{February 2013}
+\copyrightyear{2013}
+% Chapter is one level, section and subsection are the next two levels.
+\fourlevels
+%\dedication{For my horse, Dixie, etc. A few lines only.}
+ \inputpicturetrue  % By Jeff McGough. See uuguide and private thesis.sty
+%\inputpicturefalse % To NOT produce pictures, uncomment this line
+
+
+\input{variables.tex}
+
+
+
+\begin{document}
+%% Comment out items by inserting a percent % character
+\frontmatterformat
+\titlepage
+\copyrightpage
+\committeeapproval
+%\readingapproval
+\preface{abstract}{Abstract}
+%\dedicationpage
+%\begin{epigraph}
+%``Nature is trying very hard to make us succeed, but nature does not depend on us. We are not the only experiment.''
+%\begin{flushright} -- R. Buckminster Fuller \par\end{flushright}
+%\end{epigraph}
+\setcounter{tocdepth}{4}    %How many levels to include in TOC
+\addtocontents{toc}{\protect\sloppy}    %Keeps long chapters within page # margins
+\tableofcontents
+\listoffigures
+\listoftables
+%
+% Optional front page, made from source "notation.tex".
+% If you don't need it, then don't use it.
+%
+%\optionalfront{Notation and Symbols}{\input{notation.tex}}
+\preface{acknowledge}{Acknowledgments}
+\maintext       % Start normal page numbering. Parts and chapters follow.
+\include{chapter1/chap1}
+\include{chapter2/chap2}
+%\include{chap3}
+%\include{chap4}
+\include{chapter5/chap5}
+%\numberofappendices=2   % Set 0 for none, else number of appendices.
+%\appendix       				% Chapters and sections are now appendix style
+%\include{appA}
+%\include{appB}
+
+%
+% The choice of bibliography style is a major decision, jointly made
+% by you, your thesis advisor and the thesis editor. Common choices are
+% "siam", "acm", "amsplain", "plain", "chicago".
+%
+
+%Uncomment and use desired bibliography style
+%\bibliographystyle{IEEEtran}
+\bibliographystyle{acm}
+\bibliography{thesis}
+\end{document}
