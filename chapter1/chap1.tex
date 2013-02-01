@@ -1,17 +1,19 @@
-\chapter{Geometry of Isosurfaces}\label{chap1}
+\chapter{Introduction}
 
-Bla Bla Bla 
+The scientific method can be subdivided into four steps: observations; hypothesis creation; predictions; and analysis. Details on how to perform each of these steps are different depending on the field. A particular important step in the process of deriving a valid scientific theory is the process of \emph{falsification}. Falsifiability  is concerned to whether a particular statement can be proven false \cite{KarlPopper}. In the scientific method, instead of trying to repeatedly prove that a statement or theory is true, one should strive for prove that it is false. A classic example is related to Einstein theory of general relativity. In order to strengthen his argument, Einstein and colleagues devise a risky experiment: they assumed that the light coming from a given galaxy far away would be bended the massive size of the Sun, and would make it appear shifted in relation to its original position. Moreover, the same star could be observed in two different location, as seen from Earth. These last two observation are not intuitive and can be considered to be risky observation: if they are not observed, than the theory can be refuted. On the other hand, if these events are observed as predicted, nothing can be said about the truth of the theory, aside from the fact that it has not been proved wrong and has stood risky tests. The more a theory is tested, the more trustworthy it becomes. 
+This is of course a simplified analysis. There are may exist other explanations for the failures of an prediction: for instance, due to defects in the instruments used. Once these barriers are put aside, the prediction of a given theory is should be observed. A good scientific theory is hard to build variants \cite{The-beginning-of-infinity}, or, one can say, that a good theory is very sensitive.
 
-\input{chapter1/verify_iso_introduction}
-%
-\input{chapter1/verify_iso_vv}
-%
-\input{chapter1/verify_iso_prevwork}
-%
-\input{chapter1/verify_iso_framework}
-%
-\input{chapter1/verify_iso_results}
-%
-\input{chapter1/verify_iso_discussion}
-%
-\input{chapter1/verify_iso_conclusions}
+The sensitivity of a theory thus requires that given statement to be carefully tested: problems during the test phase may cause the theory to be wrongly convicted of falsity. Thus, the scientific community have developed several ways of increasing the reliability of their tests: statistic: powerful statistical methods have been developed; mathematical models were improved; computational models have been built, among others.  Each of the tools cited previously, is, in itself, has is also critically verified. Theorems have to be revised; statistical methods needs to be improved; computational models must be verified.  Thus, the reliability of scientific theories is directly related to the methodology used. In many of the sub steps involved in the creation of a scientific theory, the scientific methodology can be applied in order to increase our confidence that an individual part of the method is correct. Clearly, this is not always the case: a theorem can be proven to be true or false. 
+In other cases, one needs to resort to the testability of some statement. The case of \emph{code-an-solution-verification} is one of them.  In computational science, code verification is concerned with the reliability of the solutions provided by a numerical code. Since there code can be proven correct in only some cases \cite{citation-needed}, often the goal is to increase the reliability that a certain statement about the code is true. If the tests are sufficiently thorough, the confidence that a particular code is corrects increases. In the same way that the computation science community has developed new ways of increase confidence in their code, the computer science community has also developed techniques appropriated for their need for increasing the confidence that certain statements about the software correctness are true.
+
+Now, let us revisit the simplified traditional scientific pipeline and see how rigorously all the steps have been taken. As one can see, all but the last step, the visualization step, have rigorously, well-defined and widely accepted tools  for increase the chances that that step has not introduced undue error. In this thesis, we present techniques for increasing one's confidence that certain claims about visualization algorithm are indeed true. 
+
+I need to write a paragraph or two about the more general reliability of visualization algorithms. This purpose of this thesis is to advance the state of reliability of visualization and thus stye overall traditional scientific pipeline.
+I should also mention that different techniques have to be applied. I shall mention that every single visualization technique should be verified. 
+
+\section{Verification in \cs{} and \cse{}}
+
+\section{Thesis organization}
+
+This thesis is organized as follows: Chapter \ref{chap:geometry}, \ref{chap:topology}, and \ref{chap:vr} present the theory used for verifying visualization algorithms and provide the results for of applying the verification to well-known and widely used visualization algorithms and implementations. Chapter \ref{chap:mc33} shows how the verification procedure developed in Chapter \ref{chap:topology} helped us uncover an 18 years old problem in a topologically correct isosurface extraction algorithm. We explain the details of the problem and provide the solution for it. In chapter \ref{chap:aiwa}, we detail some of the recent advances in techniques for flow visualization and show some studies on the topic of reliability of visualization algorithms. The goal is to present to a client community, in our case the AIAA community, some of the cutting edge results that can help them increase reliability of their implementation.
+
