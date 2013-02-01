@@ -1,0 +1,65 @@
+\section{Related Work}
+\label{chap1:sec:prevwork}
+
+Isosurface extraction is a popular visualization technique, being a
+tool currently used in science, engineering, and applications.
+This popularity makes it a natural target for this first application of
+verification mechanisms in the context of visualization.
+%
+This same popularity has also driven a large body of work
+comparing different isosurface extraction algorithms.
+
+Previous researchers have examined topological 
+issues~\cite{ning93, Lewiner:2003},
+mesh quality~\cite{Dietrich:TVCG:2008,Schreiner06},
+accuracy~\cite{patera04,zhou01}, and
+performance~\cite{Sutton00acase}. The influence of different reconstruction schemes and 
+filters in scalar visualization has also been examined~\cite{Hamish06,Pommert02}.
+In this paper, we focus on techniques to verify the correctness of
+algorithms and their corresponding implementations. In particular, we
+provide mathematical tools that other researchers and developers can
+use to increase their confidence in the correctness of their own
+isosurface extraction codes.  A traditional way to test
+implementations in scientific visualization is to perform a visual
+inspection of the results of the Marschner-Lobb
+dataset~\cite{marschnerlobb}. In the context of isosurface extraction,
+researchers routinely use tools such as Metro~\cite{Cignoni:1998:MET} to
+quantitatively measure the distance between a single pair of surfaces.
+We argue that the methodology presented here is more effective and more
+explicit at elucidating a technique's limitations. In particular, our proposal
+pays closer attention to the interplay between a theoretical
+convergence analysis and the experimental result of a \emph{sequence} of
+approximations.
+
+% carlos: we need to cite crj's "visualizing errors" here.. this is an
+% error quantification technique.
+Globus and Uselton~\cite{globus95} and more recently
+Kirby and Silva~\cite{kirby-vv-08} have pointed out the need 
+for verifying both visualization techniques and the corresponding
+software implementations. In this paper, we provide concrete tools for
+the specific case of isosurface extraction. Although this is only one
+particular technique in visualization, we expect the general technique
+to generalize.
+
+% As can be seen from the discussion above, the visualization literature 
+% has lagged behind in
+% verifying visualization codes. Some authors argue that this fault is due to the lack
+% of a specific methodology, that is, particular verification approaches must be set forth  
+% in the context of visualization. The present work aims at presenting a 
+% framework to verify isosurfacing tools which follows
+% the well established verification methodology usually employed in the
+% V\&V field. In fact, we shall show that even simple manufactured solutions
+% can reveal unexpected behavior, allowing not only to better understanding
+% the conduct of visualization tools but also find out errors in computational codes.
+
+It is important to again stress that verification is a \emph{process}: even
+when successfully applied to an algorithm and its implementation, 
+one can only concretely claim that the implementation behaves correctly
+(in the sense of analyzed predicted behavior) for all test cases to which
+it has been applied.  Because the test set, both in terms of model
+problems and analyzed properties, is open-ended and ever increasing, 
+the verification process must continually be applied to previous and
+new algorithms as new test sets become available.  This does not, however,
+preclude us from formulating a basic set of metrics against which
+isosurface extraction methods should be tested, as this is the starting
+point of the process.  This is what we turn to in the next section.
