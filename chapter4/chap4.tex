@@ -1,11 +1,11 @@
 \chapter{Practical Considerations on the Topological Correctness of Marching Cubes 33}
 \label{chap:mc33}
 
-The Marching Cubes (MC) algorithm \cite{lor87} is arguably the most popular isosurface extraction algorithm available and is an important component of the toolkits many visualization experts and researchers. The popularity of the MC algorithm springs from  its many advantages, which include simplicity, robustness, and speed.  
+%The Marching Cubes (MC) algorithm \cite{lor87} is arguably the most popular isosurface extraction algorithm available and is an important component of the toolkits many visualization experts and researchers. The popularity of the MC algorithm springs from  its many advantages, which include simplicity, robustness, and speed.  
 %
-The widespread adoption of MC has resulted in a vast number of improvements in areas ranging from performance to triangle quality and topological correctness. 
+%The widespread adoption of MC has resulted in a vast number of improvements in areas ranging from performance to triangle quality and topological correctness. 
 %
-The latter topic is of special interest in this work. We focus on the problem of MC interior ambiguity and, in particular, on the topological correctness of Chernyaev's Marching Cubes 33 (\mc) \cite{Chernyaev95marchingcubes, Lewiner:2003}. 
+%The latter topic is of special interest in this work. We focus on the problem of MC interior ambiguity and, in particular, on the topological correctness of Chernyaev's Marching Cubes 33 (\mc) \cite{Chernyaev95marchingcubes, Lewiner:2003}. 
 
 Isosurface extraction techniques can be divided into two classes according to their topological guarantees, namely, consistency or correctness. Topologically \emph{consistent} techniques produce surfaces that are piecewise-linear (PL) manifolds (\emph{i.e.}, crack-free surfaces), except at the boundary of the domain. Topologically \emph{correct} techniques produce a PL-manifold homeomorphic to the surface induced by a given interpolant, such as the trilinear interpolant. Although there are many topologically \emph{consistent} MC-based techniques, only a handful are topologically \emph{correct}. Marching Cubes 33 is one of the first MC-based algorithms that preserves the topology of the trilinear interpolant.
 
@@ -16,22 +16,22 @@ As algorithms and implementations become more complex, issues may be overlooked 
 %
 Throughout years of research, it has been shown that some topologically correct techniques, including \mc, have issues that prevent correctness  \cite{Etiene:2012:TVI:2197070.2197097, lopes:tvcg:2003, newman:candg:2006}. 
 %
-In particular, the work of Etiene \emph{et al.} \cite{Etiene:2012:TVI:2197070.2197097} shows that the \mc{} implementation by Lewiner \emph{et al.} \cite{lewiner:impl,Lewiner:2003}, fails to produce topologically correct isosurfaces. 
+In particular, the work presented in the Chapter \ref{chap:topology} \cite{Etiene:2012:TVI:2197070.2197097} shows that the \mc{} implementation by Lewiner \emph{et al.} \cite{lewiner:impl,Lewiner:2003}, fails to produce topologically correct isosurfaces. 
 %
-Alas, the authors \emph{do not} provide an explanation for the problem source, let alone fix the problem. 
+Nevertheless, no explanation is given for the problem source, nor possible solutions. 
 %
-They only provide cases that are mishandled by \mc{} and a conjecture regarding  the root of one of the observed flaws.
+%Nevertheless, it is  pointed out that some provide cases that are mishandled by \mc{} and a conjecture regarding  the root of one of the observed flaws.
 %
-As we studied the \mc{} implementation, we realized that the source of the problem was not merely implementation bugs but the core ideas behind the implemented algorithm.  
+As we continued our study of the \mc{} implementation, we realized that the source of the problem was not merely implementation bugs but the core ideas behind the implemented algorithm.  
 %
-In this work, we address issues with Chernyaev's original algorithm, its extension, and its implementation. 
+In this chapter, we address issues with Chernyaev's original algorithm, its extension, and its implementation. 
 %
-Our work represents another step towards closing an existing gap in the topological correctness of Marching Cubes 33.
+This work is another step towards closing an existing gap in the topological correctness of Marching Cubes 33.
  
  The subtleties involved in the correctness of isosurface extraction techniques are sometimes difficult to grasp in the ordinary paper medium. Both the geometry and topology inside grid voxels are often complex and challenging to understand,  study and replicate ({\em e.g.}, see Figures 9 and 10 in~\cite{10.1109/TVCG.2003.1207437}).  As an attempt to bridge this gap, we build on recent efforts towards \emph{executable papers}~\cite{Koop:2011tv, Tohline:2010jn}. Executable papers extend the traditional paper/digital counterpart by including tools that allow readers to interact, explore and verify experiments more easily.  In this work, we use executable papers to increase the reproducibility of our results.
  %
  
-Our contributions, which have a practical nature, are the following:
+In this chapter, our contributions are the following:
 \begin{itemize}
 \item We explain and address three algorithmic issues and one non-trivial implementation issue with Marching Cubes 33. In particular, we solve an issue with the core \mc{} disambiguation procedure that, as far as we know, has not been addressed elsewhere. Hence, we close an existing gap in the \mc{} literature.
 \item We make our results reproducible. CrowdLabs~\cite{Tohline:2010jn} and Vistrails \cite{Freire:2006va} are used to create an executable paper that can reproduce the results shown in the following sections.
@@ -88,9 +88,9 @@ The output of MC-based algorithms is a piecewise-linear mesh $M_\lambda$, and we
 
 Given a voxel $v_i$, and a cutting-plane $P$ parallel to one of $v_i$'s faces, define  $f_i:\mathbb{R}^2 \rightarrow \mathbb{R}$ as the bilinear interpolant along $P$. Note that $f_i(x) = g_i(x)$ for $x \in P$. Throughout the text, we deal with a single voxel $v$; thus, we omit the subscript $i$. We also assume that $v$ and $P$ are defined in the domains  $[0,1]^3$ and $[0,1]^2$, respectively.
 
-\begin{figure}
+\begin{figure}[b]
      \centering
-     \includegraphics[width=0.95\linewidth]{chapter4/figures/cut-plane-fig.png}
+     \includegraphics[width=0.6\linewidth]{chapter4/figures/cut-plane-fig.png}
      \caption{Asymptotic Decider (left) and \mc{} interior ambiguity test for MC case 4 (right). The gray areas represent regions with positive scalar values, and the capital letters represent the scalar value at each vertex. In the left image, we observe that $f(x_c) < 0$, where $x_c$ is the saddle point position. Positive areas will be connected if $f(x_c) > 0$. The orange squared plane shown in the right image represents the cutting-plane. The goal of the \mc{} algorithm is to find a cutting-plane such that the gray areas in the top and bottom planes are joined in the interior.}
      \label{interior_ambiguity}
 \end{figure}
@@ -103,7 +103,7 @@ The two pillars of Marching Cubes 33's topological correctness are Nielson and H
 %
 %In this discussion, we follow the notation from \cite{Chernyaev95marchingcubes}. 
 %
-A face ambiguity occurs when face vertices have alternating signs. That is, one face diagonal is positive (both vertices are positive) and the other is negative (both vertices are negative). In this case, the signs of the face vertices are insufficient to determine the correct way to triangulate the isosurface (see Figure \ref{interior_ambiguity}). Similarly, an interior ambiguity occurs when the signs of the cube vertices are insufficient to determine the correct surface triangulation, \emph{i.e.}, when multiple triangulations are possible for the same cube configuration (\textcolor{red}{see Figure 2 - colocar label}).
+A face ambiguity occurs when face vertices have alternating signs. That is, one face diagonal is positive (both vertices are positive) and the other is negative (both vertices are negative). In this case, the signs of the face vertices are insufficient to determine the correct way to triangulate the isosurface (see Figure \ref{interior_ambiguity}). Similarly, an interior ambiguity occurs when the signs of the cube vertices are insufficient to determine the correct surface triangulation, \emph{i.e.}, when multiple triangulations are possible for the same cube configuration.
 
 The idea behind the Asymptotic Decider is to verify the face saddle sign and compare it to the sign on the face vertices. A positive saddle means that the positive face vertices are connected; consequently, the positive face vertices are separated if the face saddle point is negative (see Figure \ref{interior_ambiguity}). To compute the face saddle sign, the saddle point position $x_c$ must be computed~\cite{Chernyaev95marchingcubes}:
 \begin{eqnarray}
@@ -123,7 +123,7 @@ For an ambiguous face, assuming $A$, $C$ positive and $B$ and $D$ negative, the 
 Due to the interior ambiguity, the Asymptotic Decider alone cannot solve the topological correctness problem. Chernyaev uses the idea behind the Asymptotic Decider to solve the interior ambiguity problem. The proposed test uses a  sweeping cutting-plane to evaluate the behavior of the trilinear interpolant inside the cube.
 %
 
-Given a cube with a ambiguous configuration (\textcolor{red}{see Figure 2}), define the scalar values at the base and top planes as $A _{0}B_{0}C_{0}D_{0}$ and $A _{1}B_{1}C_{1}D_{1}$, respectively.  Let $A_{0}$ and $C_{1}$, the vertices to be tested, be positive. Observe that, although $A_{0}$ and $C_{1}$ belong to opposite cube faces, they can be connected through the cube interior. In other words, there may exist a path from $A_0$ to $C_1$ passing through the voxel interior for which all points belonging to that path are positive. To determine whether $A_0$ and $C_1$ are connected, Chernyaev begins by observing that the saddle points at the top and base cube faces are negative, \emph{i.e.}, Equation \eqref{eq:saddle_value} is negative at the bottom and top faces. It follows that the denominator of $f(x_c)$ is positive because:
+Given a cube with a ambiguous configuration, define the scalar values at the base and top planes as $A _{0}B_{0}C_{0}D_{0}$ and $A _{1}B_{1}C_{1}D_{1}$, respectively.  Let $A_{0}$ and $C_{1}$, the vertices to be tested, be positive. Observe that, although $A_{0}$ and $C_{1}$ belong to opposite cube faces, they can be connected through the cube interior. In other words, there may exist a path from $A_0$ to $C_1$ passing through the voxel interior for which all points belonging to that path are positive. To determine whether $A_0$ and $C_1$ are connected, Chernyaev begins by observing that the saddle points at the top and base cube faces are negative, \emph{i.e.}, Equation \eqref{eq:saddle_value} is negative at the bottom and top faces. It follows that the denominator of $f(x_c)$ is positive because:
 %
 %The \mc{} algorithm search for a cutting-plane $A_tB_tC_tD_t$, $t \in [0,1]$, joining the gray area shown in the base and top planes  (see Figure \ref{interior_ambiguity}).
 %
@@ -162,22 +162,6 @@ where $V_{0}$ and $V_{1}$ are the scalar values at the vertices of $e$. Note tha
 
 Section \ref{erros_cause:chernyaev} explains why the algorithm proposed by Chernyaev and its modified version proposed by Lewiner \emph{et al.} may fail to extract surfaces that are topologically correct. In the following section, we present the tools we use to detect, debug, and reproduce the issues found in the \mc{} algorithm and its implementation.
 
-\begin{figure}
-     \centering
-    \includegraphics[width=0.98\linewidth]{chapter4/figures/executable.png}
-     \caption{ \label{fig:executable}\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/index.html}{The executable paper pipeline. An image is made executable (left), meaning that the reader can launch a request to execute a pipeline in a remote server (middle) and interact with the result in a web browser (right).  
-     %In this particular case, we show a volume rendering image of the scalar field inside a single voxel. The user can interact with it and even change parameters, such as transfer functions. In this image, blue is used to encode  $f(x) < - \epsilon$, red  encodes $f(x) > \epsilon$ and yellow $-\epsilon \leq f(x) \leq \epsilon$.
-     }}
-     
-\end{figure}
-
-\begin{figure}
-     \centering
-     \includegraphics[width=0.99\linewidth]{chapter4/figures/case13/case13.png}
-     \caption{Sign changes of the cutting-plane saddle point as a function of the height $t$. The gray area depicts $f(x) > 0$. The black (resp. white) dots are face saddles with $f(x_c) > 0$ (resp. $f(x_c) < 0$). From left to right, the four leftmost images show the sign of the face saddle points changing from negative to positive to negative and to positive again, respectively. The rightmost image shows the  hyperbolic trajectory of the face saddle position $x_c(t)$. The \mc{} algorithm fails to track the saddle point sign because it ignores the influence of the hyperbolic trajectory shown here. }
-     \label{fig:case13saddlesigns}
-\end{figure}
-
 \section{Experiments setup}
 \label{experiments_setup}
 
@@ -210,6 +194,13 @@ We have selected cases in which \mc{} fails have provided the respective correct
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+\begin{figure}[t]
+     \centering
+    \includegraphics[width=0.5\linewidth]{chapter4/figures/executable.png}
+     \caption{ \label{fig:executable}\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/index.html}{The executable paper pipeline. An image is made executable (left), meaning that the reader can launch a request to execute a pipeline in a remote server (middle) and interact with the result in a web browser (right).}}
+     
+\end{figure}
+
 \section{Issues with the \mc{} algorithm and its implementation}
 \label{erros_cause:chernyaev}
 
@@ -220,25 +211,32 @@ This section is organized as follows. First, we explain an algorithmic problem w
 \subsection{Issue I -- Case 13.5}
 \label{sec:problem-case-13}
 
-\begin{figure}
+\begin{figure}[t]
+     \centering
+     \includegraphics[width=0.5\linewidth]{chapter4/figures/case-13.png}
+     \caption{Challenging cases for Chernyave's interior test: voxel diagonal has vertices with alternating signs. Case 13.5.2 needs to be oriented correctly. One of the diagonal vertices is isolated from all other vertices in the cube, while the other is faced by the tunnel. In order to determine which vertex is isolated, we apply the same tool used for disambiguation of case 13.5. For case 13.5.1, the orientation of the isosurface have no influence on the topology. }
+     \label{fig:case13}
+\end{figure}
+
+\begin{figure}[t]
+     \centering
+     \includegraphics[width=1\linewidth]{chapter4/figures/case13/case13.png}
+     \caption{Sign changes of the cutting-plane saddle point as a function of the height $t$. The gray area depicts $f(x) > 0$. The black (resp. white) dots are face saddles with $f(x_c) > 0$ (resp. $f(x_c) < 0$). From left to right, the four leftmost images show the sign of the face saddle points changing from negative to positive to negative and to positive again, respectively. The rightmost image shows the  hyperbolic trajectory of the face saddle position $x_c(t)$. The \mc{} algorithm fails to track the saddle point sign because it ignores the influence of the hyperbolic trajectory shown here. }
+     \label{fig:case13saddlesigns}
+\end{figure}
+
+\begin{figure}[t]
      \centering
      \includegraphics[width=1\linewidth]{chapter4/data/counter_example/graph.png}
      \caption{Counterexample to Chernyaev's core disambiguation algorithm. The \mc{} algorithm incorrectly interprets case 13.5.2 as 13.5.1. The left image shows the zero-level set for case 13.5.2 and cutting-planes at heights $t_1$, $t_2$, and $t_a$, which correspond to both roots of $F(t)$ and the asymptote of $f(x_c(t))$, respectively. The blue ribbon shows the path of the face saddle $x_c(t)$. The right image shows the changes in $f(x_c(t))$ and $F(t)$. According to the three criteria of the \mc{} algorithm described in Section \ref{sec:preliminaries},  the upward-facing red parabola defines the absence of a tunnel (condition (i)), which is incorrect. The blue curve, on the other hand, shows the correct sign change.}
      \label{fig:case13counter_example}
 \end{figure}
 
-\begin{figure}
-     \centering
-     \includegraphics[width=0.8\linewidth]{chapter4/figures/case-13.png}
-     \caption{Challenging cases for Chernyave's interior test: voxel diagonal has vertices with alternating signs. Case 13.5.2 needs to be oriented correctly. One of the diagonal vertices is isolated from all other vertices in the cube, while the other is faced by the tunnel. In order to determine which vertex is isolated, we apply the same tool used for disambiguation of case 13.5. For case 13.5.1, the orientation of the isosurface have no influence on the topology. }
-     \label{fig:case13}
-\end{figure}
-
 Here, we show a problem with the core disambiguation procedure described in Chernyaev's work. To our knowledge, this problem has not been exposed or addressed in the literature.
 
 Case 13 is certainly the most complex table case; all faces are ambiguous, and six subcases are possible. Four of the subcases can be discriminated by using Asymptotic Decider. The remaining cases 13.5.1 and 13.5.2 require Chernyaev's \mc{} interior ambiguity resolution method.
 %
-Recall that the \mc{} approach discriminates between tunnels and isolated sheets by finding a cutting-plane for which positive nodes in the cube diagonal are joined by points in the interior of the cubic cell (\textcolor{red}{see Figure 2}). 
+Recall that the \mc{} approach discriminates between tunnels and isolated sheets by finding a cutting-plane for which positive nodes in the cube diagonal are joined by points in the interior of the cubic cell. 
 Cases 13.5.1 and 13.5.2 differ precisely because the positive nodes in case 13.5.2 are connected to one another by the interior points, which is not true for 13.5.1 (see Figure \ref{fig:case13}).
 
 Although it seems that the \mc{} methodology described in Section \ref{sec:preliminaries} fits naturally in this scenario, as it turns out this disambiguation procedure \emph{cannot} be applied for 13.5. %because the underlying assumptions are violated. 
@@ -267,19 +265,18 @@ The problem is not only related to the misclassification of case 13.5.2 as 13.5.
 
 \subsubsection{Tunnel orientation}
 
+A second minor issue regarding case 13.5.2 is the tunnel orientation of configuration 13.5.2. Once case 13.5.2 is determined, one needs to properly orient the tunnel inside the voxel. The inline figures show the two possibilities. Both vertices at the voxel diagonal are separated from all other voxel vertices at the voxel faces (note that this is not the case for other vertices). Nevertheless, either the positive or the negative vertex of the cube diagonal will connect with vertices with the same sign through the voxel's interior. 
 \begin{wrapfigure}{l}{0.5\linewidth}
-     \includegraphics[width=\linewidth]{chapter4/figures/tunnel.png}
+     \includegraphics[width=0.9\linewidth]{chapter4/figures/tunnel.png}
 \end{wrapfigure}
-A second minor issue regarding case 13.5.2 is the tunnel orientation of configuration 13.5.2. Once case 13.5.2 is determined, one needs to properly orient the tunnel inside the voxel. The inline figures show the two possibilities. Both vertices at the voxel diagonal are separated from all other voxel vertices at the voxel faces (note that this is not the case for other vertices). Nevertheless, either the positive or the negative vertex of the cube diagonal will connect with vertices with the same sign through the voxel's interior. This will determine which vertex is isolated and which is facing the tunnel. This problem with the tunnel orientation is not dealt with or mentioned in either Chernyaev or Lewiner \emph{et al.}'s work. Nevertheless, it was briefly mentioned in Etiene \emph{et al.} \cite{Etiene:2012:TVI:2197070.2197097}, but no solution to the problem was provided. As the authors observed, the isosurface topology changes if the tunnel orientation is incorrect; thus, it must be oriented correctly. The following section provides a solution for this issue.
-%One possible way to solve this is by evaluating the signs of the critical points of the trilinear interpolant (blue dots in Figure \ref{fig:case13}): if the critical points are positive, then the tunnel is facing the positive vertex at the cube diagonal, whereas the negative vertex is completely isolated from all negative vertices, and vice-versa.
-%
+This will determine which vertex is isolated and which is facing the tunnel. This problem with the tunnel orientation is not dealt with or mentioned in either Chernyaev or Lewiner \emph{et al.}'s work. Nevertheless, it was briefly mentioned in Etiene \emph{et al.} \cite{Etiene:2012:TVI:2197070.2197097}, but no solution to the problem was provided. As the authors observed, the isosurface topology changes if the tunnel orientation is incorrect; thus, it must be oriented correctly. The following section provides a solution for this issue.
 
 \subsection{Issue II -- Non-manifold surfaces}
 \label{sec:non-manifold-surfaces}
 
-\begin{figure}
+\begin{figure}[t]
      \centering
-     \includegraphics[width=0.9\linewidth]{chapter4/figures/non_manifold.png}
+     \includegraphics[width=1\linewidth]{chapter4/figures/non_manifold.png}
      \caption{\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/figure6.html}{Top: Problem with Chernyaev's triangulation table. The figure shows the  zero level-set of a $5\times5\times5$ randomly generated piecewise-trilinear scalar field $G$ (left) and two meshes extracted using the \mc{} (center) and \cmc{} (right) algorithms. The isolated voxel patches, shown in green and yellow, represent the two voxels at the center of $G$. The face shared by two consecutive tunnels, shown in purple, generates non-manifold edges. After one subdivision at the critical point of this case, the problem no longer occurs, and a valid manifold surface is obtained (right). Bottom: Triangulation for tunnels used by Lewiner \emph{et al.}~\cite{Lewiner:2003}. Each has a face that is coplanar to the voxel faces, which may lead to non-manifold surfaces.}}
   \label{fig:non_manifold}
 \end{figure}
@@ -303,9 +300,9 @@ This problem was pointed out by Gelder and Wilhelms \cite{Gelder94topologicalcon
 The third algorithmic issue is related to an \mc{} improvement proposed by Lewiner \emph{et al.}~\cite{Lewiner:2003} for computing the plane height.  
 The problem is that Equation \eqref{eq:alternative} may fail to find an appropriate height  that can correctly distinguish between tunnels and surface sheets. Let us illustrate this point with an example. For the cases previously cited, two of the conditions in the Chernyaev interior test described in Section \ref{sec:preliminaries} are not used. The \mc{} implementation does not use condition (i), and (ii) is always true because the edge $e$ will always have a positive and a negative vertex, implying that $t_{\mathrm{alt}} \in (0,1)$. Thus, only condition (iii) is used in retrieving the correct voxel topology. Suppose that the scalar field in a given voxel defines a tunnel, as shown in the left image in Figure \ref{interior_test}. In this case, to retrieve the correct topology, $F(t)$ should be a downward-facing parabola with both roots $t_1, t_2 \in (0,1)$, $t_1 < t_2$, and $t_\mathrm{max} \in (t_1,t_2)$. In this case, $F(t) > 0$ only for $t \in (t_1, t_2)$; hence, $F(t_{\mathrm{max}}) > 0$, and a tunnel is retrieved according to condition (iii). The problem with the alternative approach is that, as shown in Figure \ref{interior_test},  Equation \eqref{eq:alternative} is not guaranteed to fall within  the $(t_1,t_2)$ interval, which implies that the scalar field may be incorrectly interpreted as containing two sheets of surface (shown on the right). In other words, because $t_{\mathrm{alt}} \in (0,t_1)$ and $F(t_{\mathrm{alt}}) < 0$, condition (iii) verifies the absence of a tunnel. 
 
-\begin{figure}
+\begin{figure}[t]
      \centering
-    \includegraphics[width=0.95\linewidth]{chapter4/figures/height-plane-problem.png}
+    \includegraphics[width=0.7\linewidth]{chapter4/figures/height-plane-problem.png}
      \caption{\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/figure7.html}{\label{interior_test}Case 6 configuration.
      Left: the cut plane height $t = t_{\mathrm{alt}} > 0$ used in the \mc{} \emph{implementation}. Middle: the test proposed in the \mc{} \emph{algorithm} provides a different $t = t_{\mathrm{max}}> 0$, which reaches the tunnel. Right: the former test decides that the isosurface is homeomorphic to two discs whereas the correct answer is a tunnel.}}
 \end{figure}
@@ -348,7 +345,7 @@ This implies that both saddle points $x_c(t_1)$ and $x_c(t_2)$ must lie inside t
 %
 We have implemented and tested this solution on \cmc{} using over 10000 randomly generated cases 13.5.
 
-\begin{algorithm}
+\begin{algorithm}[t]
 \begin{codebox}
 \Procname{\proc{Case 13.5}($a, b, c$)}
 \zi $\rhd$ Let $t_1$ and $t_2$ be the roots of $a t^2 + b t + c$ (Equation \eqref{eq:disambiguation})
@@ -362,15 +359,14 @@ We have implemented and tested this solution on \cmc{} using over 10000 randomly
 
 \subsubsection{Tunnel orientation}
 
-\begin{figure}
+To find the correct tunnel orientation one can use the sign of any point between the roots $t_1$ and $t_2$. This is because any point in this range must have the same sign as the critical points of the trilinear interpolant for case 13.5.2. This can be seen in the black path shown in the rightmost image in Figure \ref{fig:case13saddlesigns} and from the graph in Figure \ref{fig:case13counter_example}. All points between roots $t_1$ and $t_2$ will have the same sign, which is the sign of the ``interior'' of the tunnel. Thus, we compare the sign of $f((t_1+t_2)/2)$ with the sign of both vertices of the voxel diagonal. The tunnel will face the vertex with the same sign as $f((t_1+t_2)/2)$, whereas the other vertex with be isolated from all cube vertices. Figure \ref{fig:solution-case13} illustrate this scenario. Note that Lopes and Brodlie  \cite{lopes:tvcg:2003} used the sign of the critical points of the trilinear interpolant to retrieve the correct tunnel orientation. We provide a simpler solution that fits nicely with Chernyaev's framework.
+
+\begin{figure}[t]
      \centering
-     \includegraphics[width=0.45\linewidth]{chapter4/figures/case13/solution.png}
+     \includegraphics[width=0.4\linewidth]{chapter4/figures/case13/solution.png}
      \caption{Solution to the orientation problem. The red (resp. white) dots represent regions with positive (resp. negative) scalar values.The cutting-plane location is at $(t_1 + t_2) / 2$. The sign of $f(x_c((t_1+t_2)/2))$ determines the tunnel orientation. }
      \label{fig:solution-case13}
 \end{figure}
-
-To find the correct tunnel orientation one can use the sign of any point between the roots $t_1$ and $t_2$. This is because any point in this range must have the same sign as the critical points of the trilinear interpolant for case 13.5.2. This can be seen in the black path shown in the rightmost image in Figure \ref{fig:case13saddlesigns} and from the graph in Figure \ref{fig:case13counter_example}. All points between roots $t_1$ and $t_2$ will have the same sign, which is the sign of the ``interior'' of the tunnel. Thus, we compare the sign of $f((t_1+t_2)/2)$ with the sign of both vertices of the voxel diagonal. The tunnel will face the vertex with the same sign as $f((t_1+t_2)/2)$, whereas the other vertex with be isolated from all cube vertices. Figure \ref{fig:solution-case13} illustrate this scenario. Note that Lopes and Brodlie  \cite{lopes:tvcg:2003} used the sign of the critical points of the trilinear interpolant to retrieve the correct tunnel orientation. We provide a simpler solution that fits nicely with Chernyaev's framework.
-
 
 \subsection{Issue II -- Non-manifold surfaces}
 
@@ -383,7 +379,7 @@ To simplify the algorithm, we split not only the voxels sharing the ambiguous fa
 %
 \begin{wrapfigure}{l}{0.5\linewidth}
      	%\includegraphics[width=0.48\linewidth]{chapter4/figures/subdivision-00.png}
-	\includegraphics[width=0.98\linewidth]{chapter4/figures/grid.png}
+	\includegraphics[width=0.7\linewidth]{chapter4/figures/grid.png}
 \end{wrapfigure}
 %
 of size $n \times n \times n$, the increase in the number of voxels will be $k(O(n^2))$, where $k$ is the number of subdivisions. Note that in practice, the asymptotic size of the grid does not change because $k$ is very small. This subdivision adds the degree of freedom necessary to eliminate the problem, making this implementation of the Marching Cubes 33 topologically correct (see Figure \ref{fig:non_manifold}). 
@@ -430,10 +426,10 @@ Algorithm \ref{chernyaev_case10} illustrates the required steps for disambiguati
 %\end{algorithm}
 
 
-\begin{algorithm}
+\begin{algorithm}[b]
 \caption{\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/alg2.html}{Algorithm for case 10}}
 \label{chernyaev_case10}
-\includegraphics[width=0.95\linewidth]{chapter4/figures/algorithm.pdf}
+\includegraphics[width=0.7\linewidth]{chapter4/figures/algorithm.pdf}
 \end{algorithm}
 
 
@@ -443,9 +439,9 @@ Algorithm \ref{chernyaev_case10} illustrates the required steps for disambiguati
 %=================================================================================================
 \section{Experiments with real-world datasets}
 
-\begin{figure}
+\begin{figure}[b]
      \centering
-     \includegraphics[width=0.9\linewidth]{chapter4/figures/cc_aneurism.png}
+     \includegraphics[width=1\linewidth]{chapter4/figures/cc_aneurism.png}
      \caption{\href{http://dl.dropbox.com/u/8414964/C-MC33/webpage/figure8.html}{Aneurysm dataset. From left to right, the displayed isosurfaces were extracted using VTK, \mc, and \cmc, respectively. We show the main brain artery component in yellow and the extra connected components in purple. From the images shown, it is clear that the purple components should be part of the main branch. Nevertheless, due to the implicit disambiguation in VTK and the issues in \mc, the final isosurface contains multiple components (left and middle figures). The isosurface generated using \cmc{} is shown on the right. }}
      \label{fig:cc_aneurism}
 \end{figure}
@@ -459,6 +455,12 @@ For the sake of completeness, in this section we provide a qualitative analysis 
 %
 Although only a handful of voxels differ among the implementations, for the aneurysm dataset the consequence is that the (largest) main brain artery appears quite different in each interpretation. Because the dataset contains several thin features, subvoxel accuracy is required to connect the pieces of the blood vessels. As shown in the inset images in Figure \ref{fig:cc_aneurism}, one voxel is sufficient to separate fairly large vessels.
 
+\begin{figure}[b]
+       \includegraphics[width=1\linewidth]{chapter4/figures/aneurism_cc_vtk.pdf}
+       \caption{\label{fig:cc} The left plot shows the difference between the number of connected components extracted by VTK implementation of Marching Cubes and the number of connected components extracted by our \cmc{} implementation. The right plot shows the difference in the number of connected components but between the \mc{} and  \cmc{} implementations. Negative values indicate that the \cmc{} implementation generated more connected components.
+Clearly, VTK generates more components that \cmc{}. \mc{} generates more components for most of the isovalues. }
+\end{figure}
+
 VTK and \mc{}  generate more extra connected components (shown in purple) than does \cmc. Figure \ref{fig:cc} shows the difference in the number of connected components generated by VTK and \cmc{} (left) and by \mc{} and \cmc{} (right) as a function of the isovalue for the aneurysm dataset. 
 %
 Clearly, VTK produces substantially more connected components than  \cmc{}  (up to 2400 more components).  The differences between \mc{} and \cmc{} are not as large, athough they are sufficient to disconnect important artery segments. In this example, \mc{} generates more  connected components than \cmc for most isovalues, . 
@@ -471,12 +473,13 @@ We emphasize that the ``importance'' of the differences in the number of connect
 
 The second problem is due to the extraction of non-manifold features. The issue explained in Section \ref{sec:non-manifold-surfaces} also pertains to in real-world datasets.  Figure \ref{fig:non-manifold-real-data} shows an example of a medical dataset in which the output of \mc{} implementation is a non-manifold surface. We have observed the same problem for certain isovalues of other commonly used datasets, such as the backpack and bonsai datasets. Nevertheless, in our experiments, this problem occurred  rarely in the datasets tested:  on average, one case of non-manifold edges was found per $10^7$ evaluated voxels.
 
-\begin{figure}
-       \includegraphics[width=1\linewidth]{chapter4/figures/aneurism_cc_vtk.pdf}
-       \caption{\label{fig:cc} The left plot shows the difference between the number of connected components extracted by VTK implementation of Marching Cubes and the number of connected components extracted by our \cmc{} implementation. The right plot shows the difference in the number of connected components but between the \mc{} and  \cmc{} implementations. Negative values indicate that the \cmc{} implementation generated more connected components.
-Clearly, VTK generates more components that \cmc{}. \mc{} generates more components for most of the isovalues. }
+\begin{figure}[t]
+     \centering
+     \includegraphics[width=1\linewidth]{chapter4/figures/skull.png}
+      %\includegraphics[width=0.95\linewidth]{chapter4/figures/backpack.png}
+     \caption{Skull dataset. The image shows a progressive zoom-in into the dataset in order to reveal non-manifold edges. The face containing the non-manifold edges is highlighted  in purple. The rightmost image is an isolated version of the case shown in the dataset, with a slightly different geometry for the sake of clarity. A non-manifold edge appeared six times in total for 50 distinct isosurfaces.}
+     \label{fig:non-manifold-real-data}
 \end{figure}
-
 
 \section{Conclusion}
 \label{conclusion}
@@ -484,12 +487,4 @@ Clearly, VTK generates more components that \cmc{}. \mc{} generates more compone
 In this paper, we discuss in detail three issues with  the Marching Cubes 33 algorithm and one non-trivial issue with its implementation. 
 We present solutions for the issues raised and implement them into \cmc, a topologically correct version of \mc. In addition, we make the results of our paper reproducible so that the reader can easily study, explore, and use the results presented here for his or her own purpose. 
 
-
-\begin{figure}
-     \centering
-     \includegraphics[width=0.9\linewidth]{chapter4/figures/skull.png}
-      %\includegraphics[width=0.95\linewidth]{chapter4/figures/backpack.png}
-     \caption{Skull dataset. The image shows a progressive zoom-in into the dataset in order to reveal non-manifold edges. The face containing the non-manifold edges is highlighted  in purple. The rightmost image is an isolated version of the case shown in the dataset, with a slightly different geometry for the sake of clarity. A non-manifold edge appeared six times in total for 50 distinct isosurfaces.}
-     \label{fig:non-manifold-real-data}
-\end{figure}
 

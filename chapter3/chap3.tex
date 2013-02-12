@@ -1359,7 +1359,7 @@ fashion by forcing a few cubes to represent a
 particular instance of the table, such as case 13, which produces 
 more focused tests.
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \includegraphics[width=1.0\linewidth,keepaspectratio=true]
 {chapter3/figures/random-sampling.pdf}
@@ -1437,7 +1437,7 @@ convergence is presented in the supplementary material
 % We finish this section remebering that all three codes \mclewiner, \deliso\
 % and \mcsimpleflow\ are still under development and constantly improving. 
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.33\linewidth,keepaspectratio=true]
 {chapter3/figures/deliso-case-00.pdf}
@@ -1453,7 +1453,7 @@ convergence is presented in the supplementary material
 \label{fig:pproblem-deliso}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.3\linewidth,keepaspectratio=true]
 {chapter3/figures/mc33-case-02.pdf} ~~~~
@@ -1471,9 +1471,9 @@ convergence is presented in the supplementary material
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[t]
 \centering
-\subfigure[\snapmc\ (snap = 0.3)]{
+\subfigure[\snapmc\ (0.3)]{
 \label{fig:inconsistencies:snapmc}
 \includegraphics[width=0.20\linewidth,keepaspectratio=true]
 {chapter3/figures/snapmc_00.pdf}} ~~~~~~~~
@@ -1495,7 +1495,39 @@ convergence is presented in the supplementary material
 \end{figure}
 
 
-\begin{table}
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+\subsection{Quality of manufactured solutions}
+In any use of MMS, one very important question is that of the quality
+of the manufactured solutions, since it reflects directly on the
+quality of the verification process. Using random solutions, for which
+we compute the necessary invariants, naturally seems to yield good
+results. However, our random solutions will almost always have
+nonidentical values. This raises the issue of detecting and handling
+degenerate inputs, such as the ones arising from quantization. We
+note that most implementations use techniques such as Simulation of
+Simplicity~\cite{Edelsbrunner:1990:SOS} (for example, by arbitrarily breaking ties using node
+ordering) to effectively keep the facade of nondegeneracy. However, we note
+that developing manufactured solutions
+specifically to stress degeneracies is desirable when using
+verification tools during development. We decided against this since
+different implementations might employ different strategies to handle
+degeneracies and our goal was to keep the presentation sufficiently
+uniform.
+
+\begin{table}[b]
+\caption{Rate of invariant mismatches using the PL manifold property, digital
+surfaces, and stratified Morse theory for $1000$ randomly generated
+scalar fields (the lower the rate the better).
+The invariants $\beta_1$ and $\beta_2$ are computed only if the output mesh is a
+2-manifold without boundary. \emph{We run correctness tests in all algorithms for
+completeness and to test tightness of the theory: algorithms that are not
+topology-preserving should fail these tests}. 
+The high number of \deliso, \snapmc, and \matlab\ mismatches are explained in
+Section \ref{sec:consistency}. 
+$^1$ indicates zero snap parameter and $^2$ indicates snap value of
+0.3.}
 \begin{center}
 \begin{tabular}{l@{}cccccc}
    & Consistency (\%) &\multicolumn{5}{c}{Correctness (\%)} \\
@@ -1526,46 +1558,10 @@ SMT\\
 \\
 \hline
 \end{tabular}
-
-\caption{Rate of invariant mismatches using the PL manifold property, digital
-surfaces, and stratified Morse theory for $1000$ randomly generated
-scalar fields (the lower the rate the better).
-The invariants $\beta_1$ and $\beta_2$ are computed only if the output mesh is a
-2-manifold without boundary. \emph{We run correctness tests in all algorithms for
-completeness and to test tightness of the theory: algorithms that are not
-topology-preserving should fail these tests}. 
-The high number of \deliso, \snapmc, and \matlab\ mismatches are explained in
-Section \ref{sec:consistency}. 
-% We note that \macet\ only passed the consistency tests after we
-%fixed the boundary bug described in the text. However, other bugs
-%still remain, causing \macet \ to fail all SMT tests.
-$^1$ indicates zero snap parameter and $^2$ indicates snap value of
-0.3.  }
 \label{tbl:verification-ds-stm}
 \end{center}
 \end{table}
 
-
-\section{Discussion and Limitations}
-\label{sec:discussion}
-
-\subsection{Quality of manufactured solutions}
-In any use of MMS, one very important question is that of the quality
-of the manufactured solutions, since it reflects directly on the
-quality of the verification process. Using random solutions, for which
-we compute the necessary invariants, naturally seems to yield good
-results. However, our random solutions will almost always have
-nonidentical values. This raises the issue of detecting and handling
-degenerate inputs, such as the ones arising from quantization. We
-note that most implementations use techniques such as Simulation of
-Simplicity~\cite{Edelsbrunner:1990:SOS} (for example, by arbitrarily breaking ties using node
-ordering) to effectively keep the facade of nondegeneracy. However, we note
-that developing manufactured solutions
-specifically to stress degeneracies is desirable when using
-verification tools during development. We decided against this since
-different implementations might employ different strategies to handle
-degeneracies and our goal was to keep the presentation sufficiently
-uniform.
 
 \subsection{Topology and Geometry}
 This work extends the work by Etiene et al.~\cite{etiene:tvcg:2009} toward
@@ -1722,10 +1718,10 @@ implementations tested could successfully reproduce the tubular
 structure for all $\alpha > 0$. This is not particularly surprising,
 since the trilinear interpolation from samples of $d$ is quite
 different from the $d$.
-\begin{wrapfigure}{r}{4.5cm}
+\begin{wrapfigure}{l}{4.5cm}
 \vspace{-0.2cm}
 \hspace{-0.0cm}
-\includegraphics[width=1.0\linewidth,keepaspectratio=true]
+\includegraphics[width=0.7\linewidth,keepaspectratio=true]
 {chapter3/figures/distance-field.pdf}
 \end{wrapfigure}
 The inline figure on the right shows a typical output produced by VTK

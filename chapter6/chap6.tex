@@ -1,10 +1,6 @@
 \chapter{Reliable Visualizations}
 \label{chap:aiaa}
 
-Text
-
-\section{Introduction}
-
 Flow visualization has been around in some form for as long as people have studied flows.  In some
 cases, visualization was done explicitly -- that is, with the expressed purpose of the viewer to highlight
 some feature of the flow.  In other cases, it was done tacitly, as when a child looks out the window
@@ -140,7 +136,7 @@ For more details about the articles shown in Table \ref{table:progress} and othe
 %
 Next, we briefly go over each of the classes (see Figure \ref{fig:classes}).
 
-\begin{figure}[ht]
+\begin{figure}[b]
 \centering
 \includegraphics[width=1\linewidth]{chapter6/figures/classes.png}
 \caption{Examples of flow visualization using direct, geometry, texture-, and feature-based techniques, respectively.}
@@ -418,12 +414,12 @@ It is the default map in several visualization / simulation software packages, s
 Here we review three issues known to hinder visualizations, namely, lack of ordering, iso-luminance, 
 and introduction of artifacts. 
 %
- \begin{figure}[tp]
+ \begin{figure}[t]
  	\centering
        \includegraphics[width=0.235\linewidth]{chapter6/figures/scsf-rainbow}
-       \includegraphics[width=0.235\linewidth]{chapter6/figures/scsf-gray}\qquad
+       \includegraphics[width=0.235\linewidth]{chapter6/figures/scsf-gray}
 	\includegraphics[width=0.235\linewidth]{chapter6/figures/hill-rainbow}
-       \includegraphics[width=0.235\linewidth]{chapter6/figures/hill-gray}\qquad
+       \includegraphics[width=0.235\linewidth]{chapter6/figures/hill-gray}
    \caption{Left: the images show the color mapping of the spatial contrast sensitivity function. Frequency increases from left to right whereas contrast increases from the top to the bottom. The isoluminance of the rainbow color map obfuscate low contrast regions and small details, which can be seen using gray scale. Right: changes in color in the rainbow color map may be perceived as features in the data. The ``boring'' scalar field $f(x,y) = x^2+y^2$ appears to have more features when rainbow color map is used than in the gray scale image.}
    \label{fig:rainbow}
  \end{figure}
@@ -461,7 +457,7 @@ Harmful''\cite{paraview}. The author even suggest that a better name for it woul
 %
 
 
-\begin{table}
+\begin{table}[t]
 \caption{Color maps in the AIAA journal} \label{table:aiaa_colormap}{}\centering
 \begin{tabular}{lcccc}
 				&  	Rainbow color map	 & Gray scale map & Other\\ \hline
@@ -486,7 +482,7 @@ The left image in Figure \ref{fig:flowdata} shows the results of a flow simulati
 
 The visualization community has also investigated what should constitute a ``good'' color map. Research on the topic of color selection can be found in the work by Treinish \emph{et al.} \cite{treinishshould}, Moreland\cite{paraview}, Kindlmann \emph{et al.}\cite{GLK:facelum02}, and others\cite{macdonald1999using,Tominski:2008bt}. The AIAA community can benefit from a set of standard color maps suitable for visualization of typical simulation data such as pressure fields, angle fields, {\em etc.}
 
- \begin{figure}[tp]
+ \begin{figure}[t]
  	\centering
        \includegraphics[width=0.325\linewidth]{chapter6/figures/vector_field_rainbow.png}
        \includegraphics[width=0.325\linewidth]{chapter6/figures/vector_field_gray.png}
@@ -594,12 +590,11 @@ In recent years, the Visualization community has seen a substantial increase in 
 %\end{tabular}
 %\end{table}
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \begin{center}
-\includegraphics[width=0.38\textwidth]{chapter6/figures/evaluation_tvcg.png}
-  \end{center}
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.5\linewidth]{chapter6/figures/evaluation_tvcg.png}
   \caption{\label{fig:tvcg}Evolution of the number of papers published on the topic of evaluation at TVCG.}
-\end{wrapfigure}
+\end{figure}
  
 %With user study technique in 2011 and 2012, $94\%$ papers conducted their own user study with number of participant is less than 70. Only $6\%$ papers used the previous works to get the results of user study. 
 %
@@ -610,9 +605,9 @@ As a representative example, we focus on a user study by Laidlaw \emph{et al.}\c
 The authors recruited five experts and 12 non-experts users to evaluate the efficacy of each of the six techniques displayed in Figure \ref{fig:user_study}. The evaluation was measured by the user performance during the execution of several tasks of three types: critical point detection; critical points classification; and simulation of particle advection. The first two tasks are standard whereas the third task is motivated by the fact that often experts were interested in the global flow direction. The three tasks were chosen based on the authors interaction with fluid mechanics researchers. 
 The authors built a collection of 500 vector fields for evaluation of the tasks. Among the results, they cite no significant difference between experts and non-experts regarding accuracy in the tasks or the response times. More interestingly, performance when using the standard method of arrows on a regular grid (GRID in Figure \ref{fig:user_study}) falls below average for multiples tasks involving critical points location, classification and advection (which means that users required more time to complete the task and committed more errors). On the other end of the spectrum, user performance when using GSTR consistently scored above average. Another similar study compare the user performance when using line and tube integral curves (with monoscopic and stereoscopic viewing) for 3D vector field data\cite{Forsberg:2009:CVF:1638611.1639226}. User study can be a powerful tool for helping users choose the best tool for their needs and the visualization community has been working on evaluating and testing techniques as they become more widespread.
 
- \begin{figure}[tp]
+ \begin{figure}[t]
  	\centering
-       \includegraphics[width=0.835\linewidth]{chapter6/figures/ust_kirby}
+       \includegraphics[width=1\linewidth]{chapter6/figures/ust_kirby}
    \caption{Comparing visualization methods for steady 2D vector fields. Top: standard arrow visualization, jittered arrow, icons using concepts borrowed from oil painting, respectively. Bottom: line-integral convolution, image-guided streamlines, streamlines seeded in a regular grid, respectively.}
    \label{fig:user_study}
  \end{figure}
@@ -638,9 +633,9 @@ The AIAA community is  familiar with both topics. In this work, however, we pres
 
 % will insert figures and more details of paper [1]
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{chapter6/figures/curve.png}
+\includegraphics[width=1\linewidth]{chapter6/figures/curve.png}
 \caption{The four uncertainty visualization methods used by Sanyal \emph{et al.}\cite{Sanyal:2009:USC:1638611.1639227} in their user study. From left to right: glyphs size, glyphs color mapping, surface color mapping, and error bars.}
 \label{fig:uncertainty_user_study}
 \end{figure}
