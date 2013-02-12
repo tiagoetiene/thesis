@@ -30,3 +30,6 @@
 *.vrb
 *.xdy
 *.tdo
+thesis.top
+thesis.tui
+thesis-mpgraph.mp
