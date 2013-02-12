@@ -1,7 +1,18 @@
 \section{Verifying Isosurface Extraction Algorithms}
 \label{chap1:sec:iea}
 
-\begin{algorithm}
+In this section, we describe the technique we use for verifying
+isosurface extraction algorithms, namely the \emph{method of manufactured
+solutions} (MMS). We illustrate a possible implementation of MMS in
+Algorithm~\ref{alg:manufactured-solutions} and Figure ~\ref{fig:mms-flow}. This 
+technique requires us to write down the expected behavior of particular 
+features of interest of the object (or model problem) 
+being generated. In our case, we are generating triangular
+approximations of smooth isosurfaces, and the features of interest are
+geometric surface convergence, convergence of normals, area and
+curvature. 
+
+\begin{algorithm}[h]
 \begin{codebox}
 \Procname{$\proc{MMS}(f, u, h_1)$}
 \li \Comment Let $f$ be a scalar field containing the solution surface $S$
@@ -19,17 +30,6 @@
 \end{codebox}
 \caption{\label{alg:manufactured-solutions}Overview of the method of manufactured solutions (MMS).}
 \end{algorithm}
-
-In this section, we describe the technique we use for verifying
-isosurface extraction algorithms, namely the \emph{method of manufactured
-solutions} (MMS). We illustrate a possible implementation of MMS in
-Figures~\ref{alg:manufactured-solutions} and~\ref{fig:mms-flow}. This 
-technique requires us to write down the expected behavior of particular 
-features of interest of the object (or model problem) 
-being generated. In our case, we are generating triangular
-approximations of smooth isosurfaces, and the features of interest are
-geometric surface convergence, convergence of normals, area and
-curvature. 
 
 To use MMS, we first accomplish a mathematical analysis of
 the expected convergence rate of the features (or characteristics) of interest, 
@@ -57,13 +57,8 @@ warrant further investigation. In the following sections, we will discuss
 these issues in more detail.  Let us first clarify how
 we will arrive at theoretical and empirical convergence rates.
 
-%\subsection{Approximation Error}
 For a fixed grid size, we will strive to write the approximation error
 between the desired isosurface property and its approximation by:
-%% From the analysis presented above we can see that, for a fixed grid size, the approximation error 
-%% between the exact isosurface and its approximation is given by:
-%If we write $u_k$ as an expansion of Taylor series, we may assume that the truncation term $O(k^p)$ is the one that dominates error, where $p$ is the \emph{theoretical convergence rate}. Thus we can write the discretization error as:
-
 \begin{equation}
 E = |u_{approx} - u_{exact}|_u = O(h^p) = \alpha h^p
 \label{eq:theoretical-convergence-rate}
@@ -88,7 +83,13 @@ the line that best fits the points $(\log h,\log E)$ in a
 least-squares sense. We use this technique in Section~\ref{chap1:sec:res}
 when testing the isosurface codes.
 
-% Why do we use order of accuracy?
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\linewidth,keepaspectratio=true]{chapter2/figures/mms.pdf}
+\label{fig:mms-flow}
+\caption{Workflow for the method of manufactured solution (Figure \ref{alg:manufactured-solutions}), clockwise from the top left.}
+\end{figure}
+
 MMS critically depends on an analysis of the order of accuracy of
 expected solutions. Although this seems quite simple, the order of
 accuracy under a sensitive norm like $||\cdot||_\infty$ has shown in
@@ -99,55 +100,6 @@ extraction. In addition, we believe the convergence analysis required
 by MMS is interesting in its own right. As we will discuss in
 Section~\ref{chap1:sec:dis}, it helps to shed light on the consequences of
 implementation choices.
-%
-%% Among the mathematical tools employed to verify
-%% numerical codes, order of accuracy analysis plays a special role,
-%% providing a very efficient mechanisms to check the correctness and
-%% accuracy of numerical approximation
-%% schemes~\cite{Roy2005,babuska04}. 
-%
-%% As it will be discussed later, order
-%% of accuracy analysis enables us to better understand the behavior of
-%% algorithms as well as to tackle implementation aspects while still
-%% being very effective in elucidating coding errors.  Such versatility
-%% motivates its use in the verification of isosurface methods, as
-%% describe in what is to follow.
-
-
-%% \subsection{Manufactured Solution}
-
-%% The literature of V\&V has presented different methodologies for
-%% verifying numerical codes in the field of engineering and scientific computing,
-%% being the \emph{method of manufactured solution} (MMS) one of the most widespread
-%% procedure.
-%% The reasoning behind MMS is to choose a solution and use it to generate 
-%% a set of input data to the computational code under verification, checking
-%% whether the output behaves as the original solution. When used with
-%% systematic grid refinement, MMS turns out an extremely reliable
-%% code verification mechanism.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.95\linewidth,keepaspectratio=true]{chapter2/figures/mms.pdf}
-\label{fig:mms-flow}
-\caption{Workflow for the method of manufactured solution (Figure \ref{alg:manufactured-solutions}), clockwise from the top left.}
-\end{figure}
-
-%Numerical simulation of partial differential equations is a 
-%powerful tool to help scientist to predict and understand several physical behavior.
-%In order to build confidence in numerical simulation results, scientists have to 
-%verify correctness of the code used to generate those solution. One
-%of the traditional methods for code verification is the \emph{method of exact solution}. 
-%This method consists in compare the numerical results against the analytical (exact)
-%solution of the partial differential equations involved. The main problem with this 
-%approach is that the exact solution is often not available or is a solution of
-%a simplified model of the equations being solved.
-%
-%The \emph{method of manufactured solution} (MMS) is an alternative for code verification 
-%of computational simulations. The idea is to choose a solution and use it to generate 
-%a source term for the original set of equations. Thus, this ``manufactured'' solution is 
-%an exact solution for the original set of equation with the correspondingly 
-%generated source term.
 
 In the context of isosurface methods, manufactured solutions can be built by
 specifying a ``solution surface'' to be the exact solution and deriving a 
@@ -233,7 +185,7 @@ $x_i = x_0+ih$, $y_i = y_0+ih$, $z_i = z_0+ih,\, i=0,\ldots,n$,
 where $h$ is the grid size and 
 $c_{ijk}=[x_i,x_{i+1}]\times[y_j,y_{j+1}]\times[z_k,z_{k+1}]$
 is a grid cell. 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=.75\linewidth]{chapter2/figures/algebraic.pdf}
 \caption{The distance between a point $\vec{v}$ and the isosurface $S$
@@ -305,8 +257,14 @@ Figure~\ref{fig:graphfunct}, where $x(u,v) = x_i+uh$ and
 $y(u,v)=y_j+vh$. This is acceptable because we have already assumed
 the isosurface to be regular. Still without losing generality we
 write $g(x(0,0),y(0,0)) = 0$, that is, the isosurface
-contains the point $(x_i,y_j,z_k)$. Let  
-$\vec{\Phi}(u,v) = (x(u,v),y(u,v),g(x(u,v),y(u,v)))$ be a parametrization 
+contains the point $(x_i,y_j,z_k)$.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/gridcell.pdf}
+  \caption{Isosurface local parametrization and approximation.}
+  \label{fig:graphfunct}
+\end{figure}
+ Let  $\vec{\Phi}(u,v) = (x(u,v),y(u,v),g(x(u,v),y(u,v)))$ be a parametrization 
 for the isosurface $f(x,y,z)=\lambda$ in $c_{ijk}$ and
 % \begin{equation}
 % \frac{\partial\vec{\Phi}}{\partial u}\times\frac{\partial\vec{\Phi}}{\partial v} = 
@@ -326,13 +284,6 @@ h^2\left(-\frac{\partial g}{\partial x},\\
 \end{equation}
 \noindent be the normal vector in $\vec{\Phi}(0,0)=(x_i,y_j,g(x_i,y_j))$ 
 (the partial derivatives of $g$ are evaluated at $(x(0,0),y(0,0))=(x_i,y_j)$).
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.60\linewidth,keepaspectratio=true]{chapter2/figures/gridcell.pdf}
-  \caption{Isosurface local parametrization and approximation.}
-  \label{fig:graphfunct}
-\end{figure}
 
 Consider now the triangle defined by the points $\vec{p_1},\vec{p_2}$, and $\vec{p_3}$ 
 approximating the isosurface
@@ -383,7 +334,14 @@ normals (computed by arithmetic mean) are at least first-order accurate.
 \subsection{Convergence of Area}
 \label{chap1:sec:areaconvergence}
 
-\begin{figure}
+Currently, much less is known about convergence in area, compared to
+convergence of vertices or normals. To illustrate the difficulty
+involved in approximating lengths and areas, consider the sequence
+of approximations to a straight line shown in Figure \ref{fig:uniformconvergence}. 
+Even though the function sequence converges uniformly to the line, 
+the length of the approximation stays constant.
+
+\begin{figure}[t]
 \centering
 \includegraphics[width=.8\linewidth]{chapter2/figures/sequence.pdf}
 \caption{Uniform convergence does not imply convergence in area. The
@@ -392,12 +350,6 @@ normals (computed by arithmetic mean) are at least first-order accurate.
 \label{fig:uniformconvergence}
 \end{figure}
 
-Currently, much less is known about convergence in area, compared to
-convergence of vertices or normals. To illustrate the difficulty
-involved in approximating lengths and areas, consider the sequence
-of approximations to a straight line shown in Figure \ref{fig:uniformconvergence}. 
-Even though the function sequence converges uniformly to the line, 
-the length of the approximation stays constant.
 
 To the best of our knowledge, the only relevant results establish
 convergence in area given convergence in vertex positions \emph{and}

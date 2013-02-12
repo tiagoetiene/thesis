@@ -165,32 +165,6 @@ linear interpolation (Section \ref{chap1:sec:iea}).}
 \label{tab:results}
 \end{table}
 
-%% As we will discuss,
-%% the spherical solution was not taxing enough on some of the codes we
-%% used, leadin
-%% We were able to find bugs in the some of the codes using $f$ as a manufactured solution. However, due to its simplicity, $f$ is not suitable to evaluate some of the implementations. A detailed discussion is given in the next section.
-
-
-\begin{figure}
-\centering
-\subfigure{
-\label{fig:meshconver}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
-\subfigure{
-\label{fig:normconver}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
-\subfigure{
-\label{fig:areaconv}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
-\subfigure{
-\label{fig:curvatureconv}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
-\caption{Observed order of accuracy. The implementations of 
-Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
-continuous line represents the expected behavior. $p$ is the slope of the linear 
-regression for each curve.}
-\end{figure}
-
 
 \subsubsection{Algebraic distance}
 %\label{subchap1:sec:mesh}
@@ -240,9 +214,26 @@ in the observed order of accuracy of vertex position
 high-order interpolation with splines, not linear interpolation as 
 assumed before (see Section \ref{chap1:sec:mms-complexity}).
 
-% In order to verify whether the isosurfacing algorithms behave 
-% as expected in terms of mesh convergence, we computed the
-% error (\ref{eq:surferror}) between the triangular mesh and a sphere 
+\begin{figure}[h]
+\centering
+\subfigure{
+\label{fig:meshconver}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
+\subfigure{
+\label{fig:normconver}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
+\subfigure{
+\label{fig:areaconv}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
+\subfigure{
+\label{fig:curvatureconv}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
+\caption{Observed order of accuracy. The implementations of 
+Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
+continuous line represents the expected behavior. $p$ is the slope of the linear 
+regression for each curve.}
+\end{figure}
+
 
 \subsubsection{Normals}
 \label{subchap1:sec:normal-convergence}
@@ -303,26 +294,23 @@ Although the curves shown in Figure~\ref{fig:curvatureconv} for Macet and
 Dual Contouring diverge, they change after fixing the code 
 (Figure \ref{fig:curvatureconv-fixed}).
 
-\begin{table}
+\begin{figure}[b]
 \centering
-\begin{tabular}{cccc}
-Bug $\#1$ & Bug $\#2$ & Quality & Observed accuracy \\
-
-\hline
-No Fix & No Fix & Good & Bad  \\
-\hline
-Fix 1 & No Fix & Good & Bad\\
-Fix 1 & Fixed & Bad & Good\\
-\hline
-Fix 2 & No Fix & Good & Bad\\
-Fix 2 & Fixed & Bad & Good\\
-\hline
-\end{tabular}
-\caption{Table of results for Macet. Triangle quality versus 
-convergence. We were not able to find a solution that provides 
-both triangle quality and convergence.}
-\label{tab:results-macet}
-\end{table}
+\subfigure{
+\label{fig:meshconver-fixed}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
+\subfigure{
+\label{fig:normconver-fixed}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
+\subfigure{
+\label{fig:areaconv-fixed}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
+\subfigure{
+\label{fig:curvatureconv-fixed}
+\includegraphics[width=0.47\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
+\caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
+\label{fig:allconv-fixed}
+\end{figure}
 
 \subsection{Detected Bugs}
 
@@ -347,41 +335,6 @@ exactly the solution and therefore there is no error within the approximation
 although another error source (truncation error, for instance) may show up. 
 The next section presents a detailed discussion concerning MMS.
 
-\begin{figure}
-\centering
-\subfigure{
-\label{fig:meshconver-fixed}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
-\subfigure{
-\label{fig:normconver-fixed}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
-\subfigure{
-\label{fig:areaconv-fixed}
-\includegraphics[width=0.40\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
-\subfigure{
-\label{fig:curvatureconv-fixed}
-\includegraphics[width=0.385\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
-\caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
-\label{fig:allconv-fixed}
-\end{figure}
-
-
-
-\begin{figure}
-\centering
-\includegraphics[width=0.95\linewidth]{chapter2/figures/teaser.pdf}
-\caption{Through the verification methodology presented on this paper 
-we were able to uncover a convergence problem within a publicly available marching-based 
-isosurfacing code (top left) and fix it (top right). The problem causes the mesh normals to 
-\emph{disagree} with the known gradient field when refining the voxel size $h$ (bottom row). 
-The two graphs show the convergence of the normals before and after fixing the code.}
-\label{fig:teaser}
-\end{figure}
-
-
-
-
-
 Although we managed to fix the Macet convergence problem, we were not 
 able to do so in a way that preserves triangle quality (Figure \ref{fig:teaser}).
 Two were the problems we found in the source code, and we proposed two 
@@ -392,6 +345,34 @@ is a theoretical problem that prevents both from being satisfied simultaneously,
 or it is just a matter of finding a better algorithmic fix. 
 In both cases, further study and subsequent tests must be accomplished.
 
-%Despite the fact that the observed order of accuracy for the DelIso implementation 
-%does not follows the formal order, we did not investigate the source 
-%code to confirm that this is due to a bug.
+\begin{figure}[b]
+\centering
+\includegraphics[width=1\linewidth]{chapter2/figures/teaser.pdf}
+\caption{Through the verification methodology presented on this paper 
+we were able to uncover a convergence problem within a publicly available marching-based 
+isosurfacing code (top left) and fix it (top right). The problem causes the mesh normals to 
+\emph{disagree} with the known gradient field when refining the voxel size $h$ (bottom row). 
+The two graphs show the convergence of the normals before and after fixing the code.}
+\label{fig:teaser}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{cccc}
+Bug $\#1$ & Bug $\#2$ & Quality & Observed accuracy \\
+
+\hline
+No Fix & No Fix & Good & Bad  \\
+\hline
+Fix 1 & No Fix & Good & Bad\\
+Fix 1 & Fixed & Bad & Good\\
+\hline
+Fix 2 & No Fix & Good & Bad\\
+Fix 2 & Fixed & Bad & Good\\
+\hline
+\end{tabular}
+\caption{Table of results for Macet. Triangle quality versus 
+convergence. We were not able to find a solution that provides 
+both triangle quality and convergence.}
+\label{tab:results-macet}
+\end{table}

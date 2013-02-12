@@ -89,37 +89,9 @@ Figure~\ref{fig:afront-meshconvonh}. Notice that Macet has similar behavior.
 Additional tests are needed to determine the source 
 of this behavior within both codes.
 
-% %  concerns Afront code. A possible input data for Afront is
-% % a voxelized grid, the same grid used by MC-based techniques. The first
-% % step for Afront is to build a implicit surface using Catmull-Rom
-% % splines locally so that the guidance field might be constructed
-% % later. Furthermore, every mesh vertex is projected onto the spline
-% % (i. e., the error on mesh vertices depends on the quality of spline
-% % approximation). In the tests perfomed in Section
-% % \ref{chap1:sec:verification-results}, we were refining $\rho$ and
-% % maintaining the voxel size $h$ fixed, so that we could evaluate
-% % convergence on $\rho$. This test indirectly evaluates the correctness
-% % of Catmull-Rom splines construction, although this is not the best way
-% % to evaluate it. Thus, since Afront uses Catmull-Rom splines for
-% % function approximation one might expect cube order of accuracy for
-% % Afront on mesh vertices.
-% % Nevertheless, the observed order on $h$ for Afront using a sphere as a
-% % manufactured solution is $p = 0$. This is due to Catmull-Rom spline
-% % ability to approximate a sphere with high precision and then the
-% % approximation error is constant, $E_{k} = \max_{j=1\cdots n}|v -
-% % f(c_{\sigma_j})| \approx 10^{-5}$, regardless of $h$ (note that this
-% % error is less than any other error found previously for centroid
-% % convergence). 
-
-% Using a more complex manufactured solution, namely,
-% $f(x,y,z) = a \cos(x) \cos(y) - z_0$, where $a$ is amplitude and $z_0$
-% fixed, we observe a \emph{linear} convergence rate (Figure
-% \ref{fig:afront-meshconvonh}). This might be due to a bad test, a poor
-% convergence analysis or a bug in the code.
-
-\begin{figure}
+\begin{figure}[b]
 \centering
-\includegraphics[width=0.84\linewidth,keepaspectratio=true]{chapter2/figures/afront_meshconv-onh.pdf}
+\includegraphics[width=0.6\linewidth,keepaspectratio=true]{chapter2/figures/afront_meshconv-onh.pdf}
   \caption{Order of accuracy for a transcendental function 
 $f(x,y,z) = x^2 + y^2 + z^2 + \cos(Ax)^2 + \cos(Ay)^2 + \cos(Az)^2$, $A$ 
 is a constant. The observed orders of accuracy for all implementations 
@@ -129,6 +101,7 @@ Afront and Macet due to their use of high-order spline approximations.
 Both have the expected convergence rate for all but the last two values.}
   \label{fig:afront-meshconvonh}
 \end{figure}
+
 
 \paragraph*{On the order of accuracy.}
 In this paper, we have chosen to make our formal analysis as generic
