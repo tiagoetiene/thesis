@@ -330,20 +330,7 @@ The example we have presented above is a complete instance of the
 method of manufactured solutions. We identify a property that the
 results should obey, run the implementations on inputs, and test
 whether the resulting outputs respect the properties.
-\begin{figure}
-\begin{center}
-\includegraphics[width=1.0\linewidth,keepaspectratio=true]{chapter3/figures/pipeline.pdf}
-\caption{Overview of our topology verification pipeline. First step,
-  we generate a random trilinear field and extract a random isosurface
-  using the implementation under verification. We then compute the
-  \emph{expected} topological invariants from the trilinear field and
-  compare them against the invariants obtained from the mesh. We
-  provide two simple ways to compute topological invariants from a
-  trilinear field based on digital topology (DT) or stratified Morse
-  theory (SMT). }
-\label{fig:pipeline}
-\end{center}
-\end{figure}
+%
 In the next sections, we develop a verification method for algorithms
 to reproduce the topology of the level sets of trilinear
 interpolation~\cite{Chernyaev95marchingcubes,lopes:tvcg:2003,Nielson03onmarching},
@@ -359,6 +346,20 @@ their relative strengths and weaknesses, and discuss how to robustly check
 their values.  Figure~\ref{fig:pipeline} shows our pipeline to assess
 topological correctness and also the chapter organization.
 
+\begin{figure}[b]
+\begin{center}
+\includegraphics[width=1.0\linewidth,keepaspectratio=true]{chapter3/figures/pipeline.pdf}
+\caption{Overview of our topology verification pipeline. First step,
+  we generate a random trilinear field and extract a random isosurface
+  using the implementation under verification. We then compute the
+  \emph{expected} topological invariants from the trilinear field and
+  compare them against the invariants obtained from the mesh. We
+  provide two simple ways to compute topological invariants from a
+  trilinear field based on digital topology (DT) or stratified Morse
+  theory (SMT). }
+\label{fig:pipeline}
+\end{center}
+\end{figure}
 
 \section{Mathematical Tools}
 \label{sec:math-foundations}
@@ -405,63 +406,9 @@ Euler characteristic and the Betti numbers are topological invariants:
 two homeomorphic topological spaces will have the same Euler
 characteristic and Betti numbers whenever these are well-defined.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.35\linewidth]{chapter3/figures/voxel.pdf}
-\caption{The four distinct groups of vertices $O, F, E, C$, are
-  depicted as black, blue, green, and red points. They are the ``Old'',
-  ``Face'', ``Edge,'' and ``Corner'' points of a voxel region
-  $V_\mathcal{G}$ (semitransparent cube) respectively. For the sake of
-  clarity, we only show a few points.}  
-\label{fig:voxelgrid}
-\end{figure}
 
 \subsection{Digital topology}
 \label{sec:digital-topology}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.95\linewidth,keepaspectratio=true]{chapter3/figures/mi.pdf}
-\caption{An illustration of the relation between unambiguous
-  isosurfaces of trilinear interpolants and the corresponding digital
-  surfaces.  The top row shows all possible configurations of the
-  intersection of $t = \alpha$ with a cube $c_j$ for unambiguous
-  configurations \cite{lopes:tvcg:2003}.  Each red dot $s_i$ denotes a
-  vertex with $e(s_i) < \alpha$. Each image on the top right is the
-  complement $\bar{c}_i$ of cases 1 to 4 on the left (cases 5 to 7
-  were omitted because the complement is identical to the original
-  cube up to symmetry).  The middle row shows the volume reconstructed
-  by Majority Interpolation (MI) for configurations 1 to 7 (left) and
-  the complements (right) depicted in the top row.  Bottom row shows
-  the boundary of the volume reconstructed by the MI algorithm (The
-  role of faces that intersect $c_i$ is explained in the proof of
-  Theorem~\ref{thm:topological_equivalence_trilinear}).  Notice that
-  all surfaces in the top and bottom rows are topological disks. For
-  each cube configuration, the boundary of each digital reconstruction
-  (bottom row) has the same set of positive/negative connected components as the
-  unambiguous configurations (top row).  }
-\label{fig:topology_preserving}
-\end{center}
-\end{figure}
-
-%Digital Topology (DT) is concerned with topological properties of
-%\emph{digital images}. Its concepts are largely used in image
-%processing literature where it has applications on segmentation,
-%thinning, digitization, image repair, among others. In particular,
-%the process of 3D digitization of an 3D object remains a challenge
-%\cite{siqueira:2007}. Stelldinger et al.  \cite{siqueira:2007}
-%present conditions for topological equivalence between 3D objects and
-%their digital images. It is mainly based on the concept of
-%\emph{r-regular} objects. Loosely speaking, an object is
-%\mbox{$r$-regular} if for any point over the surface of the object
-%there exist two osculating open balls of radius $r$ such that one is
-%completely inside and the other completely outside that object. The
-%drawback is that $r$-regular shapes are too restrictive, e. g., is
-%does not allow sharp features. Stelldinger and Terzic
-%\cite{Stelldinger2008} relaxed this requirement using the concept of
-%$r$-halfregular objects, a much wider class of surfaces for which the
-%digitization process is guaranteed to preserve the topology of the
-%original object.
 
 Let $\mathcal{G}$ be an $n\times n \times n$ cubic regular grid with a
 scalar $e(s)$ assigned to each vertex $s$ of $\mathcal{G}$ and
@@ -497,6 +444,31 @@ if the following two conditions hold simultaneously:
  row in Figure~\ref{fig:topology_preserving} shows all possible
  unambiguous cases.
 
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=1\linewidth,keepaspectratio=true]{chapter3/figures/mi.pdf}
+\caption{An illustration of the relation between unambiguous
+  isosurfaces of trilinear interpolants and the corresponding digital
+  surfaces.  The top row shows all possible configurations of the
+  intersection of $t = \alpha$ with a cube $c_j$ for unambiguous
+  configurations \cite{lopes:tvcg:2003}.  Each red dot $s_i$ denotes a
+  vertex with $e(s_i) < \alpha$. Each image on the top right is the
+  complement $\bar{c}_i$ of cases 1 to 4 on the left (cases 5 to 7
+  were omitted because the complement is identical to the original
+  cube up to symmetry).  The middle row shows the volume reconstructed
+  by Majority Interpolation (MI) for configurations 1 to 7 (left) and
+  the complements (right) depicted in the top row.  Bottom row shows
+  the boundary of the volume reconstructed by the MI algorithm (The
+  role of faces that intersect $c_i$ is explained in the proof of
+  Theorem~\ref{thm:topological_equivalence_trilinear}).  Notice that
+  all surfaces in the top and bottom rows are topological disks. For
+  each cube configuration, the boundary of each digital reconstruction
+  (bottom row) has the same set of positive/negative connected components as the
+  unambiguous configurations (top row).  }
+\label{fig:topology_preserving}
+\end{center}
+\end{figure}
+
 The geometric dual of $\mathcal{G}$ is called the \emph{voxel grid}
 associated with $\mathcal{G}$, denoted by $V_{\mathcal{G}}$. More
 specifically, each vertex $s$ of $\mathcal{G}$ has a corresponding
@@ -512,6 +484,18 @@ shall show, the voxel grid structure plays an
 important role when using digital topology to compute topological
 invariants of a given isosurface. Before showing that relation,
 though, we need a few more definitions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.35\linewidth]{chapter3/figures/voxel.pdf}
+\caption{The four distinct groups of vertices $O, F, E, C$, are
+  depicted as black, blue, green, and red points. They are the ``Old'',
+  ``Face'', ``Edge,'' and ``Corner'' points of a voxel region
+  $V_\mathcal{G}$ (semitransparent cube) respectively. For the sake of
+  clarity, we only show a few points.}  
+\label{fig:voxelgrid}
+\end{figure}
+
 
 Denote by $\mathcal{G}^\prime$ the $(2n-1)\times (2n-1) \times (2n-1)$ regular grid
 obtained from a refinement of $\mathcal{G}$.
@@ -555,6 +539,35 @@ the voxels that belong to a digital object $\mathcal{O}_\alpha$.
 The middle row of Figure~\ref{fig:topology_preserving} shows all
 possible cases for voxels picked by the MI algorithm (notice the
 correspondence with the top row of the same figure).
+
+\begin{algorithm}[t]
+\begin{codebox}
+\Procname{$\proc{MajorityInterpolation}(\mathcal{G},\alpha)$}
+%\li \Comment Let $S'$ be $S$ with resolution doubled
+\li \Comment Let $O$, $F$, $E$ and $C$ be the subset of vertices 
+\zi ~~~in $\mathcal{G}^\prime$ as described in
+subsection~\ref{sec:digital-topology}. %an old, face, edge and corner point
+%\zi  respectively (Definition \ref{dff:majority-interpolation}).
+\li \Comment Let $\mathpzc{N}(s, \star)$ be the set of neighbors of
+$s\in\mathcal{G}^\prime$ in the \zi ~~~ set $\star$, where $\star =
+\{O, F, E, C\}$, with associate scalar \zi ~~~ less than $\alpha$
+%\zi of $s \in S'$ inside $p = 0$
+\li \For $s \in \mathcal{G}^\prime$
+\li     \Do  	\If $s \in O$ \bf or
+\li		    $s \in \proc{F}$ and $|\mathpzc{N}(s, O)| = 2$ \bf or
+\li			  $s \in E$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s, F)| 
+\geqslant 4$ \bf or
+\li		    $s \in \proc{C}$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s,
+F)+\mathpzc{N}(s,E)| \geqslant 12$
+\li		\Then Select voxel $v_s$
+		\End
+	\End
+\li \Return $\mathcal{O}_\alpha$
+\end{codebox}
+\caption{Voxel selection using Majority Interpolation (MI).
+}
+\label{alg:majority-interpolation}
+\end{algorithm}
 
 The importance of $\mathcal{O}_\alpha$ is two-fold. First, the
 boundary surface of the union of the voxels in $\mathcal{O}_\alpha$,
@@ -648,50 +661,6 @@ shown the conditions for which the digital surfaces and the level sets
 are homeomorphic, any topological invariant will have to be the
 same for both surfaces.
 
-\begin{algorithm}
-\begin{codebox}
-\Procname{$\proc{MajorityInterpolation}(\mathcal{G},\alpha)$}
-%\li \Comment Let $S'$ be $S$ with resolution doubled
-\li \Comment Let $O$, $F$, $E$ and $C$ be the subset of vertices 
-\zi ~~~in $\mathcal{G}^\prime$ as described in
-subsection~\ref{sec:digital-topology}. %an old, face, edge and corner point
-%\zi  respectively (Definition \ref{dff:majority-interpolation}).
-\li \Comment Let $\mathpzc{N}(s, \star)$ be the set of neighbors of
-$s\in\mathcal{G}^\prime$ in the \zi ~~~ set $\star$, where $\star =
-\{O, F, E, C\}$, with associate scalar \zi ~~~ less than $\alpha$
-%\zi of $s \in S'$ inside $p = 0$
-\li \For $s \in \mathcal{G}^\prime$
-\li     \Do  	\If $s \in O$ \bf or
-\li		    $s \in \proc{F}$ and $|\mathpzc{N}(s, O)| = 2$ \bf or
-\li			  $s \in E$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s, F)| 
-\geqslant 4$ \bf or
-\li		    $s \in \proc{C}$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s,
-F)+\mathpzc{N}(s,E)| \geqslant 12$
-\li		\Then Select voxel $v_s$
-		\End
-	\End
-\li \Return $\mathcal{O}_\alpha$
-\end{codebox}
-\caption{Voxel selection using Majority Interpolation (MI).
-}
-\label{alg:majority-interpolation}
-\end{algorithm}
-
-\begin{algorithm}[ht]
-\begin{codebox}
-\Procname{$\proc{GenusFromDS}(\partial \mathcal{O}_\alpha)$}
-\li \Comment Let $\partial \mathcal{O}_\alpha$ be a 2-manifold without
-boundary
-\li \Comment Let $|\mathpzc{N}_i|$ be the number of surface points with
-\zi ~~~exactly $i$ neighbors.
-\li \Comment Let $g$ be the surface genus
-\li $g = 1 + (|\mathpzc{N}_5| + 2 |\mathpzc{N}_6| - |\mathpzc{N}_3|) / 8 $
-\li \Return $g$
-\end{codebox}
-\caption{A simple formula for genus computation.}
-\label{alg:compute-invariant}
-\end{algorithm}
-
 \subsection{Stratified Morse Theory}
 \label{sec:smt}
 The mathematical developments presented above allow us to compute the
@@ -764,15 +733,6 @@ boundary of the domain. It is
 important, then, to have a mathematical tool which makes predictions
 regardless of the types of configurations, and SMT is one such theory.
 
-\begin{figure}
-\includegraphics[width=\linewidth]{chapter3/figures/stratification.png}
-\caption{\label{fig:stratification}An illustration of a
-  piecewise-smooth immersed 2-manifold. The colormap illustrates the
-  value of each point of the scalar field. Notice that although the manifold
-  itself is not everywhere differentiable, each stratum is itself an open
-  manifold that is differentiable.}
-\end{figure}
-
 Intuitively, a \emph{stratification} is a partition of a
 piecewise-smooth manifold such that each subset, called a
 \emph{stratum}, is either a set of discrete points or has a smooth
@@ -787,6 +747,15 @@ strata is that the level sets of $f$ restricted to each stratum are
 smooth (or lack any differential structure, as in the vertex-set). In
 SMT, one applies standard Morse theory on each stratum, and then
 combines the partial results appropriately.
+
+\begin{figure}[t]
+\includegraphics[width=\linewidth]{chapter3/figures/stratification.png}
+\caption{\label{fig:stratification}An illustration of a
+  piecewise-smooth immersed 2-manifold. The colormap illustrates the
+  value of each point of the scalar field. Notice that although the manifold
+  itself is not everywhere differentiable, each stratum is itself an open
+  manifold that is differentiable.}
+\end{figure}
 
 The set of points with zero gradient (computed on each stratum), which
 SMT assumes to be isolated, are called the \emph{critical points} of
@@ -812,8 +781,8 @@ complement'').  In this context, we can define a small neighborhood
 $T_\varepsilon(p)$ in the strata containing $p$ and the \emph{lower
   tangential} link $T_L^-(p)$ as the set of points in the boundary of
 $T_\varepsilon(p)$ with scalar values less than that in $p$.
-\begin{wrapfigure}{r}{2.5cm}
-\vspace{-0.2cm}
+\begin{wrapfigure}{r}{3cm}
+\centering
 \includegraphics[width=2.0cm,keepaspectratio=true]{chapter3/figures/ilustration.png}
 \end{wrapfigure}
 Similarly we can define the \emph{upper tangential} link $T_L^+(p)$ as
@@ -983,31 +952,6 @@ tests, we consider the implementation verified.
 % (in the sense of analyzed predicted behavior) for all test cases to which
 % it has been applied, increasing our confidence in the stated properties
 
-\begin{algorithm}
-\begin{codebox}
-\Procname{$\proc{MMS-SMT}(\mathcal{G})$}
-\li \Comment Let the input $\mathcal{G}$ be $n \times n \times n$ rectilinear grid
-\li \For $i \gets 1$ \To $\#$tests
-\li     \Do $\mathcal{G} \gets$ randomly sampled $n \times n \times n$ grid \label{alg:mms:sampling}
-\li         $\id{CPs} \gets \proc{ComputeCriticalPoints}(\mathcal{G})$
-\li         \If $p \in CPs$ is degenerate \kw{or}
-\li		$p$ is an internal saddle close to edges or faces
-\li         	\Then $\proc{GoTo}$ \ref{alg:mms:sampling} \label{alg:mms:goto-smt}
-\li         \Else $K \gets \proc{Isosurfacing}(\mathcal{G})$
-\li         	  $(\chi^v)_i \gets \proc{InvariantFromCPs}(\mathcal{G})$
-\li         	  $(\chi^k)_i \gets \proc{InvariantFromMesh}(K)$
-	    \End
-\li Compare $(\chi^v)_i$ and $(\chi^k)_i$
-      \End
-\end{codebox}
-\caption{Overview of the method of manufactured solutions (MMS) using
-stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
-\ref{ref:chis}. The method either fails to match the expected topology, in
-which case $\mathcal{G}$ is provided as a counterexample, or
-succeeds otherwise.}
-\label{alg:manufactured-solutions-smt}
-\end{algorithm}
-
 \subsection{Verification using Stratified Morse Theory}
 \label{subsec:smt-verify}
 
@@ -1043,6 +987,31 @@ to avoid numerical instabilities, we also regenerate the scalar field
 locally if any internal critical point lies too close to the border of
 the domain (that is, to an edge or to a face of the cube).
 
+\begin{algorithm}[t]
+\begin{codebox}
+\Procname{$\proc{MMS-SMT}(\mathcal{G})$}
+\li \Comment Let the input $\mathcal{G}$ be $n \times n \times n$ rectilinear grid
+\li \For $i \gets 1$ \To $\#$tests
+\li     \Do $\mathcal{G} \gets$ randomly sampled $n \times n \times n$ grid \label{alg:mms:sampling}
+\li         $\id{CPs} \gets \proc{ComputeCriticalPoints}(\mathcal{G})$
+\li         \If $p \in CPs$ is degenerate \kw{or}
+\li		$p$ is an internal saddle close to edges or faces
+\li         	\Then $\proc{GoTo}$ \ref{alg:mms:sampling} \label{alg:mms:goto-smt}
+\li         \Else $K \gets \proc{Isosurfacing}(\mathcal{G})$
+\li         	  $(\chi^v)_i \gets \proc{InvariantFromCPs}(\mathcal{G})$
+\li         	  $(\chi^k)_i \gets \proc{InvariantFromMesh}(K)$
+	    \End
+\li Compare $(\chi^v)_i$ and $(\chi^k)_i$
+      \End
+\end{codebox}
+\caption{Overview of the method of manufactured solutions (MMS) using
+stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
+\ref{ref:chis}. The method either fails to match the expected topology, in
+which case $\mathcal{G}$ is provided as a counterexample, or
+succeeds otherwise.}
+\label{alg:manufactured-solutions-smt}
+\end{algorithm}
+
 The third step computes the Euler characteristic of a set of
 isosurfaces with random isovalues in the interval $[-1, 1]$ using the
 theory previously described, jointly with Equation~\ref{ref:chis}.  In
@@ -1057,23 +1026,6 @@ less likely to contain bugs.
 
 \subsection{Verification using Digital Topology}
 \label{subsec:ds-verify}
-
-\begin{figure}
-\centering
-\includegraphics[width=1.0\linewidth,keepaspectratio=true]
-{chapter3/figures/trilinear-field.pdf}
-\caption{Our manufactured solution is given by $t(x) = \alpha$. $\mathcal{G}$ is
-depicted in solid lines while $\tilde{\mathcal{G}}$ is shown in dashed lines.
-$\tilde{\mathcal{G}}$ is a uniform subdivision of $\mathcal{G}$. The trilinear
-surfaces $t_i$ are defined for each cube
-$c_i \in \mathcal{G}$ and resampled in $c'_j \in \tilde{\mathcal{G}}$.
-The cubes in the center of $\mathcal{G}$ have four maxima each
-(left) and thus induce complicated topology. The final
-isosurface may have several tunnels and/or connected
-components even for coarse $\mathcal{G}$ (right). }
-\label{fig:trilinear-field}
-\end{figure}
-
 
 Algorithm~\ref{alg:manufactured-solutions-digital-surfaces} shows the
 verification pipeline using the MI algorithm, and
@@ -1098,69 +1050,7 @@ be unambiguous.
 For simplicity, in this work we refine $\mathcal{G}$ uniformly
 doubling the grid resolution in each dimension.
 
-Scalars are assigned to the new vertices of $\tilde{\mathcal{G}}$ (the ones not in $\mathcal{G}$) by trilinearly 
-interpolating
-from scalars in $\mathcal{G}$, thus ensuring that $\mathcal{G}$ and  $\tilde{\mathcal{G}}$ have
-exactly the same scalar field~\cite{Nielson03onmarching}.
-As all cubic cells in $\tilde{\mathcal{G}}$ are unambiguous, Theorem \ref{thm:topological_equivalence_trilinear} guarantees 
-the topology of the digital surface $\partial\mathcal{O}_\alpha$
-obtained from $\tilde{\mathcal{G}}$ is equivalent to 
-that of $t(x)=\alpha$. Algorithm \proc{InvariantFromDS} computes
-topological invariants of
-$\partial\mathcal{O}_\alpha$ using the scheme discussed in
-Section~\ref{sec:digital-topology}. In this context, \proc{InvariantFromDS} is
-the algorithm illustrated in Algorithm~\ref{alg:compute-invariant}.
-Surfaces with boundary are avoided by assigning the scalar value $1$ to every vertex in the
-boundary of $\mathcal{G}$.
-%$\proc{RefineAndResample}$ generates $S'$, a refined version of
-%$S$ that contains no ambiguous cases. Theorem \ref{thm:topological_equivalence_trilinear} guarantees that if no ambiguous cells exist the topology of the digitized surface $\partial V$ is the same as $p = 0$. 
-%Notice that the subdivison part of \proc{RefineAndResample} can be done using many different schemes. 
-%For instance, each cube may be refined in a non-uniform way, using a random pivot or using $p_i$'s critical points, 
-%and the result of the verification process is still reliable. 
-%This is because Theorem $\ref{thm:topological_equivalence_trilinear}$ only requires that each $C$ to be unambiguous. 
-%In fact, $C$ doesn't even have to be a cube. This shows us that the reliability of this verification 
-%process depends only on key concepts with other steps beign done in arbitrarily ways. 
-%Although not stricly necessary, the refinement applied to $\mathcal{G}$ to generate $\tilde{\mathcal{G}}$ is uniform. 
-%In fact, we set maximum number of refinements to be applied, if the upper bound is reached and ambiguous cells
-%are still present in the grid, we restart the process from scratch, generating a new random field in $\mathcal{G}$
-%and triggering then the refinement process.
-%It is important to point out that If no $S'$ can be found for a particular $S$, the process is restarted. Although this reduces the range
-%of $p$ defined in $C_i$, in our tests we hit all 256 possible combinations of signs for
-%$C_i$ (Figure \ref{fig:trilinear-field} shows an instance of $p = 0$). $\proc{InvariantFromDS}$ uses the algorithm described in \ref{sec:digital-topology} for computing digital surface invariants.
-%Among the advantages of this framework is the simplicity and ability of compute
-%topological invariants, namely, the Euler Characteristics $\chi$,
-%$\beta_0$, $\beta_1$ and $\beta_2$. On the other hand, the zero level-set must
-%be a closed 2-manifold.
-
-
-
-
-% \begin{figure}
-% \begin{codebox}
-% \Procname{$\proc{MajorityInterpolation}(S)$}
-% \li \Comment Let $S'$ be $S$ with resolution doubled
-% \li \Comment Let $O$, $F$, $E$ and $C$ be an old, face, edge and corner point
-% \zi  respectively (Definition \ref{dff:majority-interpolation}).
-% \li \Comment Let $\mathpzc{N}(s, t)$ be the set of $t-$neighbors, $t \in \{O,
-% F, E, C\}$ 
-% \zi of $s \in S'$ inside $p = 0$
-% \li \For $s \in S'$
-% \li     \Do  	\If $s = O$ \bf or
-% \li		    $s = \proc{F}$ and $|\mathpzc{N}(s, O)| = 2$ \bf or
-% \li			  $s = E$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s, F)| 
-% \geqslant 4$ \bf or
-% \li		    $s = \proc{C}$ and $|\mathpzc{N}(s, O)+\mathpzc{N}(s,
-% F)+\mathpzc{N}(s,E)| \geqslant 12$
-% \li		\Then Select voxel $\mathpzc{V}_{S'}(s)$
-% 		\End
-% 	\End
-% \li \Return $S'$
-% \end{codebox}
-% \caption{Voxel selection.}
-% \label{alg:majority-interpolation}
-% \end{figure}
-
-\begin{algorithm}
+\begin{algorithm}[t]
 \begin{codebox}
 \Procname{$\proc{MMS-DS}(\mathcal{G})$}
 \li \Comment Let the input $\mathcal{G}$ be a $n \times n \times n$ rectilinear grid
@@ -1188,6 +1078,51 @@ succeeds otherwise.}
 \label{alg:manufactured-solutions-digital-surfaces}
 \end{algorithm}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\linewidth,keepaspectratio=true]
+{chapter3/figures/trilinear-field.pdf}
+\caption{Our manufactured solution is given by $t(x) = \alpha$. $\mathcal{G}$ is
+depicted in solid lines while $\tilde{\mathcal{G}}$ is shown in dashed lines.
+$\tilde{\mathcal{G}}$ is a uniform subdivision of $\mathcal{G}$. The trilinear
+surfaces $t_i$ are defined for each cube
+$c_i \in \mathcal{G}$ and resampled in $c'_j \in \tilde{\mathcal{G}}$.
+The cubes in the center of $\mathcal{G}$ have four maxima each
+(left) and thus induce complicated topology. The final
+isosurface may have several tunnels and/or connected
+components even for coarse $\mathcal{G}$ (right). }
+\label{fig:trilinear-field}
+\end{figure}
+
+Scalars are assigned to the new vertices of $\tilde{\mathcal{G}}$ (the ones not in $\mathcal{G}$) by trilinearly 
+interpolating
+from scalars in $\mathcal{G}$, thus ensuring that $\mathcal{G}$ and  $\tilde{\mathcal{G}}$ have
+exactly the same scalar field~\cite{Nielson03onmarching}.
+As all cubic cells in $\tilde{\mathcal{G}}$ are unambiguous, Theorem \ref{thm:topological_equivalence_trilinear} guarantees 
+the topology of the digital surface $\partial\mathcal{O}_\alpha$
+obtained from $\tilde{\mathcal{G}}$ is equivalent to 
+that of $t(x)=\alpha$. Algorithm \proc{InvariantFromDS} computes
+topological invariants of
+$\partial\mathcal{O}_\alpha$ using the scheme discussed in
+Section~\ref{sec:digital-topology}. In this context, \proc{InvariantFromDS} is
+the algorithm illustrated in Algorithm~\ref{alg:compute-invariant}.
+Surfaces with boundary are avoided by assigning the scalar value $1$ to every vertex in the
+boundary of $\mathcal{G}$.
+
+\begin{algorithm}[b]
+\begin{codebox}
+\Procname{$\proc{GenusFromDS}(\partial \mathcal{O}_\alpha)$}
+\li \Comment Let $\partial \mathcal{O}_\alpha$ be a 2-manifold without
+boundary
+\li \Comment Let $|\mathpzc{N}_i|$ be the number of surface points with
+\zi ~~~exactly $i$ neighbors.
+\li \Comment Let $g$ be the surface genus
+\li $g = 1 + (|\mathpzc{N}_5| + 2 |\mathpzc{N}_6| - |\mathpzc{N}_3|) / 8 $
+\li \Return $g$
+\end{codebox}
+\caption{A simple formula for genus computation.}
+\label{alg:compute-invariant}
+\end{algorithm}
 
 
 \section{Experimental Results}
