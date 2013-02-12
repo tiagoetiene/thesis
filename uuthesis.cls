@@ -1406,30 +1406,30 @@
 has been approved by the following supervisory committee members:
   \begin{flushleft}
     \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
+        \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
+    \rule{1.375in}{0.4pt}}\\
     \@committeechair\ {}      , Chair      enter date
-    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
-    \rule{1.375in}{0.4pt}}\\
     \rule{4.375in}{0in}{\HFapprovalsmall {     } Date Approved\hspace{1em}}
 \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
+    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
+    \rule{1.375in}{0.4pt}}\\
     \@firstreader\ {}      , Member 
-    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
-    \rule{1.375in}{0.4pt}}\\
     \rule{4.375in}{0in}{\HFapprovalsmall {     } Date Approved\hspace{1em}}
 \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
+    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
+    \rule{1.375in}{0.4pt}}\\
     \@secondreader\ {}      , Member 
-    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
-    \rule{1.375in}{0.4pt}}\\
     \rule{4.375in}{0in}{\HFapprovalsmall {     } Date Approved\hspace{1em}}
 \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
-    \iffourth \@secondreader\ {}      , Member 
     \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
     \rule{1.375in}{0.4pt}}\\
+    \iffourth \@thirdreader\ {}      , Member 
     \rule{4.375in}{0in}{\HFapprovalsmall {     } Date Approved\hspace{1em}}
     \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
  \fi
-    \iffifth \@secondreader\ {}      , Member 
-    \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
+     \mbox{\rule{3.5in}{0.4pt}\rule{0.75in}{0in}%
     \rule{1.375in}{0.4pt}}\\
+    \iffifth \@fourthreader\ {}      , Member 
     \rule{4.375in}{0in}{\HFapprovalsmall {     } Date Approved\hspace{1em}}
     \mbox{}\\ \mbox{}\\  \mbox{}\\ \mbox{} \\
  \fi
