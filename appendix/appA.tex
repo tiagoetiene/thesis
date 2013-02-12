@@ -1,9 +1,40 @@
-\chapter{Appendix A Title}\label{appA}
-%\fixchapterheading % Use this if section follows chapter immediately
-Text
+\chapter{The counterexample in numbers}
+\label{app:counter-example}
 
-\section{Section Title}  % level 2
-Text
+We provide the data necessary for reproducing the counterexample shown in Figure \ref{fig:case13counter_example}. The isosurface of interest is homeomorphic to configuration 13.5.2 of the extended Marching Cubes table.This example can be used to show that both the original and modified versions of the \mc{} algorithm will fail to retrieve the correct case. 
+Following the interior test proposed by Chernyaev, let
+\begin{eqnarray}
+A_0 = +0.2864 & &A_1 = -0.2384 \nonumber\\
+ B_0 = -0.0639 & &B_1 =  +0.9486 \nonumber\\
+C_0 =+0.6568 & &C_1 = -0.5049\nonumber\\
+D_0  = -0.1692 & &D_1 = +0.1075.\nonumber
+\end{eqnarray}
+The coefficient $a$, $b$, and $c$ in $F(t)$ are given by
+\begin{eqnarray*}
+a &=& {}+(A_1-A_0)(C_1-C_0)\\
+& & {} -(B_1-B_0)(D_1-D_0) = 0.3296\\
+b &=& {}+C_0(A_1-A_0)\\ 
+& & {}+ A_0(C_1-C_0)\\
+& & {}-D_0(B_1-B_0\\
+& & {}-B_0(D_1-D_0) = -0.4886\\
+c &=& {} A_0C_0 - B_0D_0 = 0.1701
+\end{eqnarray*}
+Condition (i) does not hold because $a > 0$, which means that a tunnel is absent. Therefore, under Chernyaev's conditions, case 13.5.2 is incorrectly interpreted as 13.5.1. 
 
-\subsection{Subsection Title} %level 3
-Text 
+Now, following the Lewiner's implementation, for the same scalar field, let
+\begin{eqnarray}
+A_0 = +0.1075    & &A_1 =  -0.5049\nonumber\\
+B_0 = -0.1692     & &B_1 =  +0.6568 \nonumber\\
+C_0 = +0.2864   & &C_1 =  -0.0639\nonumber\\
+D_0  = -0.2384 & &D_1 =  +0.9486.\nonumber
+\end{eqnarray}
+%
+The proposed alternative $t$ is given by
+\begin{eqnarray}
+t_{\mathrm{alt}} = \frac{A_0}{A_0 - A_1}= 0.1756 ,\nonumber
+\end{eqnarray}
+and:
+\begin{eqnarray}
+F(t_{\mathrm{alt}}) = -0.0007 < 0.\nonumber
+\end{eqnarray}
+Thus condition (iii) fails, which means that case 13.5.2 is again incorrectly interpreted as 13.5.1.
