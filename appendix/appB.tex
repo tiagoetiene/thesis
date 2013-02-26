@@ -1,9 +1,34 @@
-\chapter{Appendix B Title}\label{appB}
-%\fixchapterheading % Use this if section follows chapter immediately
-Text
+\chapter{Auxiliary expansions}\label{sec:aux}
 
-\section{Section Title}  % level 2
-Text
+In this chapter, we provide auxiliary expansions and proofs. More details on the expansions shown below can be found in the textbook by Sedgewick and Flajolet \cite{Sedgewick95}. Recall that $d = D / n$.
 
-\subsection{Subsection Title} %level 3
-Text 
+\section{Proof of convergence of $(1+ O(d))^n$}
+
+Let us first expand the term $(1+C_1x)^{C_2/x}$, where $C_1 C_2 \in \mathbb{R}^+$ and $x \rightarrow 0$.
+\begin{eqnarray}
+(1+C_1x)^{\frac{C_2}{x}}
+&= & \exp \left(\frac{C_2}{x}\log (1+C_1x) \right)\\
+&= & \exp \left(\frac{C_2}{x}(C_1x + O(x^2)) \right)\\
+&= & \exp ( C_1C_2 + O(x) ) \\
+&=& 1 + C_1C_2 + O(x) = O(1)
+\end{eqnarray}
+Hence:
+\begin{eqnarray}
+(1+ O(d))^n = (1+ O(d))^{D/d} = O(1)
+\end{eqnarray}
+
+\section{Proof of convergence of $(1+ O(d^2))^n$}
+
+Let us first expand the term $(1+C_1x^2)^{C_2/x}$, where $C_1,C_2 \in \mathbb{R}^+$ and $x \rightarrow 0$.
+\begin{eqnarray}
+(1+C_1x^2)^{\frac{C_2}{x}}
+&= & \exp \left(\frac{C_2}{x}\log (1+C_1x^2) \right)\\
+&= & \exp \left(\frac{C_2}{x}(C_1x^2 + O(x^4)) \right)\\
+&= & \exp ( C_1C_2x + O(x^3) ) \\
+&=& 1 + C_1C_2x + O(x^3)\\
+&=& 1 + O(x)
+\end{eqnarray}
+Hence:
+\begin{eqnarray}
+(1+ O(d^2))^n = (1+ O(d^2))^{D/d} = 1 + O(d)
+\end{eqnarray}
