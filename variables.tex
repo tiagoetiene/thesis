@@ -27,3 +27,8 @@
 \newcommand{\mc}{\textsc{MC33}}
 \newcommand{\cmc}{\textsc{C-MC33}}
 
+\global\newcount\nn \nn=0
+\def\Sen{\global\advance\nn by 1 \number\nn}
+\newcommand{\bugnumber}{\Sen}
+
+
