@@ -57,7 +57,7 @@ The main contributions of this article are:
 
 %One may be tempted to classify the verification as debugging, a well-known process for finding software glitches. Although debugging has been used extensively in computer science (and hence in the visualization community), our claim is not that the debugging process has not been used in visualization but that there are only a few attempts to formally verify correctness of visualization implementation.
 
-%Clearly, our approach is problem-dependent, but its general formulation can be applied not only to isosurfacing and volume rendering, but also to techniques such as streamline computation and mesh simplification. In this paper, however, we focus on direct volume rendering.
+%Clearly, our approach is problem-dependent, but its general formulation can be applied not only to isosurfacing and volume rendering, but also to techniques such as streamline computation and mesh simplification. In this chapter, however, we focus on direct volume rendering.
 
 %We emphasize that verification is a \emph{process}. Our goal is to increase confidence in a given implementation rather than prove or provide any final guarantees on the implementation correctness~\cite{Roache_1998}. The latter is known in computer science as formal verification~\cite{FLO67,Hoare:1969:ABC:363235.363259} an approach beyond the scope of this work.
 
@@ -149,7 +149,7 @@ expected rate. In this list, the expert judgment is the least rigorous
 test, followed by error quantification and convergence analysis. 
 Order-of-accuracy is widely recognized as the most rigorous code
 verification tool~\cite{babuska04, KnuppSalari02, roach98,
-  Roy2005}. In this paper, we focus on the last two methods, namely,
+  Roy2005}. In this chapter, we focus on the last two methods, namely,
 convergence analysis and order-of-accuracy. Before we dive into these
 methods, let us first consider some of the limitation of the expert
 analysis and error quantification.
@@ -195,7 +195,7 @@ On the other hand, we will have enough information to make such a
 decision if one observes how errors behave when input parameters
 change, instead of quantifying them from one image. The convergence
 and order-of-accuracy tests work in this way, and they are the focus
-of this paper.
+of this chapter.
 
 We advocate the use of convergence and order-of-accuracy verification
 not as a replacement but as an extension of the current testing
@@ -488,7 +488,7 @@ The interplay between the approximation errors of the inner and outer integrals 
   The computation of the convergence rate is detailed in Section \ref{sec:convergence_analysis}. The results shown in Table \ref{table:orders} suggest
   that one needs to improve the accuracy of \emph{both} the inner and outer integrals to obtain
   high-order methods.  
-  %In this paper, we restrict ourselves to the classic discretization using Riemann sum 
+  %In this chapter, we restrict ourselves to the classic discretization using Riemann sum 
   %for both inner and outer integrals. 
 %  The results of this section will be used for the verification of 
 %  widely used volume rendering packages, whichs implement the Riemann sum.
@@ -537,20 +537,20 @@ The interplay between the approximation errors of the inner and outer integrals 
 %interpolant is used for reconstruction of
 %the scalar field. For dataset refinement, we restrict ourselves to the case of piecewise trilinear
 %interpolants. This is a valid assumption for verification 
-%purposes because in this work we are not  interested in the quality of the 
+%purposes because in this chapter we are not  interested in the quality of the 
 %approximation of the unknown scalar field but  instead we need
 % a property that can be tested under the outlined assumptions (and the
-% piecewise trilinear field provides us such a property). Moreover, the software packages tested in this work, 
+% piecewise trilinear field provides us such a property). Moreover, the software packages tested in this chapter, 
 % and many more, also use a trilinear interpolant.  If other interpolants are used, there may be an 
 %approximation error due to grid size. 
 
-For the purposes of this paper, we assume that no additional 
+For the purposes of this chapter, we assume that no additional 
 errors will be created during the refinement of the scalar field. 
 Hence, we need to find an interpolation function, that fulfills the 
 so called two-scaling property. Fortunately, B-splines fulfill the 
 two-scale property~\cite{799930} and we will pick the linear B-spline, 
 which results in the well-known tri-linear interpolator. Care must 
-be taking on the refinement step. In this paper we will pick a 
+be taking on the refinement step. In this chapter we will pick a 
 refinement factor of two, which simplifies to a simple averaging of 
 the nearest neighbours. The errors introduced so far remain 
 unchanged:
@@ -595,7 +595,7 @@ be interpreted as an ``infinity order of convergence'' on the grid
 size $m$, $O(m^{-\infty})$; {\em i.e.}, an instantaneous convergence to zero error.
 %
 Nevertheless, Equation \eqref{eq:datasetsize} still contains an error due 
-to ray sampling $O(d)$, and others  not considered in this work 
+to ray sampling $O(d)$, and others  not considered in this chapter 
 (such as rounding errors, finite precision, etc.).  
 These fixed error sources will be revealed in the approximation 
 of the VRI and remain (mostly) unchanged when refining dataset size.
@@ -1071,7 +1071,7 @@ projection step used.
 
 \begin{table}[t]
 \caption{Each cell indicates where the results for each type of test
-  can be found in the paper.}
+  can be found in this chapter.}
   \centering
 \begin{tabular}{ l l | c | c c}
                               &                     & \textbf{Known sol.}             & \multicolumn{2}{c}{\textbf{Unknown sol.}}\\
@@ -1604,7 +1604,7 @@ function.
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 
-In this paper, we present verification techniques for volume rendering
+In this chapter, we present verification techniques for volume rendering
 based on the use of convergence analysis. Using these techniques, we
 successfully found discrepancies in the behavior of the volume
 rendering algorithms of two widely-used visualization packages.  We

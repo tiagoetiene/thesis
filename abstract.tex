@@ -1,2 +1,29 @@
 % Complete in less than 350 words.
-Abstract text here. 
+
+In this dissertation we advance the theory and practice of verification of visualization algorithms.
+%
+%%% GEOMETRY
+We present techniques to assess visualization correctness  through the testing of important mathematical properties that should be honored. Where applicable, these techniques allow us to distinguish
+ whether anomalies in visualization features can be attributed to the
+  underlying physical process or to artifacts from the implementation under verification.
+Such scientific scrutiny is at the heart of {\em
+    verifiable visualization} -- subjecting visualization algorithms
+  to the same verification process that is used in other components of
+  the scientific pipeline.  More concretely, we derive the mathematical framework for
+  the expected behavior of several 
+  visualization algorithms,
+  and compare them to experimentally observed results in the selected
+  codes.  In Computational Science \& Simulation community this technique is know as the Method of Manufactured Solution (MMS). We apply MMS to the verification of geometrical and topological properties of isosurface extraction algorithms, and direct volume rendering. 
+%To apply MMS for the verification of these properties, we mathematically described the important properties necessary for carry the MMS test. 
+We derive the convergence of geometrical properties of isosurface extraction techniques, such as function value and normals. For the verification of topological properties, we use stratified Morse theory and digital topology to
+design algorithms which verify topological invariants. In the case of volume rendering algorithms, we provide the expected discretization errors for three different error sources.
+The results of applying the MMS is another important contribution of this dissertation. 
+%
+We report unexpected behavior for almost all implementations tested. In some cases, we were able to find and fix bugs that prevented the correctness of the visualization algorithm. 
+%
+In particular,  we address three issues with the Marching Cubes 33 algorithm, one of the first algorithms intended to preserve the topology of the trilinear interpolant. 
+%
+One of the issues addressed is an almost 20-years old bug with the core disambiguation procedure of Marching Cubes 33 that prevents the extraction of topologically correct isosurfaces for the ambiguous configuration 13.5.
+  %
+Finally,  an important by-product of this work is a range of responses practitioners can expect to encounter with the visualization technique under verification. 
+  

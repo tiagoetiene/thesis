@@ -61,7 +61,7 @@ By manufacturing a model whose known behavior should be reproduced by
 the techniques under analysis, MMS can check whether they meet
 expectations.
 
-Etiene et al. have recently used this method to verify geometrical properties of
+Etiene \emph{et al.} have recently used this method to verify geometrical properties of
 isosurfacing codes~\cite{etiene:tvcg:2009}, and topological
 verification naturally follows.
 %
@@ -151,7 +151,7 @@ Cubes algorithm would produce surfaces with
 which lead to contradicting triangulations in neighboring cells~\cite{Nielson:1991:ADR:949607.949621}.
 Disambiguation mechanisms can ensure crack-free surfaces,
 and many schemes have been proposed, such as
-the one by Montani et al.~\cite{Montani:1994:MLT},
+the one by Montani \emph{et al.}~\cite{Montani:1994:MLT},
 domain tetrahedralization~\cite{Hamish06}, 
 preferred polarity~\cite{Bloomenthal88}, gradient-based method~\cite{gelder:tog:1994}, and
 feature-based schemes~\cite{ho:cgf:2005}.
@@ -186,11 +186,11 @@ triangulation schemes.
 %
 This line of work has inspired many other ``topology-aware'' triangulation
 methods,
-such as Cignoni et al.'s reconstruction
+such as Cignoni \emph{et al.}'s reconstruction
 technique~\cite{Cignoni00reconstructionof}.
 %
 Subsequent work by Lopes and Brodlie~\cite{lopes:tvcg:2003} and
-Lewiner et al.~\cite{Lewiner:2003} has finally provided triangulation patterns covering
+Lewiner \emph{et al.}~\cite{Lewiner:2003} has finally provided triangulation patterns covering
 all possible topological configurations of trilinear functions, implicitly promising
 a crack-free surface.
 %
@@ -211,7 +211,7 @@ corresponding software implementations has been a long-term concern of
 the visualization community~\cite{globus95,kirby-vv-08}, concrete
 proposals on verification are relatively recent.
 %
-Etiene et al.~\cite{etiene:tvcg:2009} were among the first
+Etiene \emph{et al.}~\cite{etiene:tvcg:2009} were among the first
 in scientific visualization to propose a practical
 verification framework for geometrical properties of isosurfacing.
 Their work is
@@ -368,7 +368,7 @@ This section describes the mathematical machinery used to derive the
 topology verification tools. More specifically, we provide a summary
 of the results we need from digital topology and stratified Morse
 theory.  A detailed discussion on digital topology can be found in
-Stelldinger et al.'s paper~\cite{siqueira:2007}, and Goresky and
+Stelldinger \emph{et al.}'s paper~\cite{siqueira:2007}, and Goresky and
 MacPherson give a comprehensive presentation of stratified Morse
 theory~\cite{Goresky:1988:SMT}.
 
@@ -1135,7 +1135,7 @@ Specifically, the techniques are:
 
 \vtk\ \cite{vtk} is the Visualization Toolkit (VTK) implementation of the
 Marching Cubes algorithm with the
-implicit disambiguation scheme proposed by Montani et al.
+implicit disambiguation scheme proposed by Montani \emph{et al.}
 \cite{Montani:1994:MLT}. Essentially, it separates positive vertices when a
 face saddle appears and assumes no tunnels exist inside a cube. The
 proposed scheme is topologically consistent, but it does not reproduce the
@@ -1186,7 +1186,7 @@ unique configurations. Chernyaev's MC solves face ambiguity using Nielsen and
 Hamann's \cite{Nielson:1991:ADR:949607.949621} asymptotic decider and internal ambiguity
 by evaluating the bilinear function over a plane parallel to a face. Additional
 points may be inserted to reproduce some configuration requiring subvoxel
-accuracy.  We use Lewiner et al.'s implementation \cite{Lewiner:2003} of
+accuracy.  We use Lewiner \emph{et al.}'s implementation \cite{Lewiner:2003} of
 Chernyaev's algorithm.
 
 \deliso\ \cite{Dey07} is a Delaunay-based approach for isosurface extraction. 
@@ -1197,7 +1197,7 @@ compute the whole 3D Voronoi structure. \deliso\ has theoretical guarantees of
 homeomorphism and mesh quality.
 
 \mcsimpleflow\ is a proof-of-concept implementation of the algorithm
-described in Scheidegger et al.
+described in Scheidegger \emph{et al.}
 \cite{scheidegger:techreport:2010}. It works by successive cube
 subdivision until it has a \emph{simple edge flow}. A cube has a
 simple edge flow if it has only one \emph{minima} and one
@@ -1564,7 +1564,7 @@ SMT\\
 
 
 \subsection{Topology and Geometry}
-This work extends the work by Etiene et al.~\cite{etiene:tvcg:2009} toward
+This work extends the work by Etiene \emph{et al.}~\cite{etiene:tvcg:2009} toward
 including topology in the loop of verification for isosurface techniques. 
 The machinery presented herein combined with the methodology for verifying
 geometry comprises a solid battery of tests able to stress most of the existing 
@@ -1626,7 +1626,7 @@ Verification tools should be as simple as possible while still
 revealing unexpected behavior. The pipeline for geometric
 convergence is straightforward and thus much less error-prone. This is
 mostly because
-Etiene et al.'s approach uses analytical manufactured solutions to provide
+Etiene \emph{et al.}'s approach uses analytical manufactured solutions to provide
 information about function value, gradients, area, and curvature. In topology,
 on the other hand, we can manufacture only simple analytical solutions (e.g., a
 sphere, torus, double-torus, etc.) for which we know topological
@@ -1646,7 +1646,7 @@ greater than any other in the grid. In such case, the verification
 tool should result in $\chi = 0$. For DT, we can use the fact that
 Majority Interpolation always produces a 2-manifold. Fortunately, this
 test reduces to check for two invalid cube configurations as described
-by Stelldinger et al.~\cite{siqueira:2007}. Obviously, there might
+by Stelldinger \emph{et al.}~\cite{siqueira:2007}. Obviously, there might
 remain bugs in the verification code. As we have stated before, a
 mismatch between the expected invariants and the computed ones
 indicates a problem \emph{somewhere} in the pipeline; our experiments
@@ -1757,9 +1757,9 @@ The basic infrastructure we have described here, however,
 should be appropriate as a starting point for the process.
 
 
-\section{Conclusion and Future Work}
+\section{Conclusion}
 
-We extended the framework presented by Etiene et al.
+We extended the framework presented by Etiene \emph{et al.}
 \cite{etiene:tvcg:2009} by including topology into the verification
 cycle.  We used machinery from digital topology and stratified Morse
 theory to derive two verification tools that are simple and yet
@@ -1775,44 +1775,21 @@ the verification procedures \emph{during} its development. We believe
 this happened because topological properties are particularly subtle
 and require an unusually large amount of care.
 
-The idea of verification through manufactured solutions is clearly problem-dependent
-and mathematical tools must be tailored accordingly. 
-Still, we expect the framework to enjoy a similar effectiveness in many areas of scientific visualization,
-including volume rendering, streamline computation, and mesh simplification.
-%Those areas have been extensively studied and would likely benefit from a verification
-%framework.
-We hope that the results of this work further motivate the visualization
-community to develop a culture of verification.
-
-%We should highlight that this is just a brick to the new field of
-%verification for visualization.  This is a valuable tool for
-%verification. There are several ways to extend this: volume
-%rendering, streamlines, simplification, etc.  All these algorithms
-%are part of critical pipelines and thus its correctness is of great
-%importance. (We have to polish this)
-
-%We should include some complexity analysis (although it doesn't
-%matter). It will be easy and the reviewers will be happy.  Bullet
-%points contribuitions. We should emphasize this whole new field of
-%verification in the introduction. We should emphasize that this has
-%not been done before. Similar work, like Edelbrunner, doesn't cover
-%this.
-
 %% if specified like this the section will be ommitted in review mode
-\section*{Acknowledgments}
-We thank Thomas Lewiner and Joshua Levine for
-  help with \mclewiner\ and \deliso\ codes respectively.
-This work was supported in part by grants from
-%  the National Science Foundation
-  NSF
- (grants IIS-0905385, IIS-0844546,
-  ATM-0835821, CNS-0751152, OCE-0424602, CNS-0514485, IIS-0513692,
-  CNS-0524096, CCF-0401498, OISE-0405402, CCF-0528201, CNS-0551724,
-  CMMI 1053077, IIP 0810023, CCF 0429477),
-  DOE,
-%  the Department of Energy, 
-  IBM Faculty Awards and PhD Fellowship, the
-  US ARO % Army Research Office
-  under grant W911NF0810517, ExxonMobil, and
-  Fapesp-Brazil (\#2008/03349-6).
+%\section*{Acknowledgments}
+%We thank Thomas Lewiner and Joshua Levine for
+%  help with \mclewiner\ and \deliso\ codes respectively.
+%This work was supported in part by grants from
+%%  the National Science Foundation
+%  NSF
+% (grants IIS-0905385, IIS-0844546,
+%  ATM-0835821, CNS-0751152, OCE-0424602, CNS-0514485, IIS-0513692,
+%  CNS-0524096, CCF-0401498, OISE-0405402, CCF-0528201, CNS-0551724,
+%  CMMI 1053077, IIP 0810023, CCF 0429477),
+%  DOE,
+%%  the Department of Energy, 
+%  IBM Faculty Awards and PhD Fellowship, the
+%  US ARO % Army Research Office
+%  under grant W911NF0810517, ExxonMobil, and
+%  Fapesp-Brazil (\#2008/03349-6).
 
