@@ -9,91 +9,94 @@ In this dissertation, we have introduced a framework for the verification of two
 %%%% MANUFACTURED SOLUTIONS
 \section{The Method of Manufactured Solutions}
 
-The two main steps involved in the practice of the MMS are the theoretical analysis of important mathematical properties and the black-box testing. 
+As previously mentioned, the two main steps involved in the practice of the MMS are the theoretical analysis of important mathematical properties and the black-box testing. 
 %
-The analysis is by far the hardest part because research may be required; either due to the unavailability of a mathematical description, or the available one may be too complex to implement. 
+The analysis was the most time-consuming part because required intense research.
 %
-We have presented one instance of each case in this dissertation:
+% the unavailability of a mathematical description of the property of interest added to, or the available one may be too complex to implement. 
 %
-the convergence of geometrical properties of isosurfaces, such as function value and normals, were mostly available in the literature. Hence, the research was fairly straightforward;
+%We have presented one instance of each case in this dissertation:
 %
-topological properties were available only by using relatively complex algorithms, such as contour trees. 
+The convergence of geometrical properties of isosurfaces, such as function value and normals, were mostly available in the literature. Hence, the research was fairly straightforward in this case.
 %
-This is one of our motivations for devising new algorithms for computing the Euler characteristics of isosurfaces directly from scalar fields;
+On the other hand, the verification of topological properties were available only by using relatively complex algorithms, such as contour trees. 
 %
-finally, the verification of volume rendering algorithms required a convergence analysis that was not available in the literature. 
+The complexity was one of our motivations to devise new algorithms for computing the Euler characteristics of isosurfaces directly from scalar fields.
 %
-This is an important contribution of this dissertation: the analysis of the theoretical behavior of visualization algorithms. 
+In addition to that, our work on topological verification played crucial role in correcting an almost 20 year-old bug with Marching Cubes 33.
 %
-Another important consideration is that often simplifications must be made so that an algorithm can be verified. 
+The case of verification of volume rendering algorithms also required a convergence analysis not available in the literature. 
 %
-The case of volume rendering verification illustrates this point. 
+Thus, the analysis of the theoretical behavior of visualization algorithms presented in this work constitute an important contribution of this dissertation. 
+%
+Another important consideration is that often simplifications must be made so that an algorithm can be verified, such as illustrated 
+by the volume rendering case.
 %
 Many of the commonly used improvements to the standard volume rendering, such as opacity correction or advanced shading, must be ``turned off'' because the theoretical analysis does not include the influence of these improvements.
 
-Assuming that the mathematical description of a property of interest is available, the actual MMS test can be easily implemented as a black-box test. 
+%Assuming that the mathematical description of a property of interest is available, the actual MMS test can be easily implemented as a black-box test. 
 %
-All that the user should do is to compare the expected results of visualization algorithms against the results obtained by running the actual implementation under verification.
+%All that the user should do is to compare the expected results of visualization algorithms against the results obtained by running the actual implementation under verification.
 %
-Because of its simplicity, we believe MMS could become a standard tool in the verification of scientific visualization software in the same way that it has been adopted by the Computation Simulation \& Engineering community as a trustworthy tool for assess code correctness.
+Because of its simplicity, we believe MMS could become a standard tool for the verification of scientific visualization software in the same way that it has been adopted by the \cse{} community as a trustworthy tool for assess code correctness.
 
 
-The MMS contrasts with a common practice within the visualization, namely, the evaluation of new techniques through the use of real world data.  
+We observed that the MMS contrasts with a common practice within the visualization community, namely, the evaluation of new techniques through the use of real-world data.  
 %
-By using real world data during development, one can evaluate a new technique using the data is supposed to represent. 
+By using real-world data during development, one can evaluate a new technique using the data it is supposed to represent. 
 %
-When the data does not ``look right'' in the eyes of an expert, or the quantification of some property, such as area, incur in errors greater than expected, it is assumed that there is a problem that must be fixed.
+When the data does not ``look right'' in the eyes of an expert, or the error quantification exceeds some pre-determined threshold, it is assumed that there is a problem that must be fixed.
 %
 This approach is certainly valuable and we do not advocate the MMS as a replacement for using real world data, or any other method that users are accustomed with for that matter. 
 %
-Instead, we advocate its use in addition to the methods already used during the development of visualization algorithms because such methods are \emph{ad hoc} and have severe limitation.
+Instead, we advocate its use in addition to the methods already adopted by developers.
 
 \section{Order of accuracy}
 
-As our work on the verification of topological properties of isosurface extraction algorithm have shown, it is not always possible to use order of accuracy as a standard for verification visualization algorithms is not always an option: while geometrical properties can be continuously evaluated, topological properties have a binary nature.
+As our work have shown, it is not always possible to use order of accuracy as a standard method for the verification of visualization algorithms. 
 %
-MMS problem-dependent and mathematical tools must be tailored accordingly. 
+While geometrical properties can be continuously evaluated, topological properties have a binary nature.
 %
-Nevertheless, the idea of verification through MMS can be used across many visualizations techniques. 
+We then conclude that the implementation of the MMS is problem-dependent and the necessary mathematical tools must be tailored accordingly. 
 %
-We expect this framework using MMS to enjoy a similar effectiveness in many areas of scientific visualization.
+Nevertheless, the idea of verification through manufactured solutions can be used across many visualizations techniques. 
 %
-In fact, we are investigating the applicability of MMS to other visualization techniques such as streamline generation  and mesh simplification.
+We expect MMS to enjoy a similar effectiveness in many areas of scientific visualization.
+%
+This is the most direct direction of future work: the application of the MMS to other visualization techniques such as vector field visualization and mesh simplification.
 
 
-%%%% BROAD IMPACT
-\section{Broad impact}
+%%%% Evaluation
+\section{Evaluation}
 
-An important point that was not addressed in this dissertation is the practical impact of non-verified code. 
-%
-In Computer Science and Computation Simulation \& Engineering communities the economic impact due to the lack of appropriate infrastructure for software testing is well studied.
+%An interesting point that is not part of this dissertation is the practical impact of non-verified codes. 
+The economic impact due to the lack of appropriate infrastructure for software testing is well studied.
 %
 A NIST report estimates that the total loss due to lack of software testing is about \$22.2 to \$59.5 billion~\cite{tassey2002economic}. 
 %
-To the best of our knowledge, the economic impact and consequences of the lack of software testing for the subfield of scientific visualization has not yet been evaluated. However, there are known examples, within information visualization field, where the lack of an appropriate data representation obfuscated real problems. One of the well-known example is the Challenger disaster~\cite{challenger}. In scientific visualization, there are some known issues that may be due to software problems.  As an example, we cite a report from the Manufacturer and User Facility Device Experience (MAUDE), a data repository of adverse events involving medical devices under the umbrella of the FDA:
+To the best of our knowledge, the economic impact and consequences of the lack of software testing for the subfield of scientific visualization has not yet been evaluated. 
+%
+Nevertheless, there are anecdotal evidence of the need for this evaluation. As an example, we cite a medical report extracted from the Manufacturer and User Facility Device Experience (MAUDE), a data repository of adverse events involving medical devices under the umbrella of the FDA:
 \begin{quote}
-The patient was undergoing a kidney operation and the kidney image as displayed on the system’s image monitor allegedly flipped in orientation without any operator intervention and as a result it is alleged that the patient had the wrong kidney operated upon.
+The patient was undergoing a kidney operation and the kidney image as displayed on the system's image monitor allegedly flipped in orientation without any operator intervention and as a result it is alleged that the patient had the wrong kidney operated upon.
 \end{quote}
 The bug described previously is not  ``severe'' in the sense that the final image is a perfectly valid one. Nevertheless, the outcome is quite alarming. There are several similar reports involving images flips and artifacts in medical devices dating from early 90s -- when the information started to be collected -- until now. Many of these reports highlight that the problem did not cause any injury, however, they also emphasize the risk of misdiagnosis.
 %
-It may be interesting to perform an user-study using visualization results that contains known bugs and bug-free images to evaluate the class of problems that developer/expert can detect. 
-
+It may be interesting to perform an user-study using visualization results that contains known bugs and bug-free images to evaluate the class of problems that developer/expert can detect.  This is out of scope of this work and is left as future work.
 
 
 %%%%% THE VISUALIZATION COMMUNITY
-%\section{The visualization community}
+\section{The visualization community}
+
+Verification has gained some traction inside the field of visualization in recent years.  
 %
-%In the past few years, the visualization community is becoming  more interested in issues related to verification. 
-%%
-%Verification has gained traction inside the field of visualization in recent years.  
-%%
-%We have seen workshops (EuroRV$^3$ 2013), discussion panela (IEEE VisWeek); verification has become part of the Call for Papers in the most important visualization conferences (IEEE VisWeek 20??; EuroVis 20??; PacificVis 20??). 
-%%
-%We argue that researchers and developers should consider adopting verification as an integral part of the investigation and development of scientific visualization techniques.
+We have seen several initiatives that support this: two workshops on reproducibility, verification, validation in visualization (EuroRV$^3$ 2012-2013) at Eurovis; a discussion panel ``Verification in Visualization: Building a Common Culture'' at IEEE VisWeek 2011; and verification as part of the ``call for participation'' for IEEE VisWeek 2010-2013.
 %
-%More importantly, we hope the  examples presented here will encourage the adoption of MMS by the visualization community at large, increasing the impact of its contributions  to a wider audience.
-%%
-%We hope that the results of this work further motivate the visualization
-%community to develop a culture of verification.
+We hope the  examples presented here will further encourage the adoption of MMS by the visualization community at large, increasing the impact of its contributions  to a wider audience.
+%
+We believe that researchers and developers should consider adopting verification as an integral part of the investigation and development of scientific visualization techniques.
+%
+We hope that the results of this work further motivate the visualization
+community to develop a culture of verification.
 
 

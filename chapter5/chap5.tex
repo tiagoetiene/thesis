@@ -3,8 +3,8 @@
 
 Over the past decades, the visualization and graphics communities have developed a wide range of volume rendering techniques. As they are used in different disciplines of science, and thus form a basis for new scientific insights, it is essential to assess their reliability and identify errors. Furthermore, the increasing complexity of volume rendering algorithms makes the correctness of the algorithm itself as well as its potentially error-prone implementations complementary and equally important issues. Especially in areas such as medical imaging where accuracy and precision play a crucial role, a formal methodology for assessing correctness is highly desirable~\cite{kirby-vv-08, Pommert2002}. While verification is widely adopted in different branches of computer science -- see  model checking~\cite{Clarke08}, fuzzing~\cite{godefroid08}, and convergence analysis~\cite{Roy2005} -- not much work on a formalized praxis for asserting the correctness of visualization techniques has been done. 
 %Among the existing techniques, there are three conceptual approaches which could be applied to assess the reliability of volume rendering techniques, i.\,e., algorithm comparison~\cite{Meissner:2000:PEP:353888.353903}, error estimation~\cite{Moller:1996:CLE:236226.236235} and uncertainty visualization~\cite{Johnson:2003:NSV:942583.942610}. 
-In this article we present a new verification approach for direct volume rendering techniques as well as its theoretical background. 
-We use the word verification in the same sense Babuska and Oden \cite{babuska04}: ``verification is the process of determining if a computational model, and its corresponding numerical solution, obtained by discretizing the mathematical model (with corresponding exact solution) of a physical event, and the code implementing the computational model can be used to represent the mathematical model of the event with sufficient accuracy''~\cite{babuska04}. 
+In this chapter we present a new verification approach for direct volume rendering techniques as well as its theoretical background. 
+%We use the word verification in the same sense Babuska and Oden \cite{babuska04}: ``verification is the process of determining if a computational model, and its corresponding numerical solution, obtained by discretizing the mathematical model (with corresponding exact solution) of a physical event, and the code implementing the computational model can be used to represent the mathematical model of the event with sufficient accuracy''~\cite{babuska04}. 
 The presented methodology is based on order-of-accuracy and convergence analysis~\cite{Roy2005} which we can apply after deriving the expected behavior of the algorithms under observation. 
 
 To allow the verification of volume rendering algorithms, we start with an analysis of the volume rendering integral and the most common discretization of this continuous model. This analysis gives us insight into expected behavior of the observed algorithms, which is essential to perform a verification~\cite{159342}. In this sense, our main assumption, serving as a foundation for the proposed verification approach is that discretization errors of the implementations under verification should behave as the errors introduced by 
@@ -15,7 +15,7 @@ Based on the results of this comparison, we can assess the correctness of the im
 %To do so, we discuss error classes and address if these can be successfully detected by the proposed verification methodology. 
 Thus, we can demonstrate that our methodology is capable of increasing the confidence in volume rendering algorithms. To our knowledge, the proposed approach is the first step towards the verification of DVR algorithms. Thus, it can be seen as an important contribution towards a formal verification methodology of volume rendering techniques~\cite{roach98}.
 % which has the ultimate goal of deriving a correctness guarantee~\cite{Roache_1998}. 
-The main contributions of this article are:
+The main contributions of this chapter are:
 \begin{itemize}
 \item we derive the theoretical foundations necessary for verifying volume rendering with order-of-accuracy and convergence analysis. We analyze the volume rendering integral and its discretization to derive an algorithm's expected behavior when being subject to parameter changes.
 \item we explain how to exploit this theoretical foundation to perform a practical verification of implemented volume rendering algorithms, such that it can be easily used for the verification of existing volume rendering frameworks;
@@ -121,7 +121,7 @@ verifiable framework based on projection errors. In contrast, our work
 focuses on the verification of the final image produced through direct
 volume rendering.
 
-\begin{figure}
+\begin{figure}[b]
 \centering
 \includegraphics[width=1\linewidth]{chapter5/figures/torso-image.png}
 \caption{\label{fig:error-quantification-examples}  Left: 
@@ -153,7 +153,7 @@ verification tool~\cite{babuska04, KnuppSalari02, roach98,
 convergence analysis and order-of-accuracy. Before we dive into these
 methods, let us first consider some of the limitation of the expert
 analysis and error quantification.
-\begin{figure}
+\begin{figure}[b]
 \centering
 \includegraphics[width=0.8\linewidth]{chapter5/figures/refinement.png}
 \caption{\label{fig:verification-procedure} Our verification procedure
@@ -927,7 +927,7 @@ approximations using reference images. We have generated sequences of
 images based on the refinements in the following section.  The steps
 are shown in Algorithm \ref{alg:verification-procedure}.
 
-\begin{algorithm}
+\begin{algorithm}[b]
 \begin{codebox}
 \Procname{$\proc{Verification Procedure}(G,\tau(s),d_0,m_0,h_0,\rho)$}
 \li \Comment Let $G$ be the scalar field
@@ -1341,9 +1341,83 @@ implementing a volume rendering algorithm as their consequences are
 often not discussed in the
 literature~\cite{Real-TimeVolumeGraphics06}.
 
-\begin{center}
+\subsection{Test sensitivity}
+\label{sec:test-sesitivity}
+
+A verification technique ideally should be sensitive to any deviation
+from the correct implementation. Unfortunately, in practice,
+verification has limited scope, and we gain confidence if it helps us
+understand the code behavior, test sensitivity, and reveal bugs. There
+are several ways to attain this goal: Yang \emph{et al.} applied model
+checking for filesystem verification and reported \emph{unknown}
+bugs~\cite{Yang:2006:UMC:1189256.1189259};
+Howden~\cite{Howden:1980:ASV:357103.357107} evaluated the efficacy of
+dynamic and static testing for the detection of \emph{known} real bugs
+of a mathematical library; Knupp and Salari \cite{KnuppSalari02}, on
+the other hand, used the order-of-accuracy verification procedure to
+uncover \emph{known} manufactured bugs in a proof-of-concept code.  In
+software engineering, the process of evaluating a testing suite by
+injecting defects into a program is known as \emph{mutation
+  testing}~\cite{Riley:2009:BTL:1667105}.
+
+We already presented the results of applying our verification
+framework to two libraries and with our experiments we confirm the
+previously reported sensitivity of convergence
+analysis~\cite{Roy2005}. We went further to explore other scenarios in
+volume rendering that may affect the convergence curve. Thus, in the
+spirit of mutation testing, we created new versions of VTK which
+contain known issues. Table \ref{tab:vs} shows the results of some of
+the performed tests. In our experiments, we observed that some issues
+did not affect the observed behavior.  The reason for this is that an
+incomplete set of tests~\cite{KnuppSalari02} was performed, as shown
+with test $\#10$ in Table \ref{tab:vs}. In that case a bug in the G
+and B color lookup went unnoticed because our framework only used the
+R channel. Once the verification framework includes all three
+channels, the convergence drops to $0$, revealing an unexpected
+behavior. For bug $\#9$, we swapped two of the polynomial coefficients
+but they were equal for the scalar field used and thus it was not
+detected. After changing the scalar field to $s(x,y,z) = 1xyz + 2xy +
+3xz + \cdots$ the convergence curve no longer matches the expected one
+and thus the bug is detected. Bug $\#11$ was introduced in a
+matrix-vector multiplication routine which turned out to be dead
+code. However, for bug $\#12$, the loop range was slightly incorrect
+and it was not detected, even after additional changes to the
+verification framework.
+
+Aside from the defects injected into VTK, the following is a list of
+details known to affect the convergence curve:
+\emph{ERT}, as explained before;
+\emph{opacity correction}, when using the analytical solution of the volume rendering integral;
+\emph{hardcoded tolerance constants}, the famous ``epsilons'';
+\emph{off-by-one} indexing problems (sometimes VTK does not render pixels in the first or last
+column of an image);
+\emph{improper volume sampling} (cell centered versus grid centered
+scalar fields);
+\emph{high-frequency transfer functions};
+\emph{high-frequency scalar fields};
+\emph{incorrect texture coordinate mapping}, as reported with Voreen;
+\emph{inconsistent number of steps through the volume}, as reported
+with FP and RCM; etc. % hey guys, etc. and \emph{\emph{et al.}.}. are never capitalized :)
+From all the observed situations where the step/dataset/pixel size
+convergence was affected, many of these are deliberate design
+decisions, minor mistakes during the verification procedure or minor
+problems with the implementation itself which can be easily fixed.
+%
+Note that those issues were not all inside the ray integration routine
+itself, but in a variety of locations, spanning from pre-processing
+steps to OpenGL texture sampling of data.
+Our verification procedure was sensitive enough to detect all these
+situations. 
+
+We stress that our goal is to provide a methodology for verification
+of volume rendering implementations. Specifically, our goal is neither
+to compare different volume rendering implementations nor to entirely
+explain the behavior of the examined implementations. The users of the
+proposed framework are developers and practitioners who want or need
+to identify potential problems.
+
 \begin{landscape}
-\begin{table}
+\begin{table}[b]
 \caption{\label{tab:vs}This table shows the sensitivity of the convergence verification
 for different scenarios in a volume renderer.
 We applied our step size verification using
@@ -1431,82 +1505,6 @@ Exact solution & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
 \end{tabular}
 \end{table}
 \end{landscape}
-\end{center}
-
-\subsection{Test sensitivity}
-\label{sec:test-sesitivity}
-
-A verification technique ideally should be sensitive to any deviation
-from the correct implementation. Unfortunately, in practice,
-verification has limited scope, and we gain confidence if it helps us
-understand the code behavior, test sensitivity, and reveal bugs. There
-are several ways to attain this goal: Yang \emph{et al.} applied model
-checking for filesystem verification and reported \emph{unknown}
-bugs~\cite{Yang:2006:UMC:1189256.1189259};
-Howden~\cite{Howden:1980:ASV:357103.357107} evaluated the efficacy of
-dynamic and static testing for the detection of \emph{known} real bugs
-of a mathematical library; Knupp and Salari \cite{KnuppSalari02}, on
-the other hand, used the order-of-accuracy verification procedure to
-uncover \emph{known} manufactured bugs in a proof-of-concept code.  In
-software engineering, the process of evaluating a testing suite by
-injecting defects into a program is known as \emph{mutation
-  testing}~\cite{Riley:2009:BTL:1667105}.
-
-We already presented the results of applying our verification
-framework to two libraries and with our experiments we confirm the
-previously reported sensitivity of convergence
-analysis~\cite{Roy2005}. We went further to explore other scenarios in
-volume rendering that may affect the convergence curve. Thus, in the
-spirit of mutation testing, we created new versions of VTK which
-contain known issues. Table \ref{tab:vs} shows the results of some of
-the performed tests. In our experiments, we observed that some issues
-did not affect the observed behavior.  The reason for this is that an
-incomplete set of tests~\cite{KnuppSalari02} was performed, as shown
-with test $\#10$ in Table \ref{tab:vs}. In that case a bug in the G
-and B color lookup went unnoticed because our framework only used the
-R channel. Once the verification framework includes all three
-channels, the convergence drops to $0$, revealing an unexpected
-behavior. For bug $\#9$, we swapped two of the polynomial coefficients
-but they were equal for the scalar field used and thus it was not
-detected. After changing the scalar field to $s(x,y,z) = 1xyz + 2xy +
-3xz + \cdots$ the convergence curve no longer matches the expected one
-and thus the bug is detected. Bug $\#11$ was introduced in a
-matrix-vector multiplication routine which turned out to be dead
-code. However, for bug $\#12$, the loop range was slightly incorrect
-and it was not detected, even after additional changes to the
-verification framework.
-
-Aside from the defects injected into VTK, the following is a list of
-details known to affect the convergence curve:
-\emph{ERT}, as explained before;
-\emph{opacity correction}, when using the analytical solution of the volume rendering integral;
-\emph{hardcoded tolerance constants}, the famous ``epsilons'';
-\emph{off-by-one} indexing problems (sometimes VTK does not render pixels in the first or last
-column of an image);
-\emph{improper volume sampling} (cell centered versus grid centered
-scalar fields);
-\emph{high-frequency transfer functions};
-\emph{high-frequency scalar fields};
-\emph{incorrect texture coordinate mapping}, as reported with Voreen;
-\emph{inconsistent number of steps through the volume}, as reported
-with FP and RCM; etc. % hey guys, etc. and \emph{\emph{et al.}.}. are never capitalized :)
-From all the observed situations where the step/dataset/pixel size
-convergence was affected, many of these are deliberate design
-decisions, minor mistakes during the verification procedure or minor
-problems with the implementation itself which can be easily fixed.
-%
-Note that those issues were not all inside the ray integration routine
-itself, but in a variety of locations, spanning from pre-processing
-steps to OpenGL texture sampling of data.
-Our verification procedure was sensitive enough to detect all these
-situations. 
-
-We stress that our goal is to provide a methodology for verification
-of volume rendering implementations. Specifically, our goal is neither
-to compare different volume rendering implementations nor to entirely
-explain the behavior of the examined implementations. The users of the
-proposed framework are developers and practitioners who want or need
-to identify potential problems.
 
 \subsection{Other volume rendering techniques}
 

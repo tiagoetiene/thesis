@@ -1,47 +1,48 @@
 \chapter{Introduction}
 
-Today's technology provides unprecedented opportunities to scientists for deriving, expanding, or correcting scientific theories. In the past few decades, we have seen a sharp increase in one's ability to acquire, store, and process data. Simultaneously, the scientific visualization emerged as discipline and became the centerpiece in the pipeline of many scientists. In fact, visualization techniques became the means through which scientists explore, evaluate, and present results. 
+Today's technology provides unprecedented opportunities to scientists for deriving, expanding, or correcting scientific theories. In the past few decades, we have seen a sharp increase in one's ability to acquire, store, and process data. Simultaneously, the scientific visualization emerged as a discipline and became the centerpiece in the pipeline of many scientists. In fact, visualization techniques became the means through which scientists explore, evaluate, and present results. 
 %
-Propelled by a vibrant community, visualization techniques have become more widespread, and have successfully been applied in a variety of fields including medical diagnosis, computational fluid dynamics, weather simulation, among others. The wide range of applications, and the uniqueness of each field have further motivated the development of complex visualization techniques, some of which include isosurface extraction, direct volume rendering, flow visualization, to name a few.  
+Propelled by a vibrant community, visualization techniques have become more widespread, and have successfully been applied to a variety of fields including medical diagnosis, computational fluid dynamics, weather simulation, among others. The wide range of applications, and the uniqueness of each field have further motivated the development of complex visualization techniques, some of which include isosurface extraction, direct volume rendering, flow visualization, to name a few.  
 %Visualization researchers have pushed the boundaries and developed many advanced algorithms: some based on complex mathematical concepts, {\em e.g.} Morse-Smale complex; or require cutting-edge hardware, {\em e.g.}, GPU; or have hard practical constraints, {\em e.g.}, bound on triangle quality; huge input data; etc.
 The amount of work published in these (and other) areas in the past 20 years is remarkable. 
 
-With the increasing complexity and importance of visualization techniques in the scientific pipeline, questions related to the reliability of visualizations attracted attention. In the past few years, there has been a growing number of published  articles related to the way humans perceive images, the accuracy of visualizations, how to extract and depict uncertainty, and how visualizations compare to each other. More generally, the goal is to determine how \emph{reliable} visualization are.
+With the increasing complexity and importance of visualization techniques in the scientific pipeline, questions related to the reliability of visualizations began to attract attention. In the past few years, there has been a growing number of published  articles related to the way humans perceive images, the accuracy of visualizations, ways to extract and depict uncertainty, and how visualizations compare to each other. More generally, the goal is to determine how \emph{reliable} visualizations are.
 %
 In this context, ``reliable'' is used in a broad sense so as to include many of the topics of current interest of the visualization community that contributes to increase one's confidence in visualizations: uncertainty visualization; uncertainty quantification; evaluation; user perception; and verification.
-
-The main contribution of this dissertation is to advance the theory and practice of \emph{verification of visualization algorithms and implementation}.  Because visualization has become such an important part in the scientific inquiry, some scientific endeavors, will require softwares to be throughly verified.
 %
-We provide the theoretical background for the verification of visualization algorithms and the results of applying these techniques to several implementations. 
+In this dissertation, we focus on the \emph{verification of visualization algorithms and implementation}.  
+%Because visualization has become such an important part in the scientific inquiry, some scientific endeavors, will require softwares to be throughly verified.
 %
-Before we dive into the details on how to verify visualization algorithms, we go over the motivations behind verifying visualizations. 
+%We provide the theoretical background for the verification of visualization algorithms and the results of applying these techniques to several implementations. 
+%
+%Before we dive into the details on how to verify visualization algorithms, we go over the motivations behind verifying visualizations. 
 %
 %The motivation behind the need for rigorously testing algorithms and implementation comes from several sources: good practice in software engineer; decrease costs \cite{reports}; safety \cite{automobile,nuclear,stuff}; \emph{etc.}. These are the well-known (good) reasons for performing software verification. 
-At the heart of the methodology for verifying visualization, one will find old good science practices. 
+Many techniques can be used for verification purposes, but at the heart of the methodology for verifying visualization, one will find good-old science practices. 
 %
 	
-\section{The method of inquiry}
+\section{Verification of scientific theories}
 
- New theories are put forward and evaluated through the scientific method: observations; hypothesis formulation; predictions and testing; and analysis of the results. Details on how to perform each of these steps vary according to the phenomena being studied. A particular important step in the process of deriving a valid scientific theory is the process of \emph{falsification}: the process by which the theory risky predictions are tested. As Karl Popper argued in ``The Logic of Scientific Discovery''~\cite{popper-scientificdiscovery}:
+New theories are put forward and evaluated through the scientific method: observations; hypothesis formulation; predictions and testing; and analysis of the results. Details on how to perform each of these steps vary according to the phenomena being studied. A particular important step in the process of deriving a valid scientific theory is the process of \emph{falsification}: the process by which the theory risky predictions are tested. As Karl Popper argued in ``The Logic of Scientific Discovery''~\cite{popper-scientificdiscovery}:
  \begin{quote}
 With the help of other statements, previously accepted, certain singular statements  --  which we may call ``predictions'' -- are deduced from the theory; especially predictions that are easily testable or applicable. From among these statements, those are selected which are not derivable from the current theory, and more especially those which the current theory contradicts. Next we seek a decision as regards these (and other) derived statements by comparing them with the results of practical applications and experiments. If this decision is positive, that is, if the singular conclusions turn out to be acceptable, or verified, then the theory has, for the time being, passed its test: we have found no reason to discard it. But if the decision is negative, or in other words, if the conclusions have been falsified, then their falsification also falsifies the theory from which they were logically deduced.
  \end{quote}
 % 
-An example of testing risky prediction is the classic Eddington's experiment of Einstein's theory of relativity~\cite{coles2001einstein}. Eddington conducted an experiment to measure the amount of light bending caused by the massive size of the Sun.  During the eclipse of 29 May 1919, Eddington photographed the Hyades star cluster and measured the amount light deflected. The accepted theory at the time, Newton's law of gravity, predicted some shift in the position of the stars. Einstein's theory of gravity predicted twice as much shift as Newton's theory. Because Einstein's prediction contradicted current theory, it can be considered a risky prediction.
+An example of testing risky prediction is the classic Eddington's experiment of Einstein's theory of relativity~\cite{coles2001einstein}. Eddington conducted an experiment to measure the light deflection caused by the massive size of the Sun.  During the eclipse of May 29th 1919, Eddington photographed the Hyades star cluster and measured the light deflected. At the time, Newton's law of gravity was the accepted theory; it predicted some shift in the position of the stars, as observed from Earth, whereas Einstein's theory of gravity predicted twice as much shift. Because Einstein's prediction contradicted current theory, it was a risky prediction.
 %
-The eclipse was photographed, and the deviations were measured.  Two outcomes are possible: the expected (predicted) deflection does not match the observed one -- because no deflection is observed, or Newton's prediction is confirmed, or some other value is obtained --,  in which case the theory would be refuted; or, the predicted deflection matched the observations, in which case, nothing can be said about the correctness of the theory, aside from the fact that it has not been proved wrong and has stood to risky tests. The more a theory is tested, the more trustworthy it becomes. 
+The eclipse was photographed, and the deviations were measured.  At that time two outcomes were possible: either the expected (predicted) deflection would not match the observed one -- because no deflection is observed, or Newton's prediction was correct, or some other value is obtained --,  in which case the theory would be refuted; or, the predicted deflection would match the observations, in which case, nothing could be said about the correctness of the theory, aside from that it has not been proved wrong and has stood to risky tests. The more a theory is tested, the more trustworthy it becomes. 
 
-The same idea of falsification can be applied to test the trustworthiness of a computer algorithm and implementation. During the course of scientific inquiry, scientists carefully perform each step in the scientific method in order to mitigate and control errors. For each step of the scientific method, there are multiple ways of account for these errors: by using sophisticated statistical methods; advanced mathematical models; high-precision equipments; redundancy; etc.  The reason behind this is that the reliability of the conclusions drawn depends on how each of the steps are performed. In the example of Eddington's experiment, a series of precautions had to be made and several different error sources were taken into account in order to show that Einstein's predictions were correct\footnote{They started by sending off two expeditions. The first to Sobral, northern Brazil; and another to the island of Pr\'incipe, northern of S\~ao Tom\'e and Pr\'incipe. Aside equipment related to the telescope, backup lenses were packed along with equipment necessary to account for the rotation of the Earth. The expedition at Pr\'incipe, among other problems, had to deal with clouds and rain and thus they were able to retrieve only two usable photos. The expedition at Sobral, on the other hand, had better weather but had problem due to rise of the temperature between the time that the telescope was assembled and the time of the eclipse. Parts of the telescope expanded and as a result the images were blurred. Another addition problem is related to the very small expected light deflection. Since photograph plates could expand and shrink with the temperature, deflection could be due to other factors other than deflection, such as shrinkage. Other source of errors are involved. According to Coles~\cite{coles2001einstein}, at the time the results were published, they were met with some skepticism. For more details, see Coles~\cite{coles2001einstein}.}. 
+The same idea of falsification can be applied to test the trustworthiness of an algorithm and its implementation. During the course of a  scientific inquiry, scientists carefully perform each step in the scientific method to mitigate and control errors. For each step of the scientific method, there are multiple ways to account for these errors: by using sophisticated statistical methods; advanced mathematical models; high-precision equipments; redundancy; etc.  The reason behind it is that the reliability of the conclusions depends on how each of the steps are performed. In the example of Eddington's experiment, a series of precautions had to be made and several error sources were taken into account to show that Einstein's predictions were correct\footnote{They started by sending off two expeditions. The first to Sobral, northern Brazil; and another to the island of Pr\'incipe, northern of S\~ao Tom\'e and Pr\'incipe. Aside from equipment related to the telescope, backup lenses were packed along with all necessary equipment to account for the rotation of the Earth. The expedition at Pr\'incipe, among other problems, had to deal with clouds and rain, thus they were able to retrieve only two usable photos. The expedition at Sobral, on the other hand, encounter better weather but had problems due to the rise of the temperature between the time the telescope was assembled and the time of the eclipse. Parts of the telescope expanded and as a result the images were blurred. Another problem was related to the very small expected light deflection. Since photograph plates could expand and shrink with the temperature, deflection could be due to other factors other than light deflection, such as shrinkage. Other source of errors are involved. According to Coles~\cite{coles2001einstein}, at the time the results were published, they were met with some skepticism. For more details, see Coles~\cite{coles2001einstein}.}. 
 %
 Since the scientific methodology is used to increase one's confidence in a particular statement, it can also be applied to the sub steps involved in the formulation of a scientific theory, which, in turn, builds up one's confidence in the theory itself. 
 %For instance, how can one reliably make decision based on the results of his/her simulation code? In this case, the ideas behind falsifying a pieces of code have been proved valuable. 
-There is a need for reliability of scientific software. The lack of such guarantees made the discipline of CFD -- which stands for Computational Fluid Dynamics -- be once referred to as Colorful Fluid Dynamics \cite{meroney2004wind}. Of course, the Computational Science \& Engineering and Computer Science communities have already developed standard methodology for software verification.
+There is a need for reliability of scientific software. The lack of such guarantees made the discipline of Computational Fluid Dynamics (CFD) be once referred to as ``Colorful Fluid Dynamics'' \cite{meroney2004wind}. Of course, the Computational Science \& Engineering and Computer Science communities have already developed standard methodology for software verification.
 %The analog for the visualization literature is the  ``pretty picture'' \cite{Globus:1994:FWS:182452.182465}. Of course, both communities have developed frameworks and practices for dealing with these problem.
 
 \section{Verification}
 
-The meaning word ``verification'' may vary according to the context in which it is inserted. When applied loosely, it refers to good coding practices
-(such as use of versioning system), software testing (unit/regression tests), and even the process of debugging a code. These practices are obviously valuable for helping build a trustworthy software, but they are often \emph{ad hoc} and have limited scope. 
+The meaning word the ``verification'' may vary according to the context in which it is used. When applied loosely, it refers to good coding practices
+({\em e.g.}, use of versioning system), software testing ({\em e.g.}, unit/regression tests), and even the process of debugging a code. These practices are obviously valuable to help build a trustworthy software, but they are often \emph{ad hoc} and have limited scope. 
 In this dissertation, the word ``verification'' is used as in Computer Science (\cs) and Computation Simulation (\cse). 
 In \cs{} according to IEEE standards, 
 \emph{verification} is the ``process of evaluating a 
@@ -57,7 +58,7 @@ specification exactly.
 %
 In the past
 few decades, several techniques have been developed
-for attaining software verification, which include theorem
+to attain software verification, which include theorem
 provers~\cite{Bowen95}, 
 model checking~\cite{Clarke08},
 fuzzing~\cite{bird83, godefroid08},  and others. This variety of
@@ -66,7 +67,7 @@ a model or an implementation) which may contain millions of lines
 of code and an exponentially large state-space where a
 bug might be 
 hidden. Because of this large number of paths,
-verification can be considered as a
+verification can be considered a
 process where one accumulates evidence that a code is
 correct~\cite{roach98}, rather than deriving a proof that the code is actually correct.
 These techniques have been successfully applied not only for
@@ -80,53 +81,48 @@ numerical solution of partial differential equations (PDEs) that
 models a physical phenomena of
 interest. In this context, 
 \emph{verification} is defined as the process of determining if a
-\emph{computational model}, and its corresponding numerical solution, 
-obtained by discretizing the \emph{mathematical model} (with corresponding
-exact solution) of a physical event and the code
-implementing the computational model  
+\emph{computational model}, and its corresponding numerical solution,   
 can be used to represent the mathematical model of the event with 
 sufficient accuracy~\cite{babuska04}.
 %
 This definition is closely related to the errors involved during
-discretization and implementation. They are of great importance for
+discretization and implementation. They are of great importance to
 scientists because they can be used to assess which of the models,
 mathematical or computational, should be refined.  A successful
 approach for code verification, known to be sensitive to code
 mistakes \cite{roach98}, is the order of accuracy test --- an
 evaluation of the implementation behavior when submitted to successive
-grid refinement \cite{roach98}. 
+grid refinements \cite{roach98}. 
 
-The verification tools proposed by the \cs{} and \cse{} communities covers
-only part of the scientific pipeline. Given the importance of the visualization step
-in the scientific pipeline,  the need for reliable visualizations slowly become central to the scientific community. This means that not only numerical software has to be verified, but also visualization algorithms and implementations.
+The verification tools proposed by the \cs{} and \cse{} communities cover
+only part of the scientific pipeline. Given the importance of visualizations, 
+not only numerical softwares have to be verified, 
+but also visualization algorithms and implementations.
 %
 Nevertheless, visualization has not fallen under the same
 rigorous scrutiny as other components of the pipeline
 like mathematical modeling and numerical simulation.
-Unlike in traditional computational science and engineering areas,
+Unlike traditional computational science and engineering areas,
 there is no commonly accepted framework for verifying the accuracy, reliability, 
-and robustness of visualization tools. This precludes
-a precise quantification of the visualization error budget in the 
-larger scientific pipeline.
-Furthermore, very few investigations have focused on how the error originating from 
+and robustness of visualization tools. 
+Furthermore, very few studies have focused on how the error originating from 
 other components of the computational pipeline
 impacts visualization algorithms. 
 
 While the lack of a well-established framework for verifying visualization
-tools has meant that a variety of analysis techniques have been
-developed~\cite{zhou01,Tory:2004:HFV:951847.951892}, we believe that visualization 
+tools has led to the development of a variety of analysis techniques~\cite{zhou01,Tory:2004:HFV:951847.951892}, we believe visualization 
 has achieved sufficient importance to warrant investigation of
 stricter verification methodologies. Several authors have
-already asserted this need~\cite{Globus:1994:FWS:182452.182465, globus95,kirby-vv-08}, and in this work we present techniques that are a concrete step towards reducing the gap between best practices in simulation science and visualization.
+already asserted its need~\cite{Globus:1994:FWS:182452.182465, globus95,kirby-vv-08}. This work presents techniques that are a concrete step towards reducing the gap between best practices in simulation science and visualization.
 
 \section{Contributions}
 
 We advocate that all visualization algorithms and implementation should be verified.
-Hence, the main contributions to this dissertation is to advance the theory and practice of verifying visualizations. We do so by first extracting important mathematical properties of the algorithms under verification. Then, we verify if the implementation under verification honors that property by stress testing it. As in the case of falsification of scientific theories, a mismatch reveals a problem in the pipeline: the implementation may have a problem; or, perhaps, the algorithm is flawed; or the verification pipeline may have problems. In any case, a problem is revealed. On the other hand, in case the implementation honors the property of interest for all performed tests, then nothing can be said about the correctness of the implementation and algorithm, except that it has stood severe stress test. More specifically, our contribution can be summarized as follows:
+Hence, the main contribution to this dissertation is to advance the theory and practice of verifying visualizations. We do so by extracting important mathematical properties of the algorithms under verification. Then, we verify whether the implementation honors that property by stress testing it. As in the case of falsification of scientific theories, a mismatch reveals a problem; in the case of visualization, the problem will lie in the implementation, algorithm, or verification process. On the other hand, if the implementation honors the property of interest for all performed tests, then nothing can be said about the correctness of the implementation and algorithm, except that it has stood severe stress tests. More specifically, our contribution can be summarized as follows:
 \begin{enumerate}
 \item Chapter \ref{chap:geometry}: verification of geometrical properties of isosurface extraction techniques~\cite{etiene:tvcg:2009}.
 \begin{enumerate}
-\item We introduce a framework for verification of visualization tools based on the Method of Manufactured Solutions, and show how to apply it for the verification of geometrical properties of isosurface extraction algorithms and implementations;
+\item We introduce a framework for the verification of visualization tools based on the Method of Manufactured Solutions, and show how to apply it for the verification of geometrical properties of isosurface extraction algorithms and implementations;
 \item We provide the required mathematical analysis for the implementation of the verification procedure. The important properties that should be honored are derived from this mathematical analysis;
 \item We show concrete results, and show how this verification procedure helped us to find and fix problems in both algorithm and implementation. Moreover, we show that it is not trivial to find solutions that are both geometrically accurate and honors additional properties (such as triangle quality);
 \item As a by-product of the verification, we detail the behavior of several freely available implementation;

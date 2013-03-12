@@ -1,4 +1,4 @@
-\chapter{Reliable Visualizations}
+\chapter{Visualization for flow visualization}
 \label{chap:aiaa}
 
 Flow visualization has been around in some form for as long as people have studied flows.  In some
@@ -14,7 +14,7 @@ venues of the two communities, and have explored the papers published therein to
 glean how each community approaches visualization of flow, how they might differ from each other 
 and how the two communities might complement each other. 
 
-This work is organized as follows.  In Section \ref{sec:flowvis} we provide a review of the state-of-the-art
+This chapter is organized as follows.  In Section \ref{sec:flowvis} we provide a review of the state-of-the-art
 in flow visualization, both from the perspective of the Visualization and well as the AIAA communities. 
 %
 Tools such as Tecplot\cite{amtec1996tecplot} and Paraview\cite{squillacote2007paraview} have implemented many 
@@ -608,7 +608,7 @@ The authors built a collection of 500 vector fields for evaluation of the tasks.
  \begin{figure}[t]
  	\centering
        \includegraphics[width=1\linewidth]{chapter6/figures/ust_kirby}
-   \caption{Comparing visualization methods for steady 2D vector fields. Top: standard arrow visualization, jittered arrow, icons using concepts borrowed from oil painting, respectively. Bottom: line-integral convolution, image-guided streamlines, streamlines seeded in a regular grid, respectively.}
+   \caption{Comparing visualization methods for steady 2D vector fields \cite{Laidlaw:2005:CVF:1032290.1032538}. Top: standard arrow visualization, jittered arrow, icons using concepts borrowed from oil painting, respectively. Bottom: line-integral convolution, image-guided streamlines, streamlines seeded in a regular grid, respectively. Image used with permission.}
    \label{fig:user_study}
  \end{figure}
  
@@ -661,68 +661,68 @@ Several techniques for uncertainty visualization of vector fields are available.
 
 \subsection{Verifiable visualization}
 
-Algorithm verification has recently attracted attention in the Visualization community.
-Although the need for verifying and validating image results dates back almost two decades,
-there is no systematic procedure for tackling the problem of verification in visualization.
-In particular, isosurface extraction has strong presence in AIAA journal for visualization of
-flow properties, and therefore, in this section we introduce two recent developments related to verification of isosurface extraction
-algorithm for the emerging field of verifiable visualizations.
+As Chapter \ref{chap:geometry} and \ref{chap:topology} has shown, there has been work on
+the verification of the implementation of isosurface extraction algorithms.
+%Algorithm verification has recently attracted attention in the Visualization community.
+%Although the need for verifying and validating image results dates back almost two decades,
+%there is no systematic procedure for tackling the problem of verification in visualization.
+%In particular, isosurface extraction has strong presence in AIAA journal for visualization of
+%flow properties, and therefore, in this section we introduce two recent developments related to verification of isosurface extraction
+%algorithm for the emerging field of verifiable visualizations.
 
-We start our discussion on verifiable visualization by building a
-framework for the verification of isosurface extraction algorithms. 
-Etiene \emph{et al.}\cite{etiene:tvcg:2009} 
-borrowed the concept of the order of accuracy test from
-the \cse~community for assessing the quality of geometrical properties
-of isosurface extraction techniques. 
-The authors manufacture solutions (using MMS) for which the behavior of each isosurface
-extraction technique could be analyzed, and then compare it against
-implementations.  This framework requires a mathematical analysis of particular features of
-interest of each manufactured model in order to derive
-the \emph{formal order of accuracy}, allowing one to compare the
-results produced computationally, {\em i.e.} the \emph{observed
-order of accuracy}, to the one predicted by the analysis.  By
-progressively refining the manufactured cases and analyzes and
-verifying that the numerical and analytical results are comparable, one can
-increase her/his confidence in the algorithm under scrutiny.
+%Chapter \ref{chap:geometry}
+%borrowed the concept of the order of accuracy test from
+%the \cse~community for assessing the quality of geometrical properties
+%of isosurface extraction techniques. 
+%The authors manufacture solutions (using MMS) for which the behavior of each isosurface
+%extraction technique could be analyzed, and then compare it against
+%implementations.  This framework requires a mathematical analysis of particular features of
+%interest of each manufactured model in order to derive
+%the \emph{formal order of accuracy}, allowing one to compare the
+%results produced computationally, {\em i.e.} the \emph{observed
+%order of accuracy}, to the one predicted by the analysis.  By
+%progressively refining the manufactured cases and analyzes and
+%verifying that the numerical and analytical results are comparable, one can
+%increase her/his confidence in the algorithm under scrutiny.
 %
-For isosurfacing methods that generate
-simplicial approximations of smooth isosurfaces, the features of
-interest are geometric surface convergence, convergence of normals,
-area and curvature.  By comparing numerically computed and analytical
-convergence rate the authors  diagnoses and fixed problems within popular
-isosurfacing codes as well as better understand particular features of
-each technique, increasing the reliability on the methods under
-scrutiny. The practical impact of lacking of, say, area convergence is that,
-for some algorithms, the area error \emph{increased} as the dataset was refined.
-By using a simple manufactured solution, the authors were able to
-reveal bugs that prevented the convergence of some mesh properties of
-two publicly available isosurfacing codes. 
+%For isosurfacing methods that generate
+%simplicial approximations of smooth isosurfaces, the features of
+%interest are geometric surface convergence, convergence of normals,
+%area and curvature.  By comparing numerically computed and analytical
+%convergence rate the authors  diagnoses and fixed problems within popular
+%isosurfacing codes as well as better understand particular features of
+%each technique, increasing the reliability on the methods under
+%scrutiny. The practical impact of lacking of, say, area convergence is that,
+%for some algorithms, the area error \emph{increased} as the dataset was refined.
+%By using a simple manufactured solution, the authors were able to
+%reveal bugs that prevented the convergence of some mesh properties of
+%two publicly available isosurfacing codes. 
 
-The authors extended their work on verification of geometrical properties of
-isosurface extraction algorithms to the evaluation topological properties of these
-techniques \cite{Etiene:2012:TVI:2197070.2197097}. Unlike geometry verification, topology
-verification cannot be performed with order-of-accuracy tests due to
-the discrete nature of topological properties. This renders an
-approach similar to
-\emph{state exploration}, used in the Computer Science literature,  
-a more appropriate route. By \emph{exploring} different topological
-configurations and comparing the expected results against the obtained
-through the algorithm under verification, one can verify correctness of
-the system or find a counter-example.
+%The authors extended their work on verification of geometrical properties of
+%isosurface extraction algorithms to the evaluation topological properties of these
+%techniques \cite{Etiene:2012:TVI:2197070.2197097}. Unlike geometry verification, topology
+%verification cannot be performed with order-of-accuracy tests due to
+%the discrete nature of topological properties. This renders an
+%approach similar to
+%\emph{state exploration}, used in the Computer Science literature,  
+%a more appropriate route. By \emph{exploring} different topological
+%configurations and comparing the expected results against the obtained
+%through the algorithm under verification, one can verify correctness of
+%the system or find a counter-example.
 %
-The authors adapted machinery from both Stratified Morse
-Theory\cite{Goresky:1988:SMT} and Digital Topology\cite{siqueira:2007}
-to compute surface topological invariants directly from the grid that can later be
-compared against those results from the isosurface extraction algorithm
-under verification.  As an example, the authors tested an
-implementation of Chernyaev's marching cubes
-33\cite{Chernyaev95marchingcubes}, a topologically-correct isosurface extraction algorithm,
-to their framework. Any implementation
-that preserves topology of the trilinear interpolant should be able
-to reproduce the case 13.5.2 of the extended marching cubes
-table \cite{lopes:tvcg:2003}. The authors  were able to find non-trivial bugs in the
-implementation and a non-obvious algorithm detail that is not
-discussed in either Chernyaev's or Lewiner's work. 
+%The authors adapted machinery from both Stratified Morse
+%Theory\cite{Goresky:1988:SMT} and Digital Topology\cite{siqueira:2007}
+%to compute surface topological invariants directly from the grid that can later be
+%compared against those results from the isosurface extraction algorithm
+%under verification.  As an example, the authors tested an
+%implementation of Chernyaev's marching cubes
+%33\cite{Chernyaev95marchingcubes}, a topologically-correct isosurface extraction algorithm,
+%to their framework. Any implementation
+%that preserves topology of the trilinear interpolant should be able
+%to reproduce the case 13.5.2 of the extended marching cubes
+%table \cite{lopes:tvcg:2003}. The authors  were able to find non-trivial bugs in the
+%implementation and a non-obvious algorithm detail that is not
+%discussed in either Chernyaev's or Lewiner's work. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Opportunities}
