@@ -628,7 +628,7 @@
 % 9-Feb-1990 D.Eyre. Oct 1993 GBG
 %
 \def\mainheading#1{
-  \hrule width0in \vspace{.72in} \hrule width0in %0.4
+  \hrule width0in \vspace{.60in} \hrule width0in %0.4
   \mainheadingtext{#1}{\HFmainhead\bfseries}%
 }
 \def\mainheadingtext#1#2{% #1=text, #2=font size and style
