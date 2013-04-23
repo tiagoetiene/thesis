@@ -780,11 +780,12 @@ consists of only $p$ (one way to think of this $(3-d)$-manifold is as a ``topolo
 complement'').  In this context, we can define a small neighborhood
 $T_\varepsilon(p)$ in the strata containing $p$ and the \emph{lower
   tangential} link $T_L^-(p)$ as the set of points in the boundary of
-$T_\varepsilon(p)$ with scalar values less than that in $p$.
-\begin{wrapfigure}{r}{3cm}
+$T_\varepsilon(p)$ with scalar values less than that in $p$ (see Figure \ref{fig:chap4:smt}).
+\begin{figure}[b]
 \centering
-\includegraphics[width=2.0cm,keepaspectratio=true]{chapter3/figures/ilustration.png}
-\end{wrapfigure}
+\includegraphics[width=0.3\linewidth]{chapter3/figures/ilustration.png}
+\caption{\label{fig:chap4:smt} Example of tangential and normal link.}
+\end{figure}
 Similarly we can define the \emph{upper tangential} link $T_L^+(p)$ as
 the set of points in the boundary of $T_\varepsilon(p)$ with scalar
 value higher than that at $p$.  \emph{Lower normal} $N_L^-(p)$ and
@@ -1718,13 +1719,12 @@ implementations tested could successfully reproduce the tubular
 structure for all $\alpha > 0$. This is not particularly surprising,
 since the trilinear interpolation from samples of $d$ is quite
 different from the $d$.
-\begin{wrapfigure}{l}{4.5cm}
-\vspace{-0.2cm}
-\hspace{-0.0cm}
-\includegraphics[width=0.7\linewidth,keepaspectratio=true]
-{chapter3/figures/distance-field.pdf}
-\end{wrapfigure}
-The inline figure on the right shows a typical output produced by VTK
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.5\linewidth]{chapter3/figures/distance-field.pdf}
+\caption{\label{fig:chap4:vtk} Isosurface extracted with VTK Marching Cubes}
+\end{figure}
+Figure \ref{fig:chap4:vtk} on the right shows a typical output produced by VTK
 Marching Cubes for the distance field $d = \alpha$. Notice, however,
 that this is not only an issue of sampling rate because if the tube
 keeps going through the diagonals of cubic cells, VTK will not be able
@@ -1759,8 +1759,8 @@ should be appropriate as a starting point for the process.
 
 \section{Conclusion}
 
-We extended the framework presented by Etiene \emph{et al.}
-\cite{etiene:tvcg:2009} by including topology into the verification
+In this chapter, we extended the framework presented in the previous chapter
+by including topology into the verification
 cycle.  We used machinery from digital topology and stratified Morse
 theory to derive two verification tools that are simple and yet
 capable of finding unexpected behavior and coding mistakes.
