@@ -321,7 +321,7 @@ solution. In particular, the normal order of accuracy has the best rate among th
 methods. Macet improved for its results for area. On the other hand, it still has 
 some issues related to normals, which perhaps indicates a need for more tests 
 and verification. The new order of accuracy for algebraic 
-distance (Figure \ref{fig:allconv-fixed}) does not tell us 
+distance (Figure \ref{fig:meshconver-fixed}) does not tell us 
 much about the correctness of the code because of the zero-th order 
 of accuracy (same for Afront). 
 
@@ -343,7 +343,7 @@ is a theoretical problem that prevents both from being satisfied simultaneously,
 or it is just a matter of finding a better algorithmic fix. 
 In both cases, further study and subsequent tests must be accomplished.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=1\linewidth]{chapter2/figures/teaser.pdf}
 \caption{Through the verification methodology presented on this chapter 
@@ -354,7 +354,7 @@ The two graphs show the convergence of the normals before and after fixing the c
 \label{fig:teaser}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[b]
 \centering
 \begin{tabular}{cccc}
 Bug $\#1$ & Bug $\#2$ & Quality & Observed accuracy \\
