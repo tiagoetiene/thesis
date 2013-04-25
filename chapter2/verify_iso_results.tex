@@ -20,7 +20,7 @@ we briefly review their salient features.
 
 %% \subsection{Isosurface Extraction Codes under Verification}
 
-\paragraph*{VTK Marching Cubes:} Marching Cubes~\cite{lor87} (MC) is
+\paragraph*{VTK Marching Cubes.} Marching Cubes~\cite{lor87} (MC) is
 arguably the most popular isosurface extraction algorithm.
 % THIS SENTENCE SHOULD FIT BETTER SOMEWHERE ELSE IN MOTIVATION 
 %and its VTK implementation~\cite{vtk} is widely employed in engineering applications and in life sciences field. 
@@ -34,7 +34,7 @@ through a look-up table. The vertices of the triangles lie on
 the edges of the cubic cells, and they are computed by linearly interpolating 
 the implicit function values stored at the corners of the grid cell. 
 
-\paragraph*{SnapMC:} SnapMC~\cite{Raman:2008:QIM} is a recently proposed algorithm
+\paragraph*{SnapMC.} SnapMC~\cite{Raman:2008:QIM} is a recently proposed algorithm
 that extends the original Marching Cubes look-up table to cases where
 the isosurface goes exactly through the corners of the background
 grid.  The new look-up table is automatically built by an adaptation of
@@ -46,7 +46,7 @@ intersections close to grid corners. In particular, it changes
 the values on the grid so that the surface is ``snapped'' to the grid
 corners.
 
-\paragraph*{Macet:} Macet~\cite{Dietrich:TVCG:2008} is another variant of Marching
+\paragraph*{Macet.} Macet~\cite{Dietrich:TVCG:2008} is another variant of Marching
 Cubes that tries to improve the shape of the triangles in a
 mesh. Unlike SnapMC, it \emph{perturbs the active edges} of Marching Cubes
 cases by moving the vertices before the triangulation step.  The
@@ -56,7 +56,7 @@ is approximately parallel to an edge of the grid cell. Therefore, some
 corners of the background grid are displaced so as to avoid the
 parallel-like intersections.
 
-\paragraph*{Dual Contouring:} Dual Contouring~\cite{Ju:2002:DCH:566654.566586} is a feature-preserving
+\paragraph*{Dual Contouring.} Dual Contouring~\cite{Ju:2002:DCH:566654.566586} is a feature-preserving
 isosurfacing method to extract crack-free surfaces from both uniform
 and adaptive octree grids. This technique can be seen as a combination of
 Extended Marching Cubes~\cite{kobbelt01} and SurfaceNets~\cite{gibson98} 
@@ -67,7 +67,7 @@ Contouring tends to generate better quality triangles than Marching Cubes
 while still being very effective in representing sharp features, rendering this
 implicit polygonalization method a good alternative to the popular Marching Cubes.
 
-\paragraph*{Afront:} Afront~\cite{Schreiner06} is an advancing-front method
+\paragraph*{Afront.} Afront~\cite{Schreiner06} is an advancing-front method
 for surface extraction. Although we focus on applying Afront to
 isosurface extraction, it can also be used for remeshing and
 triangulating point-set surfaces. The outstanding feature of Afront is
@@ -81,7 +81,7 @@ maximum triangle size by half. A full analysis of Afront (and, in
 particular, the influence of the other main parameter $\eta$) warrants
 further investigation, but is beyond the scope of this dissertation.
 
-\paragraph*{DelIso:} DelIso \cite{Dey07} is a Delaunay-based 
+\paragraph*{DelIso.} DelIso \cite{Dey07} is a Delaunay-based 
 approach for isosurfacing. It computes the restricted Delaunay triangulation 
 from a 3D Voronoi Diagram. We run our tests on a customized version of DelIso 16 bit, 
 and our examples use the default set of parameter.
