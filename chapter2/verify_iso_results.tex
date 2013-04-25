@@ -207,9 +207,9 @@ that was affecting the convergence of Macet and Dual Contouring
 (specifically, we found a hard-coded limit in the number of steps in a
 root-finding procedure that was being triggered by the high resolution
 of the volume). Once fixed, we obtain the results shown in Figure
-\ref{fig:meshconver-fixed}. Macet and Afront now have similar behavior 
+\ref{fig:allconv-fixed}. Macet and Afront now have similar behavior 
 in the observed order of accuracy of vertex position 
-(Figure \ref{fig:meshconver-fixed}). This is because both methods use 
+(Figure \ref{fig:allconv-fixed}). This is because both methods use 
 high-order interpolation with splines, not linear interpolation as 
 assumed before (see Section \ref{chap1:sec:mms-complexity}).
 
@@ -322,7 +322,7 @@ solution. In particular, the normal order of accuracy has the best rate among th
 methods. Macet improved for its results for area. On the other hand, it still has 
 some issues related to normals, which perhaps indicates a need for more tests 
 and verification. The new order of accuracy for algebraic 
-distance (Figure \ref{fig:meshconver-fixed}) does not tell us 
+distance (Figure \ref{fig:allconv-fixed}) does not tell us 
 much about the correctness of the code because of the zero-th order 
 of accuracy (same for Afront). 
 
