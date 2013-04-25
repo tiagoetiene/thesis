@@ -22,7 +22,7 @@ In this work, we address issues with Chernyaev's original algorithm, its extensi
 %
 Our work closes an existing gap in the topological correctness of Marching Cubes 33.
  
- The subtleties involved in the correctness of isosurface extraction techniques are sometimes difficult to grasp in the ordinary paper medium. Both the geometry and topology inside grid voxels are often complex and challenging to understand,  study and replicate ({\em e.g.}, see Figures 9 and 10 in~\cite{Nielson03onmarching}).  As an attempt to bridge this gap, we build on recent efforts towards \emph{executable papers}~\cite{Koop:2011tv, Tohline:2010jn}. Executable papers extend the traditional paper/digital counterpart by including tools that allow readers to interact, explore and verify experiments more easily.  In this work, we use executable papers to increase the reproducibility of our results.
+ The subtleties involved in the correctness of isosurface extraction techniques are sometimes difficult to grasp in the ordinary paper medium. Both the geometry and topology inside grid voxels are often complex and challenging to understand,  study and replicate ({\em e.g.}, see Figures 9 and 10 in~\cite{Nielson03onmarching}).  As an attempt to bridge this gap, we build on recent efforts towards \emph{executable papers}~\cite{Koop:2011tv, Tohline:2010jn}. Executable papers extend the traditional paper/digital counterpart by including tools that allow readers to interact, explore and verify experiments more easily.  In this chapter, we use executable papers to increase the reproducibility of our results.
  %
  
 Our contributions, which have a practical nature, are the following:
@@ -73,7 +73,7 @@ We note that ``\mc{}'' may refer to either the Marching Cubes 33 \emph{algorithm
 \section{Preliminaries}
 \label{sec:preliminaries}
 
-In this section we present the notation that will be used throughout the paper. We also briefly review the main concepts behind Chernyaev's algorithm and Lewiner \emph{et al.}'s improvements to it. 
+In this section we present the notation that will be used throughout this chapter. We also briefly review the main concepts behind Chernyaev's algorithm and Lewiner \emph{et al.}'s improvements to it. 
 %
 Let $G$ be a rectilinear grid with scalar values associated with each vertex $x_j \in G$. Let $g:\mathbb{R}^3 \rightarrow \mathbb{R}$ be a piecewise-trilinear interpolation function defined on $G$. Given an isovalue $\lambda$,  the isosurface $S_\lambda$ is defined as the set of points for which $g(x)=\lambda$. For each voxel $v_i \subset G$, and $x \in v_i$, $g(x) = g_i(x)$ where $g_i$ is the trilinear interpolant inside the cubic cell $v_i$. 
 
