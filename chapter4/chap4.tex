@@ -88,9 +88,9 @@ Given a voxel $v_i$, and a cutting-plane $P$ parallel to one of $v_i$'s faces, d
      \label{ambiguity}
 \end{figure}
  
-\begin{figure}[b]
+\begin{figure}[t]
      \centering
-     \includegraphics[width=0.95\linewidth]{chapter4/figures/cut-plane-fig.png}
+     \includegraphics[width=0.65\linewidth]{chapter4/figures/cut-plane-fig.png}
      \caption{Asymptotic Decider (left) and \mc{} interior ambiguity test for MC case 4 (right). The gray areas represent regions with positive scalar values, and the capital letters represent the scalar value at each vertex. In the left image, we observe that $f(x_c) < 0$, where $x_c$ is the saddle point position. Positive areas will be connected if $f(x_c) > 0$. The orange squared plane shown in the right image represents the cutting-plane. The goal of the \mc{} algorithm is to find a cutting-plane such that the gray areas in the top and bottom planes are joined in the interior.}
      \label{interior_ambiguity}
 \end{figure}
@@ -148,23 +148,8 @@ t_{\mathrm{alt}} &=& \frac{V_{0}}{V_{0} - V_{1}},\label{eq:alternative}
 \end{eqnarray}
 where $V_{0}$ and $V_{1}$ are the scalar values at the vertices of $e$. Note that this is equivalent to finding the intersection point between the isosurface $S$ and $e$. The authors keep the structure of the test proposed by Chernyaev, but condition (i) is not used, and condition (ii) is always true because $e$ is an edge intersected by the isosurface; consequently, $t_{alt} \in (0,1)$.
 
-Section \ref{erros_cause:chernyaev} explains why the algorithm proposed by Chernyaev and its modified version proposed by Lewiner \emph{et al.} may fail to extract surfaces that are topologically correct. In the following section, we present the tools we use to detect, debug, and reproduce the issues found in the \mc{} algorithm and its implementation.
+Section \ref{erros_cause:chernyaev} explains why the algorithm proposed by Chernyaev and its modified version proposed by Lewiner \emph{et al.} may fail to extract surfaces that are topologically correct. In the following section, we present the tools we use to detect, debug, and reproduce the issues found in the \mc{} algorithm and its implementation. The full Marching Cubes table can be found in the works of Chernyaev \cite{Chernyaev95marchingcubes} and Lewiner \emph{et al.}\cite{Lewiner:2003}.
 
-\begin{figure}[b]
-     \centering
-    \includegraphics[width=0.98\linewidth]{chapter4/figures/executable.png}
-     \caption{ \label{fig:executable}\href{http://liscustodio.github.io/C_MC33/index.html}{The executable paper pipeline. An image is made executable (left), meaning that the reader can launch a request to execute a pipeline in a remote server (middle) and interact with the result in a web browser (right) \cite{lisOnline2013}.}}
-\end{figure}
-
-\begin{figure}[b]
-     \centering
-     \includegraphics[width=0.99\linewidth]{chapter4/figures/case13/case13.png}
-     \caption{Sign changes of the cutting-plane saddle point as a function of the height $t$. The gray area depicts $f(x) > 0$. The black (resp. white) dots are face saddles with $f(x_c) > 0$ (resp. $f(x_c) < 0$). From left to right, the four leftmost images show the sign of the face saddle points changing from negative to positive to negative and to positive again, respectively. The rightmost image shows the  hyperbolic trajectory of the face saddle position $x_c(t)$. The \mc{} algorithm fails to track the saddle point sign because it ignores the influence of the hyperbolic trajectory shown here. }
-     \label{fig:case13saddlesigns}
-\end{figure}
-
-
-The full Marching Cubes table can be found in the works of Chernyaev \cite{Chernyaev95marchingcubes} and Lewiner et al. \cite{Lewiner:2003}.
 
 \section{Experiments setup}
 \label{experiments_setup}
@@ -181,25 +166,24 @@ The topological issues described were obtained by systematically stress-testing 
 %
 (IV) Lastly, the pairs of topological invariants $\{\chi(S)$, $\chi(M)\}$ and $\{\beta_k(S), \beta_k(M)\}$ are compared. A mismatch indicates that a problem has occurred. Nevertheless,  as the authors note, a match between invariants does not imply a bug-free code~\cite{Etiene:2012:TVI:2197070.2197097}. The verification process does not prove the absence of bugs but only increases one's confidence in its correctness.
 %
-In this paper, we exploit the fact that when the expected and obtained surfaces are not homeomorphic, a counterexample is given in the form of a scalar field $G$ and a mesh $M$. We use this information to find and correct errors in \mc{}.
+In this chapter, we exploit the fact that when the expected and obtained surfaces are not homeomorphic, a counterexample is given in the form of a scalar field $G$ and a mesh $M$. We use this information to find and correct errors in \mc{}.
 
 \subsection{Reproducibility}
 
+\begin{figure}[b]
+     \centering
+    \includegraphics[width=0.7\linewidth]{chapter4/figures/executable.png}
+     \caption{ \label{fig:executable}\href{http://liscustodio.github.io/C_MC33/index.html}{The executable paper pipeline. An image is made executable (left), meaning that the reader can launch a request to execute a pipeline in a remote server (middle) and interact with the result in a web browser (right) \cite{lisOnline2013}.}}
+\end{figure}
+
 As investigators in a mature field within the scientific visualization community, isosurface extraction researchers have developed ways to help other researchers and practitioners reproduce their results. Published journal articles offer a first approximation of reproducibility. Nevertheless, many details regarding implementation, source code, input data, and other types of information are often omitted. Many, but not all, published techniques make source code and input data freely available, and some are part of widely used visualization packages such as VTK~\cite{vtk}. This practice greatly increases the degree of reproducibility of the work. 
-In this paper, we strive to increase the degree of reproducibility of the work presented by making the results shown in Figures \ref{fig:non_manifold} and \ref{interior_test} and in Algorithm \ref{chernyaev_case10} fully reproducible. We use CrowdLabs~\cite{Tohline:2010jn} and Vistrails~\cite{Freire:2006va, Silva:2007:PVR:1300781.1302461} as a platform to achieve this goal. To explore some of the results shown in this paper, the  reader may click on individual figure captions and interact with the results via web browser. Figure \ref{fig:executable} shows the pipeline of an executable paper. 
+We use CrowdLabs~\cite{Tohline:2010jn} and Vistrails~\cite{Freire:2006va, Silva:2007:PVR:1300781.1302461} as a platform to achieve this goal. To explore some of the results shown in this chapter, the  reader may click on individual figure captions and interact with the results via web browser. Figure \ref{fig:executable} shows the pipeline of an executable paper. 
 %
 We have selected cases in which \mc{} fails and have provided the respective correct results. In addition,  to allow the reader to explore and study the results presented here, he or she can also download the scalar fields and respective topological invariants $\chi$ and $\beta$ used for stress testing \mc. We also provide 10000 \href{http://liscustodio.github.io/C_MC33/MarchingCubes_cases.zip}{\textcolor{blue}{Marching Cubes cases grids}} and \href{http://liscustodio.github.io/C_MC33/Closed_Surfaces.zip}{\textcolor{blue}{randomly generated 5x5x5 grids}} \cite{lisOnline2013}. This dataset can be used to test any topologically correct isosurface extraction technique.
 
 
-\begin{figure}[b]
-     \centering
-     \includegraphics[width=0.8\linewidth]{chapter4/figures/case-13.png}
-     \caption{Challenging cases for Chernyave's interior test: voxel diagonal has vertices with opposite signs. Case 13.5.2 needs to be oriented correctly. One of the diagonal vertices is isolated from all other vertices in the cube, while the other is faced by the tunnel. In order to determine which vertex is isolated, we apply the same tool used for disambiguation of case 13.5. For case 13.5.1, the orientation of the isosurface have no influence on the topology. }
-     \label{fig:case13}
-\end{figure}
 
-
-\section{Issues with the \mc{} algorithm and its implementation}
+\section{Issues with the \mc{}}
 \label{erros_cause:chernyaev}
 
 In this section, we discuss specific issues regarding both Chernyaev~\cite{Chernyaev95marchingcubes} and Lewiner \emph{et al.}'s~\cite{Lewiner:2003} work. Because Lewiner \emph{et al.} extends Chernyaev's work, the issues presented in the latter are also part of the former. Specifically, we detail three \emph{algorithmic} issues -- two in Chernyaev's \mc{} and one in Lewiner \emph{et al.}  --  and one \emph{implementation} issue. The solutions for the issues raised here will be presented in the next section.
@@ -209,20 +193,34 @@ This section is organized as follows. First, we explain an algorithmic problem w
 \subsection{Issue I -- Case 13.5}
 \label{sec:problem-case-13}
 
-\begin{figure}[b]
-     \centering
-     \includegraphics[width=1\linewidth]{chapter4/figures//graph.png}
-     \caption{Counterexample to Chernyaev's core disambiguation algorithm. The \mc{} algorithm incorrectly interprets case 13.5.2 as 13.5.1. The left image shows the zero-level set for case 13.5.2 and cutting-planes at heights $t_1$, $t_2$, and $t_a$, which correspond to both roots of $F(t)$ and the asymptote of $f(x_c(t))$, respectively. The blue ribbon shows the path of the face saddle $x_c(t)$. The right image shows the changes in $f(x_c(t))$ and $F(t)$. According to the three criteria of the \mc{} algorithm described in Section \ref{sec:preliminaries},  the upward-facing red parabola defines the absence of a tunnel (condition (i)), which is incorrect. The blue curve, on the other hand, shows the correct sign change.}
-     \label{fig:case13counter_example}
-\end{figure}
-
-
 Here, we show a problem with the core disambiguation procedure described in Chernyaev's work. To our knowledge, this problem has not been exposed or addressed in the literature.
 
 Case 13 is certainly the most complex table case; all faces are ambiguous, and six subcases are possible. Four of the subcases can be discriminated by using Asymptotic Decider. The remaining cases 13.5.1 and 13.5.2 require Chernyaev's \mc{} interior ambiguity resolution method.
 %
 Recall that the \mc{} approach discriminates between tunnels and isolated sheets by finding a cutting-plane for which positive nodes in the cube diagonal are joined by points in the interior of the cubic cell (see Figure \ref{interior_ambiguity}). 
 Cases 13.5.1 and 13.5.2 differ precisely because the positive nodes in case 13.5.2 are connected to one another by interior points, which is not true for 13.5.1 (see Figure \ref{fig:case13}).
+
+\begin{figure}[b]
+     \centering
+     \includegraphics[width=0.6\linewidth]{chapter4/figures/case-13.png}
+     \caption{Challenging cases for Chernyave's interior test: voxel diagonal has vertices with opposite signs. Case 13.5.2 needs to be oriented correctly. One of the diagonal vertices is isolated from all other vertices in the cube, while the other is faced by the tunnel. In order to determine which vertex is isolated, we apply the same tool used for disambiguation of case 13.5. For case 13.5.1, the orientation of the isosurface have no influence on the topology. }
+     \label{fig:case13}
+\end{figure}
+
+
+\begin{figure}[b]
+     \centering
+     \includegraphics[width=0.99\linewidth]{chapter4/figures/case13/case13.png}
+     \caption{Sign changes of the cutting-plane saddle point as a function of the height $t$. The gray area depicts $f(x) > 0$. The black (resp. white) dots are face saddles with $f(x_c) > 0$ (resp. $f(x_c) < 0$). From left to right, the four leftmost images show the sign of the face saddle points changing from negative to positive to negative and to positive again, respectively. The rightmost image shows the  hyperbolic trajectory of the face saddle position $x_c(t)$. The \mc{} algorithm fails to track the saddle point sign because it ignores the influence of the hyperbolic trajectory shown here. }
+     \label{fig:case13saddlesigns}
+\end{figure}
+
+\begin{figure}[t]
+     \centering
+     \includegraphics[width=0.7\linewidth]{chapter4/figures//graph.png}
+     \caption{Counterexample to Chernyaev's core disambiguation algorithm. The \mc{} algorithm incorrectly interprets case 13.5.2 as 13.5.1. The left image shows the zero-level set for case 13.5.2 and cutting-planes at heights $t_1$, $t_2$, and $t_a$, which correspond to both roots of $F(t)$ and the asymptote of $f(x_c(t))$, respectively. The blue ribbon shows the path of the face saddle $x_c(t)$. The right image shows the changes in $f(x_c(t))$ and $F(t)$. According to the three criteria of the \mc{} algorithm described in Section \ref{sec:preliminaries},  the upward-facing red parabola defines the absence of a tunnel (condition (i)), which is incorrect. The blue curve, on the other hand, shows the correct sign change.}
+     \label{fig:case13counter_example}
+\end{figure}
 
 Although it seems that the \mc{} methodology described in Section \ref{sec:preliminaries} fits naturally in this scenario, as it turns out this disambiguation procedure \emph{cannot} be applied for 13.5. 
 %
