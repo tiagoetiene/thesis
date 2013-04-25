@@ -160,7 +160,7 @@ Afront$^*$          &  $-0.06$ & $0.80$   & $1.93$     & $-0.27$ \\
   and for different algorithms. $^1$ indicates the original source 
     code and $^2$ our fixed version.
    $^*$ indicates that a high-order spline was used instead of a 
-linear interpolation (Section \ref{chap1:sec:iea}).}
+linear interpolation.}
 \label{tab:results}
 \end{table}
 
@@ -171,22 +171,22 @@ linear interpolation (Section \ref{chap1:sec:iea}).}
 \begin{figure}[b]
 \centering
 \subfigure{
-\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
+\label{fig:meshconver}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
 \subfigure{
 \label{fig:normconver}
-\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
 \subfigure{
 \label{fig:areaconv}
-\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
 \subfigure{
 \label{fig:curvatureconv}
 \includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
-\caption{\label{fig:meshconver}Observed order of accuracy. The implementations of 
+\caption{Observed order of accuracy. The implementations of 
 Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
 continuous line represents the expected behavior. $p$ is the slope of the linear 
 regression for each curve.}
 \end{figure}
-
 
 Section \ref{subchap1:sec:vertex-order-of-accuracy} shows that one expects second-order 
 convergence for function value on vertices if linear interpolation is used. 
@@ -214,6 +214,24 @@ of the manufactured solution.
 %Because DelIso uses trilinear interpolation to approximate a surface vertex, the error on vertices remain constant if
 %the grid size does not change.
 
+\begin{figure}[b]
+\centering
+\subfigure{
+\label{fig:meshconver-fixed}
+\includegraphics[width=0.487\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
+\subfigure{
+\label{fig:normconver-fixed}
+\includegraphics[width=0.488\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
+\subfigure{
+\label{fig:areaconv-fixed}
+\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
+\subfigure{
+\label{fig:curvatureconv-fixed}
+\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
+\caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
+\label{fig:allconv-fixed}
+\end{figure}
+
 
 The Macet and Dual Contouring curves suggest that the algorithms converge to 
 a fixed value. 
@@ -227,27 +245,11 @@ that was affecting the convergence of Macet and Dual Contouring
 (specifically, we found a hard-coded limit in the number of steps in a
 root-finding procedure that was being triggered by the high resolution
 of the volume). Once fixed, we obtain the results shown in Figure
-\ref{fig:allconv-fixed}. Macet and Afront now have similar behavior 
+\ref{fig:meshconver-fixed}. Macet and Afront now have similar behavior 
 in the observed order of accuracy of vertex position 
-(Figure \ref{fig:allconv-fixed}). This is because both methods use 
+(Figure \ref{fig:meshconver-fixed}). This is because both methods use 
 high-order interpolation with splines, not linear interpolation as 
 assumed before (see Section \ref{chap1:sec:mms-complexity}).
-
-\begin{figure}[b]
-\centering
-\subfigure{
-\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
-\subfigure{
-\label{fig:normconver-fixed}
-\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
-\subfigure{
-\label{fig:areaconv-fixed}
-\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
-\subfigure{
-\label{fig:curvatureconv-fixed}
-\includegraphics[width=0.475\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
-\caption{\label{fig:allconv-fixed}Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
-\end{figure}
 
 \subsubsection{Normals}
 \label{subchap1:sec:normal-convergence}
