@@ -168,6 +168,26 @@ linear interpolation (Section \ref{chap1:sec:iea}).}
 \subsubsection{Algebraic distance}
 %\label{subchap1:sec:mesh}
 
+\begin{figure}[b]
+\centering
+\subfigure{
+\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
+\subfigure{
+\label{fig:normconver}
+\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
+\subfigure{
+\label{fig:areaconv}
+\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
+\subfigure{
+\label{fig:curvatureconv}
+\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
+\caption{\label{fig:meshconver}Observed order of accuracy. The implementations of 
+Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
+continuous line represents the expected behavior. $p$ is the slope of the linear 
+regression for each curve.}
+\end{figure}
+
+
 Section \ref{subchap1:sec:vertex-order-of-accuracy} shows that one expects second-order 
 convergence for function value on vertices if linear interpolation is used. 
 We define the following approximation error on $L_\infty$ norm:
@@ -216,23 +236,18 @@ assumed before (see Section \ref{chap1:sec:mms-complexity}).
 \begin{figure}[b]
 \centering
 \subfigure{
-\label{fig:meshconver}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
+\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
 \subfigure{
-\label{fig:normconver}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
+\label{fig:normconver-fixed}
+\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
 \subfigure{
-\label{fig:areaconv}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
+\label{fig:areaconv-fixed}
+\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
 \subfigure{
-\label{fig:curvatureconv}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
-\caption{Observed order of accuracy. The implementations of 
-Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
-continuous line represents the expected behavior. $p$ is the slope of the linear 
-regression for each curve.}
+\label{fig:curvatureconv-fixed}
+\includegraphics[width=0.475\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
+\caption{\label{fig:allconv-fixed}Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
 \end{figure}
-
 
 \subsubsection{Normals}
 \label{subchap1:sec:normal-convergence}
@@ -292,24 +307,6 @@ investigation which we leave for future work.
 Although the curves shown in Figure~\ref{fig:curvatureconv} for Macet and 
 Dual Contouring diverge, they change after fixing the code 
 (Figure \ref{fig:curvatureconv-fixed}).
-
-\begin{figure}[b]
-\centering
-\subfigure{
-\label{fig:meshconver-fixed}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
-\subfigure{
-\label{fig:normconver-fixed}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
-\subfigure{
-\label{fig:areaconv-fixed}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
-\subfigure{
-\label{fig:curvatureconv-fixed}
-\includegraphics[width=0.47\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
-\caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
-\label{fig:allconv-fixed}
-\end{figure}
 
 \subsection{Detected Bugs}
 
