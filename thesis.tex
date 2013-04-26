@@ -81,7 +81,11 @@
 \end{epigraph}
 \setcounter{tocdepth}{3}    %How many levels to include in TOC
 \addtocontents{toc}{\protect\sloppy}    %Keeps long chapters within page # margins
+%\tableofcontents
+{\makeatletter
+\def\@@underline#1{#1}
 \tableofcontents
+\makeatother}
 \listoftables
 \listoffigures
 %
