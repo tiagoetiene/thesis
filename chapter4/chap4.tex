@@ -142,7 +142,7 @@ If one of the above conditions fails, the positive vertices are separated.
 
 \subsection{Lewiner \emph{et al.}'s \mc{}}
 
-Lewiner \emph{et al.}~\cite{Lewiner:2003} proposed a modification of Chernyaev's interior test. In this modification, they use an alternative method for computing the height plane $t$ for most ambiguous cases. For cases  6, 7, 12, and 13, the authors compute the height $t$ based on the barycenter of the end vertices of an edge $e$ (a cube edge intersected by the isosurface) weighted by the values of the scalar field on these vertices (see \cite{Lewiner:2003} for details). In practice, the implementation uses:
+Lewiner \emph{et al.}~\cite{Lewiner:2003} proposed a modification of Chernyaev's interior test. In this modification, they use an alternative method for computing the height plane $t$ for most ambiguous cases. For cases  6, 7, 12, and 13, the authors compute the height $t$ based on the barycenter of the end vertices of an edge $e$ (a cube edge intersected by the isosurface) weighted by the values of the scalar field on these vertices (see Lewiner \emph{et al.}\cite{Lewiner:2003} for details). In practice, the implementation uses:
 \begin{eqnarray}
 t_{\mathrm{alt}} &=& \frac{V_{0}}{V_{0} - V_{1}},\label{eq:alternative}
 \end{eqnarray}
@@ -259,7 +259,7 @@ A second minor issue regarding case 13.5.2 is the tunnel orientation of configur
 \begin{figure}[b]
      \centering
      \includegraphics[width=0.9\linewidth]{chapter4/figures/non_manifold.png}
-     \caption{\href{http://liscustodio.github.io/C_MC33/figure8.html}{Top: Problem with Chernyaev's triangulation table. The figure shows the  zero level-set of a $5\times5\times5$ randomly generated piecewise-trilinear scalar field $G$ (left) and two meshes extracted using the \mc{} (center) and \cmc{} (right) algorithms. The isolated voxel patches, shown in green and yellow, represent the two voxels at the center of $G$. The face shared by two consecutive tunnels, shown in purple, generates non-manifold edges. After one subdivision at the critical point of this case, the problem no longer occurs, and a valid manifold surface is obtained (right). Bottom: Triangulation for tunnels used by Lewiner \emph{et al.}~\cite{Lewiner:2003}. Each has a face that is coplanar to the voxel faces, which may lead to non-manifold surfaces.} \cite{lisOnline2013}}
+     \caption{\href{http://liscustodio.github.io/C_MC33/figure8.html}{Top: Problem with Chernyaev's triangulation table. The figure shows the  zero level-set of a $5\times5\times5$ randomly generated piecewise-trilinear scalar field $G$ (left) and two meshes extracted using the \mc{} (center) and \cmc{} (right) algorithms. The isolated voxel patches, shown in green and yellow, represent the two voxels at the center of $G$. The face shared by two consecutive tunnels, shown in purple, generates non-manifold edges. After one subdivision at the critical point of this case, the problem no longer occurs, and a valid manifold surface is obtained (right). Bottom: Triangulation for tunnels used by Lewiner \emph{et al.}~\cite{Lewiner:2003}. Each has a face that is coplanar to the voxel faces, which may lead to non-manifold surfaces\cite{lisOnline2013}.}}
   \label{fig:non_manifold}
 \end{figure}
 
@@ -283,7 +283,7 @@ The problem is that Equation \eqref{eq:alternative} may fail to find an appropri
      \centering
     \includegraphics[width=0.95\linewidth]{chapter4/figures/height-plane-problem.png}
      \caption{\href{http://liscustodio.github.io/C_MC33/figure9.html}{\label{interior_test}Case 6 configuration.
-     Left: the cut plane height $t = t_{\mathrm{alt}} > 0$ used in the \mc{} \emph{implementation}. Middle: the test proposed in the \mc{} \emph{algorithm} provides a different $t = t_{\mathrm{max}}> 0$, which reaches the tunnel. Right: the former test decides that the isosurface is homeomorphic to two discs whereas the correct answer is a tunnel.} \cite{lisOnline2013}}
+     Left: the cut plane height $t = t_{\mathrm{alt}} > 0$ used in the \mc{} \emph{implementation}. Middle: the test proposed in the \mc{} \emph{algorithm} provides a different $t = t_{\mathrm{max}}> 0$, which reaches the tunnel. Right: the former test decides that the isosurface is homeomorphic to two discs whereas the correct answer is a tunnel\cite{lisOnline2013}.}}
 \end{figure}
 
 \subsection{Issue IV -- Case 10}
@@ -324,7 +324,7 @@ This implies that both saddle points $x_c(t_1)$ and $x_c(t_2)$ must lie inside t
 %
 We have implemented and tested this solution on \cmc{} using over 10000 randomly generated instances of case 13.5.
 
-\begin{algorithm}
+\begin{algorithm}[b]
 \begin{codebox}
 \Procname{\proc{Case 13.5}($a, b, c$)}
 \zi $\rhd$ Let $t_1$ and $t_2$ be the roots of $a t^2 + b t + c$ (Equation \eqref{eq:disambiguation})
