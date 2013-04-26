@@ -346,17 +346,14 @@ their relative strengths and weaknesses, and discuss how to robustly check
 their values.  Figure~\ref{fig:pipeline} shows our pipeline to assess
 topological correctness and also the chapter organization.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=1.0\linewidth,keepaspectratio=true]{chapter3/figures/pipeline.pdf}
 \caption{Overview of our topology verification pipeline. First step,
   we generate a random trilinear field and extract a random isosurface
   using the implementation under verification. We then compute the
   \emph{expected} topological invariants from the trilinear field and
-  compare them against the invariants obtained from the mesh. We
-  provide two simple ways to compute topological invariants from a
-  trilinear field based on digital topology (DT) or stratified Morse
-  theory (SMT). }
+  compare them against the invariants obtained from the mesh. }
 \label{fig:pipeline}
 \end{center}
 \end{figure}
@@ -1032,9 +1029,23 @@ Algorithm~\ref{alg:manufactured-solutions-digital-surfaces} shows the
 verification pipeline using the MI algorithm, and
 Figure~\ref{fig:trilinear-field} depicts the refinement process. Once
 again a random scalar field, with potentially many ambiguous cubes, is
-initially generated in the vertices of a grid $\mathcal{G}$.  The
-algorithm illustrated in
-Algorithm~\ref{alg:manufactured-solutions-digital-surfaces} is applied to
+initially generated in the vertices of a grid $\mathcal{G}$.  
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.7\linewidth,keepaspectratio=true]
+{chapter3/figures/trilinear-field.pdf}
+\caption{\label{fig:trilinear-field}Our manufactured solution is given by $t(x) = \alpha$. $\mathcal{G}$ is
+depicted in solid lines while $\tilde{\mathcal{G}}$ is shown in dashed lines.
+$\tilde{\mathcal{G}}$ is a uniform subdivision of $\mathcal{G}$. The trilinear
+surfaces $t_i$ are defined for each cube
+$c_i \in \mathcal{G}$ and resampled in $c'_j \in \tilde{\mathcal{G}}$.
+The cubes in the center of $\mathcal{G}$ have four maxima each
+(left) and thus induce complicated topology. The final
+isosurface may have several tunnels and/or connected
+components even for coarse $\mathcal{G}$ (right). }
+\end{figure}
+The
+algorithm illustrated in Algorithm~\ref{alg:manufactured-solutions-digital-surfaces} is applied to
 refine $\mathcal{G}$ so as to generate a new grid
 $\tilde{\mathcal{G}}$ which does not have ambiguous cells. If the
 maximum number of refinement is reached and ambiguous cells still
@@ -1078,22 +1089,6 @@ which case $\mathcal{G}$  is provided as a counterexample, or
 succeeds otherwise.}
 \label{alg:manufactured-solutions-digital-surfaces}
 \end{algorithm}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=1.0\linewidth,keepaspectratio=true]
-{chapter3/figures/trilinear-field.pdf}
-\caption{Our manufactured solution is given by $t(x) = \alpha$. $\mathcal{G}$ is
-depicted in solid lines while $\tilde{\mathcal{G}}$ is shown in dashed lines.
-$\tilde{\mathcal{G}}$ is a uniform subdivision of $\mathcal{G}$. The trilinear
-surfaces $t_i$ are defined for each cube
-$c_i \in \mathcal{G}$ and resampled in $c'_j \in \tilde{\mathcal{G}}$.
-The cubes in the center of $\mathcal{G}$ have four maxima each
-(left) and thus induce complicated topology. The final
-isosurface may have several tunnels and/or connected
-components even for coarse $\mathcal{G}$ (right). }
-\label{fig:trilinear-field}
-\end{figure}
 
 Scalars are assigned to the new vertices of $\tilde{\mathcal{G}}$ (the ones not in $\mathcal{G}$) by trilinearly 
 interpolating
@@ -1228,6 +1223,53 @@ did find that there were bugs in some of the implementations.
 \subsection{Topology consistency}
 \label{sec:consistency}
 
+\begin{table}[b]
+\caption{Rate of invariant mismatches using the PL manifold property, digital
+surfaces, and stratified Morse theory for $1000$ randomly generated
+scalar fields (the lower the rate the better).
+The invariants $\beta_1$ and $\beta_2$ are computed only if the output mesh is a
+2-manifold without boundary. \emph{We run correctness tests in all algorithms for
+completeness and to test tightness of the theory: algorithms that are not
+topology-preserving should fail these tests}. 
+The high number of \deliso, \snapmc, and \matlab\ mismatches are explained in
+Section \ref{sec:consistency}. 
+$^1$ indicates zero snap parameter and $^2$ indicates snap value of
+0.3.}
+\begin{center}
+\begin{tabular}{l@{}cccccc}
+   & Consistency (\%) &\multicolumn{5}{c}{Correctness (\%)} \\
+\hline
+    &\multirow{2}{*}{Disk} &\multicolumn{4}{c}{Digital Surfaces} &
+SMT\\
+              &        &$\beta_0$ & $\beta_1 $ & $\beta_2 $ & $\chi$ & $\chi$ \\
+\hline
+\afront       & ~$0.0$  & $35.9$  & $22.8$ & $35.9$ & $47.5$ & ~$25.5$
+\\
+\Matlab       & $19.7$  & $32.2$  & $18.9$ & $20.5$ & $49.3$ & ~$70.3$
+\\
+\vtk          & ~$0.0$  & $27.6$  & $23.2$ & $27.6$ & $43.5$ & ~$70.7$
+\\
+\hline
+\macet        & ~$0.0$  & $54.3$  & $20.9$ & $54.3$ & $64.0$ & $100.0$
+\\
+\snapmc$^1$   & ~$0.0$  & $45.0$  & $25.4$ & $45.0$ & $57.3$ & ~$72.0$
+\\
+\snapmc$^2$   & $53.7$  & $41.6$  & $17.3$ & $23.1$ & $87.1$ & ~$74.0$
+\\
+\hline
+\mclewiner    & ~$0.0$  & ~$2.4 $ & ~$1.1$ & ~$2.4$ & ~$3.4$ & ~~$5.4$ 
+\\
+\deliso       & $19.1$  & $24.4$  & ~$0.1$ & $20.0$ & $37.2$ & ~$33.2$ 
+\\
+\mcsimpleflow & ~$0.0$  & ~$0.0$  & ~$0.0$ & ~$0.0$ & ~$0.0$ & ~~$0.0$ 
+\\
+\hline
+\end{tabular}
+\label{tbl:verification-ds-stm}
+\end{center}
+\end{table}
+
+
 All implementations were subject to the consistency test 
 (Section \ref{sec:consistency-verification}), resulting in the outputs
 reported in the first column of 
@@ -1235,9 +1277,23 @@ Table~\ref{tbl:verification-ds-stm}. We observed mismatches for
 \deliso, \snapmc\ (with non-zero snap value), and \matlab\ 
 implementations. Now, we detail these results.
 
-% Although the focus of the paper is on topology correctness, we present the
-% results for topology consistency for completeness.
-\subsubsection{\deliso}
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.33\linewidth,keepaspectratio=true]
+{chapter3/figures/deliso-case-00.pdf}
+\includegraphics[width=0.3\linewidth,keepaspectratio=true]
+{chapter3/figures/deliso-case-02.pdf}
+\includegraphics[width=0.29\linewidth,keepaspectratio=true]
+{chapter3/figures/deliso-case-03.pdf}
+\caption{\deliso\ mismatch example. From left to right: holes in $C^0$
+  regions; single missing triangle in a smooth region; duplicated
+  vertex (the mesh around the duplicated vertex is shown). These
+  behavior induce topology mismatches between the generated mesh and
+  the expected topology.}
+\label{fig:pproblem-deliso}
+\end{figure}
+
+\paragraph*{\deliso}
 \label{sec:consistency:deliso}
 We analyzed $50$ cases where \deliso's output mismatched the ground
 truth produced by MMS, and we found that: 1) $28$ cases had incorrect
@@ -1281,7 +1337,30 @@ Since non-manifold meshes are not desirable in many applications, the authors
 suggest a post-processing for fixing these topological issues, although no implementation
 or algorithm for this post-processing is provided.
 
-\subsubsection{\matlab}
+\begin{figure}[t]
+\centering
+\subfigure[\snapmc\ (0.3)]{
+\label{fig:inconsistencies:snapmc}
+\includegraphics[width=0.20\linewidth,keepaspectratio=true]
+{chapter3/figures/snapmc_00.pdf}} ~~~~~~~~
+\subfigure[\matlab]{
+\label{fig:inconsistencies:matlab}
+\includegraphics[width=0.20\linewidth,keepaspectratio=true]
+{chapter3/figures/matlab_00.pdf}} ~~~~~~~~
+\subfigure[\mcsimpleflow]{
+\label{fig:problem-mcsimpleflow}
+\includegraphics[width=0.37\linewidth,keepaspectratio=true]
+{chapter3/figures/our_mc.pdf}}
+\caption{Mismatches in topology and geometry. (a) \snapmc\ generates
+  non-manifold surfaces due to the snap process. (b)
+  \matlab\ generates some edges (red) that are shared by more than two
+  face. (c) \mcsimpleflow before (left) and after (right) fixing a bug
+  that causes the code to produce the expected topology, but the wrong
+  geometry.}
+\label{fig:inconsistencies}
+\end{figure}
+
+\paragraph*{\matlab}
 
 \matlab\ documentation does not specify the properties of the
 implemented isosurface extraction technique. Consequently, it becomes
@@ -1350,6 +1429,20 @@ not discarded.
 Notice that no significant differences can be observed, implying that
 our rejection-sampling method does not bias the case frequencies.
 
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.9\linewidth,keepaspectratio=true]
+{chapter3/figures/random-sampling.pdf}
+\caption{The horizontal axis shows the case and subcase numbers for
+  each of the 31 Marching Cubes configurations. 
+  The dark bars show the percentage of
+  random fields that fit a particular configuration. The light bars
+  show the percentage of random fields that fit a particular
+  configuration \emph{and} do not violate the assumptions of our
+  manufactured solution. }
+\label{fig:cubes-entries}
+\end{figure}
+
 Some configurations, such as 13 or
 0, have low incidence rates and therefore might not be sufficiently stressed during verification. While the
 trivial case 0 does not pose a challenge for
@@ -1359,21 +1452,6 @@ Nielson03onmarching}. Fortunately, we can build random fields in a convenient
 fashion by forcing a few cubes to represent a
 particular instance of the table, such as case 13, which produces 
 more focused tests.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=1.0\linewidth,keepaspectratio=true]
-{chapter3/figures/random-sampling.pdf}
-\caption{The horizontal axis shows the case and subcase numbers for
-  each of the 31 Marching Cubes configurations described by Lopes and
-  Brodlie~\cite{lopes:tvcg:2003}. The dark bars show the percentage of
-  random fields that fit a particular configuration. The light bars
-  show the percentage of random fields which fit a particular
-  configuration \emph{and} do not violate the assumptions of our
-  manufactured solution.  Our manufactured solution hits all possible
-  cube configurations.}
-\label{fig:cubes-entries}
-\end{figure}
 
 
 % \begin{figure}
@@ -1387,6 +1465,22 @@ more focused tests.
 % \label{fig:mc33-problem}
 % \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.3\linewidth,keepaspectratio=true]
+{chapter3/figures/mc33-case-02.pdf} ~~~~
+\includegraphics[width=0.3\linewidth,keepaspectratio=true]
+{chapter3/figures/mc33-case-01.pdf} ~~~~
+\includegraphics[width=0.3\linewidth,keepaspectratio=true]
+{chapter3/figures/mc33-case-00.pdf} 
+\caption{\mclewiner\ mismatch example. From left to right: problem in
+  the case 4.1.2, 6.1.2, and 13.5.2 of marching cube table (all are
+  ambiguous). Each group of three pictures shows the obtained,
+  expected, and implicit surfaces. Our verification procedure can
+  detect the topological differences between the obtained and expected
+  topologies, even for ambiguous cases.}
+\label{fig:problem-mclewiner}
+\end{figure}
 
 Table \ref{tbl:verification-ds-stm} shows statistics for all 
 implementations. For 
@@ -1435,72 +1529,12 @@ because cubes of different sizes are glued together.
 convergence is presented in the supplementary material
 \cite{scheidegger:techreport:2010}.
 
-% We finish this section remebering that all three codes \mclewiner, \deliso\
-% and \mcsimpleflow\ are still under development and constantly improving. 
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.33\linewidth,keepaspectratio=true]
-{chapter3/figures/deliso-case-00.pdf}
-\includegraphics[width=0.3\linewidth,keepaspectratio=true]
-{chapter3/figures/deliso-case-02.pdf}
-\includegraphics[width=0.29\linewidth,keepaspectratio=true]
-{chapter3/figures/deliso-case-03.pdf}
-\caption{\deliso\ mismatch example. From left to right: holes in $C^0$
-  regions; single missing triangle in a smooth region; duplicated
-  vertex (the mesh around the duplicated vertex is shown). These
-  behavior induce topology mismatches between the generated mesh and
-  the expected topology.}
-\label{fig:pproblem-deliso}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.3\linewidth,keepaspectratio=true]
-{chapter3/figures/mc33-case-02.pdf} ~~~~
-\includegraphics[width=0.3\linewidth,keepaspectratio=true]
-{chapter3/figures/mc33-case-01.pdf} ~~~~
-\includegraphics[width=0.3\linewidth,keepaspectratio=true]
-{chapter3/figures/mc33-case-00.pdf} 
-\caption{\mclewiner\ mismatch example. From left to right: problem in
-  the case 4.1.2, 6.1.2, and 13.5.2 of marching cube table (all are
-  ambiguous). Each group of three pictures shows the obtained,
-  expected, and implicit surfaces. Our verification procedure can
-  detect the topological differences between the obtained and expected
-  topologies, even for ambiguous cases.}
-\label{fig:problem-mclewiner}
-\end{figure}
-
-
-\begin{figure}[t]
-\centering
-\subfigure[\snapmc\ (0.3)]{
-\label{fig:inconsistencies:snapmc}
-\includegraphics[width=0.20\linewidth,keepaspectratio=true]
-{chapter3/figures/snapmc_00.pdf}} ~~~~~~~~
-\subfigure[\matlab]{
-\label{fig:inconsistencies:matlab}
-\includegraphics[width=0.20\linewidth,keepaspectratio=true]
-{chapter3/figures/matlab_00.pdf}} ~~~~~~~~
-\subfigure[\mcsimpleflow]{
-\label{fig:problem-mcsimpleflow}
-\includegraphics[width=0.37\linewidth,keepaspectratio=true]
-{chapter3/figures/our_mc.pdf}}
-\caption{Mismatches in topology and geometry. (a) \snapmc\ generates
-  non-manifold surfaces due to the snap process. (b)
-  \matlab\ generates some edges (red) that are shared by more than two
-  face. (c) \mcsimpleflow before (left) and after (right) fixing a bug
-  that causes the code to produce the expected topology, but the wrong
-  geometry.}
-\label{fig:inconsistencies}
-\end{figure}
-
 
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
 \subsection{Quality of manufactured solutions}
-In any use of MMS, one very important question is that of the quality
+Whenever one uses MMS, one very important question is that of the quality
 of the manufactured solutions, since it reflects directly on the
 quality of the verification process. Using random solutions, for which
 we compute the necessary invariants, naturally seems to yield good
@@ -1516,53 +1550,6 @@ verification tools during development. We decided against this since
 different implementations might employ different strategies to handle
 degeneracies and our goal was to keep the presentation sufficiently
 uniform.
-
-\begin{table}[b]
-\caption{Rate of invariant mismatches using the PL manifold property, digital
-surfaces, and stratified Morse theory for $1000$ randomly generated
-scalar fields (the lower the rate the better).
-The invariants $\beta_1$ and $\beta_2$ are computed only if the output mesh is a
-2-manifold without boundary. \emph{We run correctness tests in all algorithms for
-completeness and to test tightness of the theory: algorithms that are not
-topology-preserving should fail these tests}. 
-The high number of \deliso, \snapmc, and \matlab\ mismatches are explained in
-Section \ref{sec:consistency}. 
-$^1$ indicates zero snap parameter and $^2$ indicates snap value of
-0.3.}
-\begin{center}
-\begin{tabular}{l@{}cccccc}
-   & Consistency (\%) &\multicolumn{5}{c}{Correctness (\%)} \\
-\hline
-    &\multirow{2}{*}{Disk} &\multicolumn{4}{c}{Digital Surfaces} &
-SMT\\
-              &        &$\beta_0$ & $\beta_1 $ & $\beta_2 $ & $\chi$ & $\chi$ \\
-\hline
-\afront       & ~$0.0$  & $35.9$  & $22.8$ & $35.9$ & $47.5$ & ~$25.5$
-\\
-\Matlab       & $19.7$  & $32.2$  & $18.9$ & $20.5$ & $49.3$ & ~$70.3$
-\\
-\vtk          & ~$0.0$  & $27.6$  & $23.2$ & $27.6$ & $43.5$ & ~$70.7$
-\\
-\hline
-\macet        & ~$0.0$  & $54.3$  & $20.9$ & $54.3$ & $64.0$ & $100.0$
-\\
-\snapmc$^1$   & ~$0.0$  & $45.0$  & $25.4$ & $45.0$ & $57.3$ & ~$72.0$
-\\
-\snapmc$^2$   & $53.7$  & $41.6$  & $17.3$ & $23.1$ & $87.1$ & ~$74.0$
-\\
-\hline
-\mclewiner    & ~$0.0$  & ~$2.4 $ & ~$1.1$ & ~$2.4$ & ~$3.4$ & ~~$5.4$ 
-\\
-\deliso       & $19.1$  & $24.4$  & ~$0.1$ & $20.0$ & $37.2$ & ~$33.2$ 
-\\
-\mcsimpleflow & ~$0.0$  & ~$0.0$  & ~$0.0$ & ~$0.0$ & ~$0.0$ & ~~$0.0$ 
-\\
-\hline
-\end{tabular}
-\label{tbl:verification-ds-stm}
-\end{center}
-\end{table}
-
 
 \subsection{Topology and Geometry}
 This work extends the work by Etiene \emph{et al.}~\cite{etiene:tvcg:2009} toward
