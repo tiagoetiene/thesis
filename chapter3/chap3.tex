@@ -780,7 +780,7 @@ $T_\varepsilon(p)$ in the strata containing $p$ and the \emph{lower
 $T_\varepsilon(p)$ with scalar values less than that in $p$ (see Figure \ref{fig:chap4:smt}).
 \begin{figure}[b]
 \centering
-\includegraphics[width=0.3\linewidth]{chapter3/figures/ilustration.png}
+\includegraphics[width=0.15\linewidth]{chapter3/figures/ilustration.png}
 \caption{\label{fig:chap4:smt} Example of tangential and normal link.}
 \end{figure}
 Similarly we can define the \emph{upper tangential} link $T_L^+(p)$ as
@@ -985,7 +985,7 @@ to avoid numerical instabilities, we also regenerate the scalar field
 locally if any internal critical point lies too close to the border of
 the domain (that is, to an edge or to a face of the cube).
 
-\begin{algorithm}[t]
+\begin{algorithm}[b]
 \begin{codebox}
 \Procname{$\proc{MMS-SMT}(\mathcal{G})$}
 \li \Comment Let the input $\mathcal{G}$ be $n \times n \times n$ rectilinear grid
@@ -1002,12 +1002,11 @@ the domain (that is, to an edge or to a face of the cube).
 \li Compare $(\chi^v)_i$ and $(\chi^k)_i$
       \End
 \end{codebox}
-\caption{Overview of the method of manufactured solutions (MMS) using
+\caption{\label{alg:manufactured-solutions-smt}Overview of the method of manufactured solutions (MMS) using
 stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
 \ref{ref:chis}. The method either fails to match the expected topology, in
 which case $\mathcal{G}$ is provided as a counterexample, or
 succeeds otherwise.}
-\label{alg:manufactured-solutions-smt}
 \end{algorithm}
 
 The third step computes the Euler characteristic of a set of
