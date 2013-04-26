@@ -95,6 +95,11 @@
 %\optionalfront{Notation and Symbols}{\input{notation.tex}}
 \preface{acknowledge}{Acknowledgments}
 \maintext       % Start normal page numbering. Parts and chapters follow.
+
+\newcommand{\tmpsection}[1]{}
+\let\tmpsection=\section
+\renewcommand{\section}[1]{\tmpsection{\underline{#1}}}
+
 \include{chapter1/chap1}
 \include{chapter2/chap2}
 \include{chapter3/chap3}
