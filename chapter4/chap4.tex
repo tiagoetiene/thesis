@@ -240,18 +240,18 @@ Nevertheless, contrary to what is expected, the polynomial $F(t)$ (Equation \eqr
 The source of the problem can be tracked to Equations \ref{eq:condition1} and \ref{eq:condition2} and the assumption that the denominator of $f(x_c)$ (Equation \eqref{eq:saddle_value}) is positive. 
 These assumptions can easily be verified to be true for case 4, shown in Figure \ref{interior_ambiguity}. However, for case 13, the saddle points at the top and bottom planes have opposite signs, which contradicts Equations \eqref{eq:condition1} and \eqref{eq:condition2}. In addition, the denominator $A+C-B-D$ of $f(x_c)$ changes its sign at the asymptote of $f(x_c)$, contrary to the assumption that it is always positive.
 %
-The consequence of incorrectly tracking sign changes is that the three rules used for resolving internal ambiguity will fail for some scalar fields. As an example, Figure \ref{fig:case13counter_example} shows a case 13.5.2 that will mistakenly be taken as case 13.5.1 because  $a > 0$ characterizes multiples surface sheets instead of a tunnel (see also \ref{app:counter-example}).
+The consequence of incorrectly tracking sign changes is that the three rules used for resolving internal ambiguity will fail for some scalar fields. As an example, Figure \ref{fig:case13counter_example} shows a case 13.5.2 that will mistakenly be taken as case 13.5.1 because  $a > 0$ characterizes multiples surface sheets instead of a tunnel (see also Appendix \ref{app:counter-example}).
 %
 The problem is not only related to the misclassification of case 13.5.2 as 13.5.1. We have also devised examples in which case 13.5.1 is mistakenly taken as case 13.5.2 because the three criteria shown in Section \ref{sec:preliminaries} hold. Thus, Chernyaev's interior ambiguity test does not always yield topologically correct isosurfaces.
 
-\subsubsection{Tunnel orientation}
+\paragraph*{Tunnel orientation}
 
 \begin{figure}[b]
      \centering
      \includegraphics[width=0.6\linewidth]{chapter4/figures/tunnel.png}
-     \caption{Two possible tunnel orientations for case 13.5.2. The difference between them is the location of the positive vertex.}
+     \caption{\label{fig:twotunnel}Two possible tunnel orientations for case 13.5.2. The difference between them is the location of the positive vertex.}
 \end{figure}
-A second minor issue regarding case 13.5.2 is the tunnel orientation of configuration 13.5.2. Once case 13.5.2 is determined, one needs to properly orient the tunnel inside the voxel. The inline figures show the two possibilities. Both vertices at the voxel diagonal are separated from all other voxel vertices at the voxel faces (note that this is not the case for other vertices). Nevertheless, either the positive or the negative vertex of the cube diagonal will connect with vertices with the same sign through the voxel's interior. This will determine which vertex is isolated and which is facing the tunnel. This problem with the tunnel orientation is not dealt with or mentioned in either Chernyaev or Lewiner \emph{et al.}'s work. Nevertheless, it was briefly mentioned in Etiene \emph{et al.} \cite{Etiene:2012:TVI:2197070.2197097}, but no solution to the problem was provided. As the authors observed, the isosurface topology changes if the tunnel orientation is incorrect; thus, it must be oriented correctly. The section \ref{sec:TunnelOrientation} provides a solution for this issue.
+A second minor issue regarding case 13.5.2 is the tunnel orientation of configuration 13.5.2. Once case 13.5.2 is determined, one needs to properly orient the tunnel inside the voxel. Figure \ref{fig:twotunnel} shows the two possibilities. Both vertices at the voxel diagonal are separated from all other voxel vertices at the voxel faces (note that this is not the case for other vertices). Nevertheless, either the positive or the negative vertex of the cube diagonal will connect with vertices with the same sign through the voxel's interior. This will determine which vertex is isolated and which is facing the tunnel. This problem with the tunnel orientation is not dealt with or mentioned in either Chernyaev or Lewiner \emph{et al.}'s work. Nevertheless, it was brieflÄy mentioned in Etiene \emph{et al.} \cite{Etiene:2012:TVI:2197070.2197097}, but no solution to the problem was provided. As the authors observed, the isosurface topology changes if the tunnel orientation is incorrect; thus, it must be oriented correctly. The section \ref{sec:TunnelOrientation} provides a solution for this issue.
 
 \subsection{Issue II -- Non-manifold surfaces}
 \label{sec:non-manifold-surfaces}
@@ -336,13 +336,13 @@ We have implemented and tested this solution on \cmc{} using over 10000 randomly
 \caption{\label{alg:new_case-13}A simple disambiguation procedure for Case 13.5}
 \end{algorithm}
 
-\subsubsection{Issue II -- Tunnel orientation}
+\paragraph*{Issue II -- Tunnel orientation}
 \label{sec:TunnelOrientation}
 
 \begin{figure}[b]
      \centering
-     \includegraphics[width=0.5\linewidth]{chapter4/figures/case13/solution.png}
-     \caption{Solution to the orientation problem. The black dots represent regions with positive scalar values.The cutting-plane location is at $(t_1 + t_2) / 2$. The sign of $f((t_1+t_2)/2)$ determines the tunnel orientation. }
+     \includegraphics[width=0.4\linewidth]{chapter4/figures/case13/solution.png}
+     \caption{Solution to the orientation problem. The black dots represent regions with positive scalar values. The cutting-plane location is at $(t_1 + t_2) / 2$. The sign of $f((t_1+t_2)/2)$ determines the tunnel orientation. }
      \label{fig:solution-case13}
 \end{figure}
 
@@ -351,9 +351,11 @@ To find the correct tunnel orientation one can use the sign of any point between
 
 \subsection{Issue II -- Non-manifold surfaces}
 
-A possible solution to this problem involves post-pro\-cessing the mesh to remove non-manifold features. Although  many works in the literature proposed methods for fixing meshes (see \cite{springerlink:10.1007/s11390-009-9206-7} for an excellent survey), these are mainly focused on retrieving a valid manifold mesh. Topologically correct algorithms, on the other hand, require that the topology of the trilinear interpolant  be preserved. In addition, mesh repairing techniques may mask implementation issues by fixing them, which complicates the verification process. 
+A possible solution to this problem involves post-pro\-cessing the mesh to remove non-manifold features. Although  many works in the literature proposed methods for fixing meshes (see Ju \cite{springerlink:10.1007/s11390-009-9206-7} for an excellent survey), these are mainly focused on retrieving a valid manifold mesh. Topologically correct algorithms, on the other hand, require that the topology of the trilinear interpolant  be preserved. In addition, mesh repairing techniques may mask implementation issues by fixing them, which complicates the verification process. 
 
-We use an alternative approach that does not require any changes in the \mc{} triangulation table. An interesting fact is that this problem has a low probability of being generated at random and an even lower probability of occurring in real-world datasets. For example, as shown in Figure \ref{fig:non-manifold-real-data} for the Skull dataset this problem appeared six times in total for 50 distinct isosurfaces. In our tests, it occurred only once in 10000 randomly generated $5\times5\times5$ scalar fields. Thus, instead of implementing the approach of Lopes and Brodlie's, we adopt a different solution that takes advantage of the fact that this is a rare event.
+We use an alternative approach that does not require any changes in the \mc{} triangulation table. An interesting fact is that this problem has a low probability of being generated at random and an even lower probability of occurring in real-world datasets. 
+%For example, as shown in Figure \ref{fig:non-manifold-real-data} for the Skull dataset this problem appeared six times in total for 50 distinct isosurfaces. 
+In our tests, it occurred only once in 10000 randomly generated $5\times5\times5$ scalar fields. Thus, instead of implementing the approach of Lopes and Brodlie's, we adopt a different solution that takes advantage of the fact that this is a rare event.
 
 Non-manifold surfaces are created when two adjacent voxels that share an ambiguous face have tunnels in the voxel interior. By splitting both voxels at the critical point of that face, the face ambiguity is  eliminated \cite{10.1109/TVCG.2009.10}.
 To simplify the algorithm, we split not only the voxels sharing the ambiguous face but all faces in the volume slice that contains that face (see Figure \ref{fig:grid-refinement}). 
@@ -407,7 +409,7 @@ Algorithm \ref{chernyaev_case10} illustrates the required steps for disambiguati
 %\end{algorithm}
 
 
-\begin{algorithm}
+\begin{algorithm}[t]
 \caption{\href{http://liscustodio.github.io/C_MC33/alg2.html}{Algorithm for case 10} \cite{lisOnline2013}}
 \label{chernyaev_case10}
 \includegraphics[width=0.7\linewidth]{chapter4/figures/algorithm.pdf}
@@ -446,7 +448,8 @@ We emphasize that the ``importance'' of the differences in the number of connect
 The second problem is due to the extraction of non-manifold features. The issue explained in Section \ref{sec:non-manifold-surfaces} also pertains to real-world datasets.  Figure \ref{fig:non-manifold-real-data} shows an example of a medical dataset in which the output of \mc{} implementation is a non-manifold surface. We have observed the same problem for certain isovalues of other commonly used datasets, such as the backpack and bonsai datasets. Nevertheless, in our experiments, this problem occurred  rarely in the datasets tested:  on average, one case of non-manifold edges was found per $10^7$ evaluated voxels.
 
 \begin{figure}[b]
-       \includegraphics[width=1\linewidth]{chapter4/figures/aneurism_cc_vtk.pdf}
+	\centering
+       \includegraphics[width=0.7\linewidth]{chapter4/figures/aneurism_cc_vtk.pdf}
        \caption{\label{fig:cc} The left plot shows the difference between the number of connected components extracted by VTK implementation of Marching Cubes and the number of connected components extracted by our \cmc{} implementation. The right plot shows the difference in the number of connected components but between the \mc{} and  \cmc{} implementations. Negative values indicate that the \cmc{} implementation generated more connected components.
 Clearly, VTK generates more components that \cmc{}. \mc{} generates more components for most of the isovalues. }
 \end{figure}
@@ -457,7 +460,7 @@ Clearly, VTK generates more components that \cmc{}. \mc{} generates more compone
 In this chapter, we discussed in detail three issues with  the Marching Cubes 33 algorithm and one non-trivial issue with its implementation. 
 We presented solutions for the issues raised and implement them into \cmc, a topologically correct version of \mc. In addition, we made our results reproducible so that the reader can easily study, explore, and use the results presented here for his or her own purpose. 
 
-\begin{figure}[b]
+\begin{figure}[t]
      \centering
      \includegraphics[width=0.9\linewidth]{chapter4/figures/skull.png}
      \caption{Skull dataset. The image shows a progressive zoom-in into the dataset in order to reveal non-manifold edges. The face containing the non-manifold edges is highlighted  in purple. The rightmost image is an isolated version of the case shown in the dataset, with a slightly different geometry for the sake of clarity. A non-manifold edge appeared six times in total for 50 distinct isosurfaces.}
