@@ -39,7 +39,7 @@ more effective communication between the two communities, and we conclude in Sec
 
 \begin{table}
 \caption{\label{table:progress}Advances in flow visualization. This table is \emph{not} meant to be comprehensive.}{}\centering
-\begin{tabular}{c c r p{8.5cm}}
+\begin{tabular}{c c r p{7.25cm}}
 \toprule
 Class &  Subclass & Technique & Reference\\
 \hline
@@ -455,19 +455,6 @@ visualization tools. Paraview is one of the tools that no longer uses the rainbo
 default option since the publication of  Borland \emph{et al.}'s ``Rainbow Color Map (Still) Considered 
 Harmful''\cite{paraview}. The author even suggest that a better name for it would be ``misleading color map''.
 %
-
-
-\begin{table}[t]
-\caption{Color maps in the AIAA journal} \label{table:aiaa_colormap}{}\centering
-\begin{tabular}{lcccc}
-				&  	Rainbow color map	 & Gray scale map & Other\\ \hline
-	2010		&       68.63\%		   	 &        13.73\% & 17.64\%    		          \\
-\gc	2011		& 		64.7\%		 	 &        15.69\%& 19.61\%      		     	  \\
-	2012		&       79.03\% 	     &        8.65\% & 12.32\%        		      \\
-\end{tabular}
-\end{table}
-
-
 In light of the many pitfalls of the rainbow color map, the visualization community has, in the past few 
 years, been moving away from it. 
 %
@@ -479,6 +466,16 @@ Computer Graphics} in 2011. Motivated by this experiment, we reviewed all public
 %
 Nevertheless, we tried the methodology explained above for a flow simulation dataset. 
 The left image in Figure \ref{fig:flowdata} shows the results of a flow simulation. Note how some regions are over emphasized (shown in red) while details are blurred (shown in green). The problems with the rainbow color map can be avoided by simply switching to another color map, such as the gray scale color map shown in the middle image in Figure \ref{fig:flowdata}. The image to the right shows the decolorized rainbow color map: although some details are easier to see, the result is still very different from the gray scale color map.
+
+\begin{table}[b]
+\caption{Color maps in the AIAA journal} \label{table:aiaa_colormap}{}\centering
+\begin{tabular}{lcccc}
+				&  	Rainbow color map	 & Gray scale map & Other\\ \hline
+	2010		&       68.63\%		   	 &        13.73\% & 17.64\%    		          \\
+\gc	2011		& 		64.7\%		 	 &        15.69\%& 19.61\%      		     	  \\
+	2012		&       79.03\% 	     &        8.65\% & 12.32\%        		      \\
+\end{tabular}
+\end{table}
 
 The visualization community has also investigated what should constitute a ``good'' color map. Research on the topic of color selection can be found in the work by Treinish \emph{et al.} \cite{treinishshould}, Moreland\cite{paraview}, Kindlmann \emph{et al.}\cite{GLK:facelum02}, and others\cite{macdonald1999using,Tominski:2008bt}. The AIAA community can benefit from a set of standard color maps suitable for visualization of typical simulation data such as pressure fields, angle fields, {\em etc.}
 
