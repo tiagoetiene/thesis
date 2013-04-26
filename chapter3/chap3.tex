@@ -1392,7 +1392,7 @@ meshes with the same topology of the trilinear interpolant. Our tests
 consisted of one thousand random fields generated in a rectilinear $5
 \times 5 \times 5$ grid $\mathcal{G}$.  The verification test using
 Digital Surfaces demanded a compact, orientable, 2-manifold without
-boundary, so we set scalars equal $1$ for grid vertices in the
+boundary, so we set scalars to one for grid vertices in the
 boundary of the grid.  As stratified Morse theory supports surfaces
 with boundary, no special treatment was employed in the boundary of
 $\mathcal{G}$. We decided to run these tests using all algorithms for
@@ -1403,8 +1403,6 @@ this test, we were able to find another code mistake in \macet\ that
 prevented it from terminating safely when the SMT procedure was applied. 
 For all non topology-preserving algorithms, there was a high
 number of mismatches as expected.
-%(first three rows of Table
-%\ref{tbl:verification-ds-stm}).
 
 One might think that the algorithms described in Algorithms
 \ref{alg:manufactured-solutions-smt} and
@@ -1706,7 +1704,7 @@ since the trilinear interpolation from samples of $d$ is quite
 different from the $d$.
 \begin{figure}[b]
 \centering
-\includegraphics[width=0.5\linewidth]{chapter3/figures/distance-field.pdf}
+\includegraphics[width=0.4\linewidth]{chapter3/figures/distance-field.pdf}
 \caption{\label{fig:chap4:vtk} Isosurface extracted with VTK Marching Cubes}
 \end{figure}
 Figure \ref{fig:chap4:vtk} on the right shows a typical output produced by VTK
@@ -1737,7 +1735,7 @@ techniques.
 The theoretical guarantees supporting our manufactured solution
 rely on the trilinear interpolant.  
 If an interpolant other than trilinear is employed, then new results ensuring
-homeomorphism (Theorem 4.1) should be derived. 
+homeomorphism (Theorem \ref{thm:topological_equivalence_trilinear}) should be derived. 
 The basic infrastructure we have described here, however,
 should be appropriate as a starting point for the process.
 
