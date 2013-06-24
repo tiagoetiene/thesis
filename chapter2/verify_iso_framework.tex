@@ -9,10 +9,10 @@ technique requires us to write down the expected behavior of particular
 features of interest of the object (or model problem) 
 being generated. In our case, we are generating triangular
 approximations of smooth isosurfaces, and the features of interest are
-geometric surface convergence, convergence of normals, area and
+geometric surface convergence, convergence of normals, area, and
 curvature. 
 
-\begin{algorithm}[h]
+\begin{algorithm}[t]
 \begin{codebox}
 \Procname{$\proc{MMS}(f, u, h_1)$}
 \li \Comment Let $f$ be a scalar field containing the solution surface $S$
@@ -31,25 +31,31 @@ curvature.
 \caption{\label{alg:manufactured-solutions}Overview of the method of manufactured solutions (MMS).}
 \end{algorithm}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth,keepaspectratio=true]{chapter2/figures/mms.pdf}
+\caption{\label{fig:mms-flow}Workflow for the method of manufactured solution (Algorithm \ref{alg:manufactured-solutions}), clockwise from the top left.}
+\end{figure}
+
 To use MMS, we first accomplish a mathematical analysis of
 the expected convergence rate of the features (or characteristics) of interest, 
 known in the numerical literature as the \emph{formal order of accuracy} of the
 characteristic. This analysis is done for solutions of the problem that can
 be conveniently described and analyzed (these are the manufactured
 solutions). Then, the code is executed with progressively refined
-versions of the data that is used in the generation or sampling of 
+versions of the data that are used in the generation or sampling of 
 the manufactured solution. Finally, the empirical convergence rate is compared to the
 one predicted by the analysis.  When the convergence rates are
 comparable, we increase our confidence in the algorithm.
 %
 If the realizable behavior disagrees with the analysis, either (1) the analysis 
 does not correspond to the correct behavior of the algorithm, (2) the assumptions
-upon which the analysis was build were violated by the input data and hence
+upon which the analysis was build were violated by the input data and hence,
 the predicted behavior is not valid for the circumstances under investigation, or (3) 
 there are issues with the algorithm or with the implementation of the 
 algorithm (depending on access to source code
 and algorithmic details, one may not be able to distinguish between
-these two -- algorithmic or implementation -- and hence we in this work 
+these two -- algorithmic or implementation -- and hence, we in this work 
 always consider them together. Given sufficient information, the
 verification process can help further delineate between these
 two issues). Notice, however, that all three situations
@@ -82,12 +88,6 @@ Using this linearized version, we estimate $p$ from the slope of
 the line that best fits the points $(\log h,\log E)$ in a
 least-squares sense. We use this technique in Section~\ref{chap1:sec:res}
 when testing the isosurface codes.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.95\linewidth,keepaspectratio=true]{chapter2/figures/mms.pdf}
-\caption{\label{fig:mms-flow}Workflow for the method of manufactured solution (Algorithm \ref{alg:manufactured-solutions}), clockwise from the top left.}
-\end{figure}
 
 MMS critically depends on an analysis of the order of accuracy of
 expected solutions. Although this seems quite simple, the order of
@@ -219,8 +219,8 @@ $\vec{x_\lambda}$ is a point on the isosurface $\lambda$ of $\tilde{f}$.
 
 The algebraic distance between the exact isosurface $f(x,y,z) = \lambda$ and
 the linearly approximated isosurface can be measured by 
-$|f(\vec{x_\lambda}) - \lambda|$. From Equations~\ref{eq:taylor} and~\ref{eq:linear} one can 
-see that
+$|f(\vec{x_\lambda}) - \lambda|$. From Equations~\eqref{eq:taylor} and~\ref{eq:linear}, one can 
+see that:
 \begin{equation}
 \begin{array}{c}
 \displaystyle{|f(\vec{x_\lambda}) - \lambda| = |f_{ijk} + \nabla f_{ijk}\cdot \vec{\delta} + \frac{1}{2}\vec{\delta}^T H(\vec{\xi}) \vec{\delta} -\lambda| =}\\
@@ -254,7 +254,7 @@ locally written as a graph of a function in two-variables
 $g(x(u,v),y(u,v))=\lambda-f(x(u,v),y(u,v),z_k)$, as illustrated in
 Figure~\ref{fig:graphfunct}, where $x(u,v) = x_i+uh$ and
 $y(u,v)=y_j+vh$. This is acceptable because we have already assumed
-the isosurface to be regular. Still without losing generality we
+the isosurface to be regular. Still without losing generality, we
 write $g(x(0,0),y(0,0)) = 0$, that is, the isosurface
 contains the point $(x_i,y_j,z_k)$.
 \begin{figure}[b]
@@ -323,7 +323,7 @@ series, some terms cancel and the normal $\vec{n_{p_1p_2p_3}}$ becomes:
 \label{eq:normal_tri2}
 \end{equation}
 where $r = u_2v_3-u_3v_2$. 
-Comparing the exact normal vector $\vec{n_0}$ in Equation~\ref{eq:normal_exact} with
+Comparing the exact normal vector $\vec{n_0}$ in Equation~\eqref{eq:normal_exact} with
 $\vec{n_{p_1p_2p_3}}$ above, we recover first-order of accuracy for normals. 
 In addition, notice that the usual scheme of estimating vertex 
 normals by the arithmetic mean of triangle normals
@@ -402,20 +402,20 @@ K(p) = \frac{2\pi-\sum \theta_{i\,i+1}}{\frac{1}{3}A_{i\,i+1}}
 \end{equation}
 \noindent where $\theta_{i\,i+1}$ and $A_{i\,i+1}$ are the angle 
 $\angle p_ipp_{i+1}$ and area of the
-triangle $p_ipp_{i+1}$ respectively (summation is over all triangles comprising 
+triangle $p_ipp_{i+1}$, respectively (summation is over all triangles comprising 
 the star of $p$)~\cite{meek2000}. 
 Meek and Walton~\cite{meek2000} showed that the curvature computed via 
-Equation~\ref{eq:curvat}
+Equation~\eqref{eq:curvat}
 does not converge in general; that is, if the vertices of the star of $p$ 
 are arbitrarily distributed
 around $p$, one cannot expect curvature convergence. In fact, they
 described a more general result stating that $O(h)$ accuracy can only be
 obtained if the normals are known to have accuracy $O(h^2)$. Subsequently,
 Xu~\cite{xu2006} presented a very particular distribution of vertices around $p$
-under which the curvature estimated by Equation~\ref{eq:curvat} has accuracy $O(h^2)$. 
+under which the curvature estimated by Equation~\eqref{eq:curvat} has accuracy $O(h^2)$. 
 
 Curvature discretization schemes other than the one given in
-Equation~\ref{eq:curvat} such as the quadratic-fit and spherical-image method
+Equation~\eqref{eq:curvat} such as the quadratic-fit and spherical-image method
 (see Meek and Walton~\cite{meek2000} for details) also demand
 particular vertex distributions to ensure convergence. In our context
 of keeping the analysis applicable for many isosurfacing algorithms,

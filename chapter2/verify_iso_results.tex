@@ -1,10 +1,7 @@
 \section{Experimental Results}
 \label{chap1:sec:res}
 
-%\subsection{Isosurface Extraction Algorithms Under Verification}
-%\label{subchap1:sec:iea}
-
-In this section we present the results of applying the afore-described 
+In this section, we present the results of applying the afore-described 
 methodology. We use the framework to verify six different isosurface 
 extraction codes, namely: VTK Marching Cubes~\cite{lor87},
 SnapMC~\cite{Raman:2008:QIM}, Macet~\cite{Dietrich:TVCG:2008},
@@ -15,15 +12,8 @@ available. Before presenting the actual results of subjecting these
 implementations to the verification process,
 we briefly review their salient features.
 
-%We have chosen such algorithms due to their popularity and similar characteristics, as all of them deal with 
-%triangular meshes to approximate the desired isosurface and they also demand a background grid to support the approximation scheme.
-
-%% \subsection{Isosurface Extraction Codes under Verification}
-
-\paragraph*{VTK Marching Cubes.} Marching Cubes~\cite{lor87} (MC) is
+\subsection{VTK Marching Cubes} Marching Cubes~\cite{lor87} (MC) is
 arguably the most popular isosurface extraction algorithm.
-% THIS SENTENCE SHOULD FIT BETTER SOMEWHERE ELSE IN MOTIVATION 
-%and its VTK implementation~\cite{vtk} is widely employed in engineering applications and in life sciences field. 
 It reduces the problem of generating an isosurface triangulation
 to a finite set of cases by considering the \emph{signs} of 
 how the isosurface intersects each cell of a regular background grid.
@@ -34,7 +24,7 @@ through a look-up table. The vertices of the triangles lie on
 the edges of the cubic cells, and they are computed by linearly interpolating 
 the implicit function values stored at the corners of the grid cell. 
 
-\paragraph*{SnapMC.} SnapMC~\cite{Raman:2008:QIM} is a recently proposed algorithm
+\subsection{SnapMC} SnapMC~\cite{Raman:2008:QIM} is a recently proposed algorithm
 that extends the original Marching Cubes look-up table to cases where
 the isosurface goes exactly through the corners of the background
 grid.  The new look-up table is automatically built by an adaptation of
@@ -46,7 +36,7 @@ intersections close to grid corners. In particular, it changes
 the values on the grid so that the surface is ``snapped'' to the grid
 corners.
 
-\paragraph*{Macet.} Macet~\cite{Dietrich:TVCG:2008} is another variant of Marching
+\subsection{Macet} Macet~\cite{Dietrich:TVCG:2008} is another variant of Marching
 Cubes that tries to improve the shape of the triangles in a
 mesh. Unlike SnapMC, it \emph{perturbs the active edges} of Marching Cubes
 cases by moving the vertices before the triangulation step.  The
@@ -56,7 +46,7 @@ is approximately parallel to an edge of the grid cell. Therefore, some
 corners of the background grid are displaced so as to avoid the
 parallel-like intersections.
 
-\paragraph*{Dual Contouring.} Dual Contouring~\cite{Ju:2002:DCH:566654.566586} is a feature-preserving
+\subsection{Dual Contouring} Dual Contouring~\cite{Ju:2002:DCH:566654.566586} is a feature-preserving
 isosurfacing method to extract crack-free surfaces from both uniform
 and adaptive octree grids. This technique can be seen as a combination of
 Extended Marching Cubes~\cite{kobbelt01} and SurfaceNets~\cite{gibson98} 
@@ -67,7 +57,7 @@ Contouring tends to generate better quality triangles than Marching Cubes
 while still being very effective in representing sharp features, rendering this
 implicit polygonalization method a good alternative to the popular Marching Cubes.
 
-\paragraph*{Afront.} Afront~\cite{Schreiner06} is an advancing-front method
+\subsection{Afront} Afront~\cite{Schreiner06} is an advancing-front method
 for surface extraction. Although we focus on applying Afront to
 isosurface extraction, it can also be used for remeshing and
 triangulating point-set surfaces. The outstanding feature of Afront is
@@ -81,17 +71,10 @@ maximum triangle size by half. A full analysis of Afront (and, in
 particular, the influence of the other main parameter $\eta$) warrants
 further investigation, but is beyond the scope of this dissertation.
 
-\paragraph*{DelIso.} DelIso \cite{Dey07} is a Delaunay-based 
+\subsection{DelIso} DelIso \cite{Dey07} is a Delaunay-based 
 approach for isosurfacing. It computes the restricted Delaunay triangulation 
 from a 3D Voronoi Diagram. We run our tests on a customized version of DelIso 16 bit, 
 and our examples use the default set of parameter.
-
-%% Afront provides both surface meshing or remeshing and works at a local or global level.
-%% %It was motivated by the fact that classical approaches as marching methods requires 
-%% Afront uses two user-defined parameters, namely $\rho$ and $\eta$, to control approximation accuracy and triangle 
-%% adaptiveness respectively. The main idea is to use the parameters $\rho$ and $\eta$ to build a guidance field from the input surface whith
-%% dictates triangles sizes. 
-%% The guidance field gives also an Hausdorff error bound between the original surface and the generated mesh.
 
 In what follows, we present the results of applying the verification process 
 to these algorithms. We will describe the manufactured solutions we use and
@@ -104,7 +87,7 @@ their observed convergence rate on the isosurface extraction algorithm.
 %As already mentioned, we shall show that well established verification tools also turn out very effective in the context of visualization.
 %In fact, we have reached quite surprising and unexpected results by employing a conventional convergence analysis to verify isosurface algorithms.
 
-\subsection{Observed order of accuracy}
+\subsection{Observed Order of Accuracy}
 \label{chap1:sec:verification-results}
 
 We start by investigating the behavior of the algorithms 
@@ -118,12 +101,12 @@ scalar field $f(x,y,z) = x^2+y^2+z^2 - 1$ and isosurface $f(x,y,z) =
 %% $D=[-4,\, 4]^3$.
 Let $\tilde{S}_k$ be a simplicial complex that approximates $S$ for a given 
 discretization parameter $k$ (cell size $h$ for marching cubes-based methods, 
-accuracy $\rho$ for Afront and maximum edge size $\iota$ for DelIso).
+accuracy $\rho$ for Afront, and maximum edge size $\iota$ for DelIso).
 
-The order of accuracy for VTK Marching Cubes, SnapMC, Macet and Dual
+The order of accuracy for VTK Marching Cubes, SnapMC, Macet, and Dual
 Contouring depends on the cell size $h$. We run our tests with grid
 refinement $h_{i+1} = h_{i} / 2$ and initial condition $h_1$. For
-Afront, the order of accuracy depends on parameter $\rho$ thus the
+Afront, the order of accuracy depends on parameter $\rho$, thus the
 refinement is given by $\rho_{i+1} = \rho_{i} / 2$ with initial
 condition $\rho_1$. Our customized version of DelIso has an additional parameter $\iota$
 that controls the largest edge on the output mesh. In this case, the refinement 
@@ -137,7 +120,13 @@ was enough to suggest bugs in two implementations. The observed
 order of accuracy of the examined properties 
 is presented on Table~\ref{tab:results}.
 
-\begin{table}[b]
+\begin{table}[t]
+\caption{Comparison between formal order of accuracy and observed
+  order of accuracy using $f(x,y,z) = x^2 + y^2 + z^2 -1$ as a manufactured solution 
+  and for different algorithms. $^1$ indicates the original source 
+    code and $^2$ our fixed version.
+   $^*$ indicates that a high-order spline was used instead of a 
+linear interpolation.}
 \centering
 \begin{tabular}{lrrrr}
 \hline
@@ -155,12 +144,6 @@ Afront$^*$          &  $-0.06$ & $0.80$   & $1.93$     & $-0.27$ \\
  DellIso      &  $1.49$    & $1.07$  & $2.04$      & $0.07$ \\
 \hline
 \end{tabular}
-\caption{Comparison between formal order of accuracy and observed
-  order of accuracy using $f(x,y,z) = x^2 + y^2 + z^2 -1$ as a manufactured solution 
-  and for different algorithms. $^1$ indicates the original source 
-    code and $^2$ our fixed version.
-   $^*$ indicates that a high-order spline was used instead of a 
-linear interpolation.}
 \label{tab:results}
 \end{table}
 
@@ -168,7 +151,43 @@ linear interpolation.}
 \subsubsection{Algebraic distance}
 %\label{subchap1:sec:mesh}
 
-\begin{figure}[b]
+Section \ref{subchap1:sec:vertex-order-of-accuracy} shows that one expects second-order 
+convergence for function value on vertices if linear interpolation is used. 
+We define the following approximation error on $L_\infty$ norm:
+\begin{equation}
+E_{k} = \max_{j=1\cdots n}|\lambda - f(v_{j})|
+\label{eq:surferror}
+\end{equation}
+where $\lambda$ is the isovalue of interest, $v_j$ is a vertex of $\tilde{S}$, and 
+$n$ the number of vertices. Figure~\ref{fig:meshconver} shows the vertex observed 
+order of accuracy.
+VTK Marching Cubes, SnapMC have nearly quadratic convergence rates, 
+as shown in Figure~\ref{fig:meshconver}. Afront shows a zero-order of accuracy 
+though it presents very low error (in fact, the lowest in Figure \ref{fig:meshconver}). 
+This is due to the Catmull-Rom spline that is being used for surface 
+approximation on the voxelized grid. Since it has cubic-order of accuracy, 
+even for large values of $\rho$  it can approximate with high precision 
+the manufactured solution $f$. The next section shows that this is due to a poor 
+choice for a manufactured solution. DelIso implementation has non-zero order 
+of accuracy due to an outlier. Large values of $\iota$ causes bad approximations 
+of the manufactured solution.
+
+The Macet and Dual Contouring curves suggest that the algorithms converge to 
+a fixed value. 
+%
+In fact, there was indeed a problem in the implementation
+that was affecting the convergence of Macet and Dual Contouring
+(specifically, we found a hard-coded limit in the number of steps in a
+root-finding procedure that was being triggered by the high resolution
+of the volume). Once fixed, we obtain the results shown in Figure
+\ref{fig:meshconver-fixed}. Macet and Afront now have similar behavior 
+in the observed order of accuracy of vertex position 
+(Figure \ref{fig:meshconver-fixed}). This is because both methods use 
+high-order interpolation with splines, not linear interpolation as 
+assumed before (see Section \ref{chap1:sec:mms-complexity}).
+
+\begin{landscape}
+\begin{figure}
 \centering
 \subfigure{
 \label{fig:meshconver}
@@ -187,34 +206,10 @@ Macet and Dual Contouring have a bug that causes the deviation on errors. The bl
 continuous line represents the expected behavior. $p$ is the slope of the linear 
 regression for each curve.}
 \end{figure}
+\end{landscape}
 
-Section \ref{subchap1:sec:vertex-order-of-accuracy} shows that one expects second-order 
-convergence for function value on vertices if linear interpolation is used. 
-We define the following approximation error on $L_\infty$ norm:
-\begin{equation}
-E_{k} = \max_{j=1\cdots n}|\lambda - f(v_{j})|
-\label{eq:surferror}
-\end{equation}
-where $\lambda$ is the isovalue of interest, $v_j$ is a vertex of $\tilde{S}$ and 
-$n$ the number of vertices. Figure~\ref{fig:meshconver} shows the vertex observed 
-order of accuracy.
-VTK Marching Cubes, SnapMC have nearly quadratic convergence rates 
-as shown in Figure~\ref{fig:meshconver}. Afront shows a zero-order of accuracy 
-though it presents very low error (in fact, the lowest in Figure \ref{fig:meshconver}). 
-This is due to the Catmull-Rom spline that is being used for surface 
-approximation on the voxelized grid. Since it has cubic-order of accuracy, 
-even for large values of $\rho$  it can approximate with high precision 
-the manufactured solution $f$. Next section shows that this is due to a poor 
-choice for a manufactured solution. DelIso implementation has non-zero order 
-of accuracy due to an outlier. Large values of $\iota$ causes bad approximations 
-of the manufactured solution.
-%All other approximation have zero-th accuracy order. 
-%A possible explanation for this is that 
-%the convergence of algebraic function on vertices does not depend on $\iota$ but on other variable, voxel size $h$.
-%Because DelIso uses trilinear interpolation to approximate a surface vertex, the error on vertices remain constant if
-%the grid size does not change.
-
-\begin{figure}[b]
+\begin{landscape}
+\begin{figure}
 \centering
 \subfigure{
 \label{fig:meshconver-fixed}
@@ -231,25 +226,7 @@ of the manufactured solution.
 \caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
 \label{fig:allconv-fixed}
 \end{figure}
-
-
-The Macet and Dual Contouring curves suggest that the algorithms converge to 
-a fixed value. 
-%There are three possible interpretations for this behavior: 
-%a) the tests were not correct;
-%b) there is another error source (not present or erroneously ignored 
-%in the theoretical analysis) that becomes dominant during refinement;
-%c) there is a bug in the source code. 
-In fact, there was indeed a problem in the implementation
-that was affecting the convergence of Macet and Dual Contouring
-(specifically, we found a hard-coded limit in the number of steps in a
-root-finding procedure that was being triggered by the high resolution
-of the volume). Once fixed, we obtain the results shown in Figure
-\ref{fig:meshconver-fixed}. Macet and Afront now have similar behavior 
-in the observed order of accuracy of vertex position 
-(Figure \ref{fig:meshconver-fixed}). This is because both methods use 
-high-order interpolation with splines, not linear interpolation as 
-assumed before (see Section \ref{chap1:sec:mms-complexity}).
+\end{landscape}
 
 \subsubsection{Normals}
 \label{subchap1:sec:normal-convergence}
@@ -265,7 +242,7 @@ where $\theta_{\sigma_j}$ is the angle between the normal of
 the triangle $\sigma_j$ and the normal of 
 the point in $S$ closest to the centroid of $\sigma_j$.
 As shown in Figure \ref{fig:normconver}, VTK Marching Cubes, Afront,
-SnapMC and DelIso have good observed order of accuracy above $0.8$. However, only 
+SnapMC, and DelIso have good observed order of accuracy above $0.8$. However, only 
 VTK Marching Cubes and DelIso present close proximity to linear. 
 Macet and Dual Contouring once again do not present a consistent order. 
 Figure \ref{fig:normconver-fixed} shows the results after fixing both codes.
@@ -282,12 +259,12 @@ E_{k} = |A(S) - A(\tilde{S}_k)|
 \end{equation}
 where $A$ is the area function of a continuous or piecewise-linear surface. 
 The results are shown in Figure~\ref{fig:areaconv}. 
-VTK Marching Cubes, Afront and DelIso present second-order of accuracy as shown 
+VTK Marching Cubes, Afront, and DelIso present second-order of accuracy, as shown 
 in Figure \ref{fig:areaconv}. SnapMC accuracy is slightly better than quadratic due 
 to poor approximation for large $h$. The error dropped faster than quadratic when the 
 grid was refined for the first time. Macet and Dual Contouring exhibit once again  
 unexpected behavior. Unlike the previous time, the curves now seem to diverge 
-when $h$ is too small. Once the bug is fixed the convergence curves changes,
+when $h$ is too small. Once the bug is fixed, the convergence curves changes,
 and they become quadratic (Figure \ref{fig:areaconv-fixed}).
  
 \subsubsection{Curvature}
@@ -302,7 +279,7 @@ E_{k} = \max_{j=1\cdots n}|K(v_j) - \tilde{K}(v_j)|
 where $K(v)$ is the Gaussian curvature at $v \in S$ and $\tilde{K}(v)$ is the Gaussian curvature at $v \in \tilde{S}$. In this
 particular case where $S$ is a sphere, $K(v) = 1$ for every $v \in S$. The results 
 are shown in Figure~\ref{fig:curvatureconv}.
-DelIso, Afront and SnapMC are close to zeroth-order accuracy. The
+DelIso, Afront, and SnapMC are close to zeroth-order accuracy. The
 curvature order of accuracy for VTK Marching Cubes, on the other hand,
 diverges significantly. This unexpected behavior might deserve further
 investigation which we leave for future work.
@@ -334,7 +311,7 @@ although another error source (truncation error, for instance) may show up.
 The next section presents a detailed discussion concerning MMS.
 
 Although we managed to fix the Macet convergence problem, we were not 
-able to do so in a way that preserves triangle quality (Figure \ref{fig:teaser}).
+able to do so in a way that preserves triangle quality.
 Two were the problems we found in the source code, and we proposed two 
 solutions for one of them. Table \ref{tab:results-macet} shows that we could 
 not find any combination that both fixed the convergence problem and preserved the 
@@ -343,22 +320,26 @@ is a theoretical problem that prevents both from being satisfied simultaneously,
 or it is just a matter of finding a better algorithmic fix. 
 In both cases, further study and subsequent tests must be accomplished.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=1\linewidth]{chapter2/figures/teaser.pdf}
-\caption{Through the verification methodology presented on this chapter 
-we were able to uncover a convergence problem within a publicly available marching-based 
-isosurfacing code (top left) and fix it (top right). The problem causes the mesh normals to 
-\emph{disagree} with the known gradient field when refining the voxel size $h$ (bottom row). 
-The two graphs show the convergence of the normals before and after fixing the code.}
-\label{fig:teaser}
-\end{figure}
+%\begin{landscape}
+%\begin{figure}
+%\centering
+%\includegraphics[width=1\linewidth]{chapter2/figures/teaser.pdf}
+%\caption{Through the verification methodology presented on this chapter, 
+%we were able to uncover a convergence problem within a publicly available marching-based 
+%isosurfacing code (top left) and fix it (top right). The problem causes the mesh normals to 
+%\emph{disagree} with the known gradient field when refining the voxel size $h$ (bottom row). 
+%The two graphs show the convergence of the normals before and after fixing the code.}
+%\label{fig:teaser}
+%\end{figure}
+%\end{landscape}
 
-\begin{table}[b]
+\begin{table}[t]
+\caption{Table of results for Macet. Triangle quality versus 
+convergence. We were not able to find a solution that provides 
+both triangle quality and convergence.}
 \centering
 \begin{tabular}{cccc}
 Bug $\#1$ & Bug $\#2$ & Quality & Observed accuracy \\
-
 \hline
 No Fix & No Fix & Good & Bad  \\
 \hline
@@ -369,8 +350,5 @@ Fix 2 & No Fix & Good & Bad\\
 Fix 2 & Fixed & Bad & Good\\
 \hline
 \end{tabular}
-\caption{Table of results for Macet. Triangle quality versus 
-convergence. We were not able to find a solution that provides 
-both triangle quality and convergence.}
 \label{tab:results-macet}
 \end{table}
