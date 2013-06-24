@@ -20,6 +20,7 @@
 \usepackage{lscape}
 \usepackage[normalem]{ulem}
 \usepackage{url}
+\usepackage{enumitem}
 
 \definecolor{darkgreen}{rgb}{0.0, 0.4, 0.0}
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
@@ -86,8 +87,10 @@
 \def\@@underline#1{#1}
 \tableofcontents
 \makeatother}
+{\singlespace
 \listoftables
-\listoffigures
+%\listoffigures
+}
 %
 % Optional front page, made from source "notation.tex".
 % If you don't need it, then don't use it.
@@ -100,6 +103,7 @@
 \let\tmpsection=\section
 \renewcommand{\section}[1]{\tmpsection{\underline{#1}}}
 
+ \setlength{\parskip}{0cm plus0mm minus0mm}
 \include{chapter1/chap1}
 \include{chapter2/chap2}
 \include{chapter3/chap3}
