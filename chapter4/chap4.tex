@@ -1,4 +1,4 @@
-\chapter{Practical Considerations on the Topological Correctness of Marching Cubes 33}
+\chapter{Practical Considerations on the Topological \mbox{Correctness} of Marching Cubes 33}
 \label{chap:mc33}
 
 Isosurface extraction techniques can be divided into two classes according to their topological guarantees, namely, consistency or correctness. Topologically \emph{consistent} techniques produce surfaces that are piecewise-linear (PL) manifolds (\emph{i.e.}, crack-free surfaces), except at the boundary of the domain. To-pologically \emph{correct} techniques produce a PL-manifold homeomorphic to the surface induced by a given interpolant, such as the trilinear interpolant. Although there are many topologically \emph{consistent} MC-based techniques, only a handful are topologically \emph{correct}. Marching Cubes 33 is one of the first MC-based algorithms that aim to preserve the topology of the trilinear interpolant.
@@ -151,7 +151,7 @@ where $V_{0}$ and $V_{1}$ are the scalar values at the vertices of $e$. Note tha
 Section \ref{erros_cause:chernyaev} explains why the algorithm proposed by Chernyaev and its modified version proposed by Lewiner \emph{et al.} may fail to extract surfaces that are topologically correct. In the following section, we present the tools we use to detect, debug, and reproduce the issues found in the \mc{} algorithm and its implementation. The full Marching Cubes table can be found in the works of Chernyaev \cite{Chernyaev95marchingcubes} and Lewiner \emph{et al.}\cite{Lewiner:2003}.
 
 
-\section{Experiments setup}
+\section{Experiments Setup}
 \label{experiments_setup}
 
 We begin by investigating the source of topological problems in the \mc{} implementation~\cite{Etiene:2012:TVI:2197070.2197097}.
@@ -416,7 +416,7 @@ Algorithm \ref{chernyaev_case10} illustrates the required steps for disambiguati
 \end{algorithm}
 
 
-\section{Experiments with real-world datasets}
+\section{Experiments with Real-world Datasets}
 \label{sec:real-world}
 
 \begin{figure}[b]
