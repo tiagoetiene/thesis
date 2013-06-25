@@ -23,7 +23,7 @@ On the other hand, the verification of topological properties were available onl
 %
 The complexity was one of our motivations to devise new algorithms for computing the Euler characteristics of isosurfaces directly from scalar fields.
 %
-In addition to that, our work on topological verification played crucial role in correcting an almost 20 year-old bug with Marching Cubes 33.
+In addition to that, our work on topological verification played a crucial role in correcting an almost 20-year-old bug with Marching Cubes 33.
 %
 The case of verification of volume rendering algorithms also required a convergence analysis not available in the literature. 
 %
@@ -45,9 +45,9 @@ We observed that the MMS contrasts with a common practice within the visualizati
 %
 By using real-world data during development, one can evaluate a new technique using the data it is supposed to represent. 
 %
-When the data does not ``look right'' in the eyes of an expert, or the error quantification exceeds some pre-determined threshold, it is assumed that there is a problem that must be fixed.
+When the data do not ``look right'' in the eyes of an expert, or the error quantification exceeds some predetermined threshold, it is assumed that there is a problem that must be fixed.
 %
-This approach is certainly valuable and we do not advocate the MMS as a replacement for using real world data, or any other method that users are accustomed with for that matter. 
+This approach is certainly valuable and we do not advocate the MMS as a replacement for using real-world data, or any other method that users are accustomed with for that matter. 
 %
 Instead, we advocate its use in addition to the methods already adopted by developers.
 
@@ -69,20 +69,22 @@ This is the most direct direction of future work: the application of the MMS to 
 %%%% Evaluation
 \section{Evaluation}
 
-%An interesting point that is not part of this dissertation is the practical impact of non-verified codes. 
+%An interesting point that is not part of this dissertation is the practical impact of nonverified codes. 
 The economic impact due to the lack of appropriate infrastructure for software testing is well studied.
 %
 A NIST report estimates that the total loss due to lack of software testing is about \$22.2 to \$59.5 billion~\cite{tassey2002economic}. 
 %
 To the best of our knowledge, the economic impact and consequences of the lack of software testing for the subfield of scientific visualization has not yet been evaluated. 
 %
-Nevertheless, there are anecdotal evidence of the need for this evaluation. As an example, we cite a medical report extracted from the Manufacturer and User Facility Device Experience (MAUDE), a data repository of adverse events involving medical devices under the umbrella of the FDA:
+Nevertheless, there is anecdotal evidence of the need for this evaluation. As an example, we cite a medical report extracted from the Manufacturer and User Facility Device Experience (MAUDE), a data repository of adverse events involving medical devices under the umbrella of the FDA:
+
+{\singlespace
 \begin{quote}
 The patient was undergoing a kidney operation and the kidney image as displayed on the system's image monitor allegedly flipped in orientation without any operator intervention and as a result it is alleged that the patient had the wrong kidney operated upon.
-\end{quote}
+\end{quote}}
 The bug described previously is not  ``severe'' in the sense that the final image is a perfectly valid one. Nevertheless, the outcome is quite alarming. There are several similar reports involving images flips and artifacts in medical devices dating from early 90s -- when the information started to be collected -- until now. Many of these reports highlight that the problem did not cause any injury, however, they also emphasize the risk of misdiagnosis.
 %
-It may be interesting to perform an user-study using visualization results that contains known bugs and bug-free images to evaluate the class of problems that developer/expert can detect.  This is out of scope of this work and is left as future work.
+It may be interesting to perform an user study using visualization results that contains known bugs and bug-free images to evaluate the class of problems that developer/expert can detect.  This is out of scope of this work and is left as future work.
 
 
 %%%%% THE VISUALIZATION COMMUNITY
@@ -90,7 +92,7 @@ It may be interesting to perform an user-study using visualization results that 
 
 Verification has gained some traction inside the field of visualization in recent years.  
 %
-We have seen several initiatives that support this: two workshops on reproducibility, verification, validation in visualization (EuroRV$^3$ 2012-2013) at Eurovis; a discussion panel ``Verification in Visualization: Building a Common Culture'' at IEEE VisWeek 2011; and verification as part of the ``call for participation'' for IEEE VisWeek 2010-2013.
+We have seen several initiatives that support this: two workshops on reproducibility, verification, and validation in visualization (EuroRV$^3$ 2012-2013) at Eurovis; a discussion panel ``Verification in Visualization: Building a Common Culture'' at IEEE VisWeek 2011; and verification as part of the ``call for participation'' for IEEE VisWeek 2010-2013.
 %
 We hope the  examples presented here will further encourage the adoption of MMS by the visualization community at large, increasing the impact of its contributions  to a wider audience.
 %

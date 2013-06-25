@@ -11,10 +11,10 @@ in how two communities -- the AIAA community and the Visualization community -- 
 flow visualization.  To accomplish this task, we have used the {\em AIAA Journal} and the
 {\em IEEE Transactions on Visualization and Computer Graphics (TVCG)} as ``representative" publication
 venues of the two communities, and have explored the papers published therein to try to 
-glean how each community approaches visualization of flow, how they might differ from each other 
+glean how each community approaches visualization of flow, how they might differ from each other, 
 and how the two communities might complement each other. 
 
-This chapter is organized as follows.  In Section \ref{sec:flowvis} we provide a review of the state-of-the-art
+This chapter is organized as follows.  In Section \ref{sec:flowvis}, we provide a review of the state-of-the-art
 in flow visualization, both from the perspective of the Visualization and well as the AIAA communities. 
 %
 Tools such as Tecplot \cite{amtec1996tecplot} and Paraview \cite{squillacote2007paraview} have implemented many 
@@ -25,7 +25,7 @@ flow visualization and also provide pointers to new developments.
 In the next two sections, we focus our attention on research advances made within the Visualization 
 community that we think will, in time, have impact on flow visualization and on other application domains
 that use visualization as a means of both scientific exploration and explanation.  
-In Section \ref{sec:perceptionandevaluation} we show how perception and user studies may impact flow visualization, and
+In Section \ref{sec:perceptionandevaluation}, we show how perception and user studies may impact flow visualization, and
 in particular, we focus on
 issues related to color maps.  In Section \ref{sec:verif}, we then provide
 discussions on the current Visualization community research trends in Visualization Verification 
@@ -36,6 +36,49 @@ and Uncertainty Quantification.  We have chosen these topics because they are al
 In Section \ref{sec:opportunities}, we speculate on some of the opportunities for collaboration and
 more effective communication between the two communities, and we conclude in Section
 \ref{sec:conclusions}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Review of Flow Visualization Techniques}
+\label{sec:flowvis}
+
+%* Intro
+%* Review of flow vis 
+%	- Vis community
+%	- AIAA community
+%* How mature is the flow vis field? Evaluation, Uncertainty, and Verification of flow vis techniques.
+%      - Here we show a plot of the new wave of evaluation papers/user studies inside the Vis community
+%* Opportunities:
+%	- Does the Vis community knows the problems and challenges faces by AIAA community?
+%	- Does the AIAA community knows the advances made by the Vis community?
+
+Vector field visualization is an important and vibrant subfield of both the Visualization and AIAA communities.
+%
+The techniques developed for vector field visualization extend beyond these communities to fields such as medical imaging, meteorology, the automotive industry, and others.
+%
+In the past two decades, visualization experts and practitioners have seen the development and improvement of many vector field visualization techniques.
+%
+The contributions are numerous: the ability of handling different grid types (structured, unstructured, curvilinear, etc), high dimension data (2D, 2.5D, and 3D), time-dependent flow, seeding and placement of geometric primitives, improved performance, perception, rendering, among others.
+%
+In this section, we review some of the developments inside the Visualization community and compare with current practices inside the AIAA community.
+
+\subsection{Preliminaries}
+
+Although the concept of flow visualization is well defined in both communities, we start by clarifying what is meant by flow visualization in this section.
+%
+The difference between \emph{computational flow visualization} and \emph{flow visualization} is that the latter focus on visualization of flow behavior using experimental data (\emph{e.g.}, flow in a wind tunnel), whereas the former visualizes flow from simulated or computed data. 
+%
+Some computational visualization techniques are inspired by techniques used in flow visualization, such as dye advection. 
+%
+Since the subject of this section only addresses computational flow visualization, we will refer to that topic simply as flow visualization.
+
+For thoroughness, we also define some commonly used mathematical/physical terms used within the flow visualization literature.
+A \emph{streamline} is the path traced by a massless particle in a steady flow. Streamlines are sometimes referred to as ``instantaneous particle trace''.
+%
+A \emph{streakline} is the path traced by massless particles seeded at the same position but at different times in a unsteady flow. 
+%
+\emph{Stream surfaces} and \emph{streak surfaces} are the 2-manifold analog of streamlines and streakline, where the seeding primitive is a curve instead of a point.
+
+\subsection{Classes of Techniques}
 
 \begin{table}
 \caption{\label{table:progress}Advances in flow visualization. This table is \emph{not} meant to be comprehensive.}{}\centering
@@ -79,50 +122,7 @@ Class &  Subclass & Technique & Reference\\
 \end{tabular}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Review of Flow Visualization Techniques}
-\label{sec:flowvis}
-
-%* Intro
-%* Review of flow vis 
-%	- Vis community
-%	- AIAA community
-%* How mature is the flow vis field? Evaluation, Uncertainty, and Verification of flow vis techniques.
-%      - Here we show a plot of the new wave of evaluation papers/user studies inside the Vis community
-%* Opportunities:
-%	- Does the Vis community knows the problems and challenges faces by AIAA community?
-%	- Does the AIAA community knows the advances made by the Vis community?
-
-Vector field visualization is an important and vibrant subfield of both the Visualization and AIAA communities.
-%
-The techniques developed for vector field visualization extend beyond these communities to fields such as medical imaging, meteorology, the automotive industry, and others.
-%
-In the past two decades, visualization experts and practitioners have seen the development and improvement of many vector field visualization techniques.
-%
-The contributions are numerous: the ability of handling different grid types (structured, unstructured, curvilinear, etc), high dimension data (2D, 2.5D, and 3D), time-dependent flow, seeding and placement of geometric primitives, improved performance, perception, rendering, among others.
-%
-In this section, we review some of the developments inside the Visualization community and compare with current practices inside the AIAA community.
-
-\subsection{Preliminaries}
-
-Although the concept of flow visualization is well defined in both communities, we start by clarifying what is meant by flow visualization in this section.
-%
-The difference between \emph{computational flow visualization} and \emph{flow visualization} is that the latter focus on visualization of flow behavior using experimental data (\emph{e.g.}, flow in a wind tunnel), whereas the former visualizes flow from simulated or computed data. 
-%
-Some computational visualization techniques are inspired by techniques used in flow visualization, such as dye advection. 
-%
-Since the subject of this section only addresses computational flow visualization, we will refer to that topic simply as flow visualization.
-
-For thoroughness, we also define some commonly used mathematical/physical terms used within the flow visualization literature.
-A \emph{streamline} is the path traced by a massless particle in a steady flow. Streamlines are sometimes referred to as ``instantaneous particle trace''.
-%
-A \emph{streakline} is the path traced by massless particles seeded at the same position but at different times in a unsteady flow. 
-%
-\emph{Stream surfaces} and \emph{streak surfaces} are the 2-manifold analog of streamlines and streakline, where the seeding primitive is a curve instead of a point.
-
-\subsection{Classes of techniques}
-
-Flow visualization techniques can be classified as direct, geometric, texture-, and feature-based. 
+Flow visualization techniques can be classified as direct, geometric, texture-, and feature-based (see Figure \ref{fig:classes}). 
 %
 Table \ref{table:progress} provides an overview of the classification and a subset of the available techniques within each class.  
 %
@@ -134,17 +134,10 @@ One can find reference to extra material within the \emph{Reference} column.
 %
 For more details about the articles shown in Table \ref{table:progress} and others, we refer the interested reader to the excellent surveys by Hauser \emph{et al.} \cite{Hauser:2003tm} and Peng and Laramee \cite{peng2009higher} for an overview of the flow visualization field, Edmunds \emph{et al.} \cite{Edmunds2012974} and McLoughlin \emph{et al.} \cite{CGF:CGF1650} for geometric flow visualization, Laramee \emph{et al.} \cite{laramee2004state, laramee2008applications} for texture-based flow visualization, and Pobitzer \emph{et al.} \cite{CGF:CGF1901} for feature-based flow visualization. 
 %
-Next, we briefly go over each of the classes (see Figure \ref{fig:classes}).
-
-\begin{figure}[b]
-\centering
-\includegraphics[width=1\linewidth]{chapter6/figures/classes.png}
-\caption{Examples of flow visualization using direct, geometry, texture-, and feature-based techniques, respectively.}
-\label{fig:classes}
-\end{figure}
+Next, we briefly go over each of the classes.
 
 %%%% Direct visualization
-\paragraph{Direct visualization} 
+\subsubsection{Direct visualization} 
 %
 Direct visualization techniques provide an intuitive and straightforward way of visualizing vector fields. 
 %
@@ -162,8 +155,15 @@ In the 3D case, volume rendering \cite{Engel:2004:RVG:1103900.1103929} is the na
 %
 Although direct visualization provides an easy first approximation of the vector field, the visual complexity and occlusion may impair the interpretation of the results, especially in 3D datasets.
 
+\begin{figure}[b]
+\centering
+\includegraphics[width=1\linewidth]{chapter6/figures/classes.png}
+\caption{Examples of flow visualization using direct, geometry, texture-, and feature-based techniques, respectively.}
+\label{fig:classes}
+\end{figure}
+
 %%%% Geometric visualization
-\paragraph{Geometric visualization} 
+\subsubsection{Geometric visualization} 
 %
 In geometric visualization, curves and surfaces are used for summarizing flow behavior at particular seed points.
 %
@@ -175,11 +175,11 @@ By tracing particles (or respectively curves) one builds a 1-manifold (or respec
 %
 Geometric visualization techniques have a two steps: first, geometry computation; and secondly, rendering. 
 %
-Often, the rendering step is straightforward -- \emph{e.g.} rendering a polyline -- in which case the algorithm collapses into one step.
+Often, the rendering step is straightforward -- \emph{e.g.}, rendering a polyline -- in which case the algorithm collapses into one step.
 %
 Streamlines are one of the most well-known representative visualization tools within this class. 
 %
-Although flow visualization using both curves and surface dates back over two decades, in recent years there has been constant research on the topic \cite{Edmunds2012974}. 
+Although flow visualization using both curves and surface dates back over two decades, in recent years, there has been constant research on the topic \cite{Edmunds2012974}. 
 %
 %Some of the challenges that have been tackled are the problems of occlusion, seeding and placement of primitives, and rendering.
 %
@@ -187,9 +187,9 @@ Although flow visualization using both curves and surface dates back over two de
 For curves, the main contributions of the past decade are related to rendering, seeding and placement of curves.
 %
 % Surface
-Edmunds \emph{et al.} \cite{Edmunds2012974} classifies the surface-based flow visualization into surface construction and rendering. 
+Edmunds \emph{et al.} \cite{Edmunds2012974} classify the surface-based flow visualization into surface construction and rendering. 
 %
-Methods for surface construction are based on integral surface, implicit and topological construction. 
+Methods for surface construction are based on integral surface, implicit, and topological construction. 
 %
 This is an area of intense research in the past few years.
 %
@@ -197,10 +197,10 @@ The authors present a variety of algorithm for both steady and time-dependent su
 %
 Surface rendering methods involve the use of several techniques for improving the quality of the visualization of the flow over a surface of interest. 
 %
-Surface-based techniques can take advantages of direct or texture-based methods by including static/animated arrows over stream surfaces, shading for the evaluation of the shape of surfaces, placing streamlines over 3D surfaces, employing line-integral convolution (LIC) techniques, and/or non-photorealistic rendering techniques.
+Surface-based techniques can take advantages of direct or texture-based methods by including static/animated arrows over stream surfaces, shading for the evaluation of the shape of surfaces, placing streamlines over 3D surfaces, employing line-integral convolution (LIC) techniques, and/or nonphotorealistic rendering techniques.
 
 %%%%% Feature-based visualization
-\paragraph{Feature-based visualization} 
+\subsubsection{Feature-based visualization} 
 %
 In feature-based flow visualization, the input vector field is segmented according to features of interest. 
 %
@@ -238,7 +238,7 @@ A comprehensive survey on the topic can be found in the state-of-the-art report 
 
 
 %%%%% Texture-based visualization
-\paragraph{Texture-based visualization} 
+\subsubsection{Texture-based visualization} 
 %
 In texture-based flow visualization, the user replaces geometrical information with 2D texture mapped over surfaces. 
 %
@@ -256,7 +256,7 @@ The main issue with texture-based visualizations is the high computational cost 
 %
 Nevertheless, the advances in both computer hardware and algorithms have granted to users the ability to handle large data sets and unstructured grid at interactive rates \cite{Edmunds2012974, laramee2008applications}.
 
-\subsection{Means to an end}
+\subsection{Means to an End}
 %% Stats:
 %Grid Type Used: Cartesian, Unstructured, Curvilinear, B-Spline Volumetric Mesh, Quad-tree
 %Domain: 2D, 3D, and 2-manifold embedded in 3D space
@@ -287,7 +287,7 @@ Finally, $73\%$ of the papers contained at least one visualization for 2D domain
 %
 The latter number drops to $22\%$ if one considers only techniques for visualization of vector field data (\emph{i.e.}, excluding 3D isocontouring).
 
-Although the data is limited to a short window of time, it raises a few interesting points. 
+Although the data are limited to a short window of time, they raised a few interesting points. 
 %
 With the exception of a handful of papers, most of the flow visualization appears to be using the standard form of the traditional visualization technique.
 %
@@ -320,7 +320,7 @@ These problems can make the detection of some flow features such as vortex more 
 %
 Direct visualization for 2D vector fields using glyphs can be improved by using, for instance, a resampling technique, such as shown in Laramee  \cite{Laramee2003905}, where the author introduce a user-driven approach for reducing visual clutter via resampling. 
 %
-Another way is to segment the flow using features of interest, \emph{e.g.} critical points.
+Another way is to segment the flow using features of interest, \emph{e.g.}, critical points.
 %
 %
 %
@@ -328,7 +328,7 @@ Another way is to segment the flow using features of interest, \emph{e.g.} criti
 %
 %
 %
-Possible reasons for \emph{not} using alternative techniques include that the technique might not be easily available, the technique might not improve the quality of the visualization, users not aware of their existence or find them difficult to use, or the AIAA community 
+Possible reasons for \emph{not} using alternative techniques include that the technique might not be easily available, the technique might not improve the quality of the visualization, users are not aware of their existence or find them difficult to use, or the AIAA community 
 requires a different class of techniques, among other.
 %
 %
@@ -356,7 +356,7 @@ in order to address the concerns and issues raised.
 
 An important aspect of the visualization research consists of the building of new visualization techniques and tools.
 %
-Ideally, new techniques should be able improve the user cognitive process \cite{Tory:2004:HFV:951847.951892}, for instance, by allowing the visualization of data that has never been visualized before, or increasing ones ability to interact with, understand, and explore data.
+Ideally, new techniques should be able improve the user cognitive process \cite{Tory:2004:HFV:951847.951892}, for instance, by allowing the visualization of data that have never been visualized before, or increasing ones ability to interact with, understand, and explore data.
 %
 As visualization techniques are developed and improved, a question is raised: how can we compare and understand the differences between visualization techniques?
 %
@@ -370,7 +370,7 @@ In particular, questions involving perception and cognition are related to the \
 %
 In this section, we review two topics of interest for flow visualization from the point of view of  perception and evaluation: the use of color maps for visualization of scalar properties and the representation of steady 2D vector fields, respectively.
 
-\subsection{Perception \& color maps}
+\subsection{Perception and Color Maps}
 
 %	Introduction to the importance of color map;
 %
@@ -397,13 +397,13 @@ The mapping between data and colors is ubiquitous and essential across the scien
 In the scientific pipeline, color maps are often used to study, explain, explore, and ultimately help 
 experts to gain insight about a phenomenon of interest. 
 % 
-Alas, color maps are not all equal, and depending on the choices made one can accelerate or 
+Alas, color maps are not all equal, and depending on the choices made, one can accelerate or 
 impair scientific inquiry. 
 %
 Since they are just means-to-an-end, their impact on the underlying data should be as minimal as possible.
 %
 In a myriad of choices, one color map has been shown to be a bad choice for virtually any type of 
-visualization: the well-known and widely-used \emph{rainbow} color map. \cite{Borland:2007:RCM:1251554.1251614, 
+visualization: the well-known and widely-used \emph{rainbow} color map \cite{Borland:2007:RCM:1251554.1251614, 
 macdonald1999using, Silva2011320}. 
 
 The rainbow color map is built by varying hue in order to cover the whole spectrum of visible light, 
@@ -420,7 +420,7 @@ and introduction of artifacts.
        \includegraphics[width=0.235\linewidth]{chapter6/figures/scsf-gray}
 	\includegraphics[width=0.235\linewidth]{chapter6/figures/hill-rainbow}
        \includegraphics[width=0.235\linewidth]{chapter6/figures/hill-gray}
-   \caption{Left: the images show the color mapping of the spatial contrast sensitivity function. Frequency increases from left to right whereas contrast increases from the top to the bottom. The isoluminance of the rainbow color map obfuscate low contrast regions and small details, which can be seen using gray scale. Right: changes in color in the rainbow color map may be perceived as features in the data. The ``boring'' scalar field $f(x,y) = x^2+y^2$ appears to have more features when rainbow color map is used than in the gray scale image.}
+   \caption{Problems with the rainbow colormap. Left: the images show the color mapping of the spatial contrast sensitivity function. Frequency increases from left to right whereas contrast increases from the top to the bottom. The isoluminance of the rainbow color map obfuscate low contrast regions and small details, which can be seen using gray scale. Right: changes in color in the rainbow color map may be perceived as features in the data. The ``boring'' scalar field $f(x,y) = x^2+y^2$ appears to have more features when rainbow color map is used than in the gray scale image.}
    \label{fig:rainbow}
  \end{figure}
 %
@@ -444,7 +444,7 @@ is illustrated in the right image in Figure \ref{fig:rainbow}. In association wi
 it becomes difficult to identify that patterns are not due to the underlying data but due to the color map. 
 %
 Although Figure \ref{fig:rainbow} shows simple synthetic examples, there have also been user studies and 
-analysis showing that these problems are also present in the visualization of real world scenarios \cite{treinishshould}.
+analysis showing that these problems are also present in the visualization of real-world scenarios \cite{treinishshould}.
 %
 Despite its disadvantages, the rainbow color map is widely used in the sciences. In the study by Borkin 
 \emph{et al.} \cite{305}, participants reported that they liked it because they are ``used to seeing'', that 
@@ -452,8 +452,8 @@ the saturated colors are ``easier to see'', and it is the ``most aesthetically p
 %
 Another possible reason  for its widespread use is that it is default in many popular simulation and 
 visualization tools. Paraview is one of the tools that no longer uses the rainbow color map as the
-default option since the publication of  Borland \emph{et al.}'s ``Rainbow Color Map (Still) Considered 
-Harmful'' \cite{paraview}. The author even suggest that a better name for it would be ``misleading color map''.
+default option since the publication of ``Rainbow Color Map (Still) Considered 
+Harmful'' \cite{paraview} by Borland \emph{et al.}. The author even suggest that a better name for it would be ``misleading color map''.
 %
 In light of the many pitfalls of the rainbow color map, the visualization community has, in the past few 
 years, been moving away from it. 
@@ -464,9 +464,6 @@ This number has dropped to a single paper published at the {\em IEEE Transaction
 Computer Graphics} in 2011. Motivated by this experiment, we reviewed all publications from the 
 {\em AIAA Journal} for the years of 2010, 2011, and 2012 that contained a color map and counted the number of papers that used the rainbow color map. Table \ref{table:aiaa_colormap} shows the obtained results. Note that we do not evaluate the potential problems caused by the rainbow color map. 
 %
-Nevertheless, we tried the methodology explained above for a flow simulation dataset. 
-The left image in Figure \ref{fig:flowdata} shows the results of a flow simulation. Note how some regions are over emphasized (shown in red) while details are blurred (shown in green). The problems with the rainbow color map can be avoided by simply switching to another color map, such as the gray scale color map shown in the middle image in Figure \ref{fig:flowdata}. The image to the right shows the decolorized rainbow color map: although some details are easier to see, the result is still very different from the gray scale color map.
-
 \begin{table}[b]
 \caption{Color maps in the AIAA journal} \label{table:aiaa_colormap}{}\centering
 \begin{tabular}{lcccc}
@@ -476,17 +473,20 @@ The left image in Figure \ref{fig:flowdata} shows the results of a flow simulati
 	2012		&       79.03\% 	     &        8.65\% & 12.32\%        		      \\
 \end{tabular}
 \end{table}
+%
+Nevertheless, we tried the methodology explained above for a flow simulation dataset. 
+The left image in Figure \ref{fig:flowdata} shows the results of a flow simulation. Note how some regions are over-emphasized (shown in red) while details are blurred (shown in green). The problems with the rainbow color map can be avoided by simply switching to another color map, such as the gray scale color map shown in the middle image in Figure \ref{fig:flowdata}. The image to the right shows the decolorized rainbow color map: although some details are easier to see, the result is still very different from the gray scale color map.
 
-The visualization community has also investigated what should constitute a ``good'' color map. Research on the topic of color selection can be found in the work by Treinish \emph{et al.} \cite{treinishshould}, Moreland \cite{paraview}, Kindlmann \emph{et al.} \cite{GLK:facelum02}, and others \cite{macdonald1999using,Tominski:2008bt}. The AIAA community can benefit from a set of standard color maps suitable for visualization of typical simulation data such as pressure fields, angle fields, {\em etc.}
-
- \begin{figure}[t]
+ \begin{figure}[b]
  	\centering
        \includegraphics[width=0.325\linewidth]{chapter6/figures/vector_field_rainbow.png}
        \includegraphics[width=0.325\linewidth]{chapter6/figures/vector_field_gray.png}
        \includegraphics[width=0.325\linewidth]{chapter6/figures/vector_field_rainbow_then_gray.png}
-   \caption{Velocity magnitude. Rainbow (left) and gray scale (middle) color maps were applied to a 2D flow simulation using a spectral element code for solving the incompressible Navier-Stokes Equations. Note how red regions on the rainbow color map are over emphasized while green regions ``blur'' details that are shown in the gray color map. The image on the right is the decolorized rainbow color map.}
+   \caption{Velocity magnitude. Rainbow (left) and gray scale (middle) color maps were applied to a 2D flow simulation using a spectral element code for solving the incompressible Navier-Stokes Equations. Note how red regions on the rainbow color map are over-emphasized while green regions ``blur'' details that are shown in the gray color map. The image on the right is the decolorized rainbow color map.}
    \label{fig:flowdata}
  \end{figure}
+
+The visualization community has also investigated what should constitute a ``good'' color map. Research on the topic of color selection can be found in the work by Treinish \emph{et al.} \cite{treinishshould}, Moreland \cite{paraview}, Kindlmann \emph{et al.} \cite{GLK:facelum02}, and others \cite{macdonald1999using,Tominski:2008bt}. The AIAA community can benefit from a set of standard color maps suitable for visualization of typical simulation data such as pressure fields, angle fields, {\em etc.}
 
 %- Reasons for the rainbow color map success.
 %The works MacDonald\cite{macdonald1999using} and  Silva \emph{et al.}\cite{Silva2011320} 
@@ -508,7 +508,7 @@ The visualization community has also investigated what should constitute a ``goo
 %We can see that they did not use rainbow color map much like before 2007. A paper of IEEE 
 %transaction on visualization and computer graphics do research on rainbow color map but also 
 %confirm that rainbow color map can significantly reduce a personï¿½s accuracy and efficiency. These 
-%gives us some questions, why rainbow color is used very often in non-technique papers, do they 
+%gives us some questions, why rainbow color is used very often in nontechnique papers, do they 
 %aware about their limitations?, should AIAA papers use rainbow color map or Visualization 
 %community should change to use other color map techniques than rainbow color map technique? 
 %and what color map technique that we should use instead of rainbow color map?
@@ -553,9 +553,24 @@ The visualization community has also investigated what should constitute a ``goo
 % write about visualization in common of vis community and what is vis perspective of AIAA
 
 
-\subsection{Evaluation \& user studies}
+\subsection{Evaluation and User Studies}
 
-In recent years, the Visualization community has seen a substantial increase in the number of papers dealing with evaluation of visualization techniques published within {\em IEEE TVCG}.  Figure \ref{fig:tvcg} shows the number of such papers published per year within the {\em IEEE TVCG} journal. The data was obtained by searching the {\em TVCG} website for the keywords ``evaluation'', ``user study'', ``design study'', and ``case study'' in articles published in the period between 2002 and 2012. We then read the abstracts to make sure the papers were indeed relevant. From this corpora, $96\%$ of the aforementioned articles were user studies.
+In recent years, the Visualization community has seen a substantial increase in the number of papers dealing with evaluation of visualization techniques published within {\em IEEE TVCG}.  Figure \ref{fig:tvcg} shows the number of such papers published per year within the {\em IEEE TVCG} journal. The data were obtained by searching the {\em TVCG} website for the keywords ``evaluation'', ``user study'', ``design study'', and ``case study'' in articles published in the period between 2002 and 2012. We then read the abstracts to make sure the papers were indeed relevant. From this corpora, $96\%$ of the aforementioned articles were user studies.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.5\linewidth]{chapter6/figures/evaluation_tvcg.png}
+  \caption{\label{fig:tvcg}Evolution of the number of papers published on the topic of evaluation at TVCG.}
+\end{figure}
+
+ \begin{figure}[t]
+ 	\centering
+       \includegraphics[width=1\linewidth]{chapter6/figures/ust_kirby}
+   \caption{Comparing visualization methods for steady 2D vector fields \cite{Laidlaw:2005:CVF:1032290.1032538}. Top: standard arrow visualization, jittered arrow, icons using concepts borrowed from oil painting, respectively. Bottom: line-integral convolution, image-guided streamlines, streamlines seeded in a regular grid, respectively. Image used with permission.}
+   \label{fig:user_study}
+ \end{figure}
+
+
 
 %We searched IEEE Transactions on Visualization and Computer Graphics (TVCG) from 2002 to 2012 for papers with some current visualization trends such as design study, case study, user study, uncertainty visualization, verification, validation and evaluation. Table 1 shows the statistics and trends from 2002 to 2012 IEEE TVCG papers present design study, case study, user study, uncertainty visualization, verification, validation and evaluation.
 %Figure 2 also shows the trends of these popular techniques in visualization community from 2002 to 2012. We can see that evaluation technique is more popular in visualization community than 6 other visualization techniques and it grow much in 2011. User study technique is increased much more in 2011 and 2012.
@@ -587,30 +602,17 @@ In recent years, the Visualization community has seen a substantial increase in 
 %\end{tabular}
 %\end{table}
 
-\begin{figure}[b]
-\centering
-\includegraphics[width=0.5\linewidth]{chapter6/figures/evaluation_tvcg.png}
-  \caption{\label{fig:tvcg}Evolution of the number of papers published on the topic of evaluation at TVCG.}
-\end{figure}
  
 %With user study technique in 2011 and 2012, $94\%$ papers conducted their own user study with number of participant is less than 70. Only $6\%$ papers used the previous works to get the results of user study. 
 %
-%[This goes to the opportunities section] We also reviewed all user study papers of IEEE TVCG from 2008 to 2012 and found that almost papers did not cite papers from non-technique community such as AIAA community. Some papers cite papers from non-technique community less than $20\%$ of total reference papers. 
+%[This goes to the opportunities section] We also reviewed all user study papers of IEEE TVCG from 2008 to 2012 and found that almost papers did not cite papers from nontechnique community such as AIAA community. Some papers cite papers from nontechnique community less than $20\%$ of total reference papers. 
 % will write more this part
 
 As a representative example, we focus on a user study by Laidlaw \emph{et al.} \cite{Laidlaw:2005:CVF:1032290.1032538} comparing techniques for the visualization of steady 2D vector fields.
-The authors recruited five experts and 12 non-experts users to evaluate the efficacy of each of the six techniques displayed in Figure \ref{fig:user_study}. The evaluation was measured by the user performance during the execution of several tasks of three types: critical point detection; critical points classification; and simulation of particle advection. The first two tasks are standard whereas the third task is motivated by the fact that often experts were interested in the global flow direction. The three tasks were chosen based on the authors interaction with fluid mechanics researchers. 
-The authors built a collection of 500 vector fields for evaluation of the tasks. Among the results, they cite no significant difference between experts and non-experts regarding accuracy in the tasks or the response times. More interestingly, performance when using the standard method of arrows on a regular grid (GRID in Figure \ref{fig:user_study}) falls below average for multiples tasks involving critical points location, classification and advection (which means that users required more time to complete the task and committed more errors). On the other end of the spectrum, user performance when using GSTR consistently scored above average. Another similar study compare the user performance when using line and tube integral curves (with monoscopic and stereoscopic viewing) for 3D vector field data \cite{Forsberg:2009:CVF:1638611.1639226}. User study can be a powerful tool for helping users choose the best tool for their needs and the visualization community has been working on evaluating and testing techniques as they become more widespread.
+The authors recruited five experts and 12 nonexperts users to evaluate the efficacy of each of the six techniques displayed in Figure \ref{fig:user_study}. The evaluation was measured by the user performance during the execution of several tasks of three types: critical point detection; critical points classification; and simulation of particle advection. The first two tasks are standard whereas the third task is motivated by the fact that often experts were interested in the global flow direction. The three tasks were chosen based on the authors interaction with fluid mechanics researchers. 
+The authors built a collection of 500 vector fields for evaluation of the tasks. Among the results, they cite no significant difference between experts and nonexperts regarding accuracy in the tasks or the response times. More interestingly, performance when using the standard method of arrows on a regular grid (GRID in Figure \ref{fig:user_study}) falls below average for multiples tasks involving critical points location, classification, and advection (which means that users required more time to complete the task and committed more errors). On the other end of the spectrum, user performance when using GSTR consistently scored above average. Another similar study compare the user performance when using line and tube integral curves (with monoscopic and stereoscopic viewing) for 3D vector field data \cite{Forsberg:2009:CVF:1638611.1639226}. User study can be a powerful tool for helping users choose the best tool for their needs and the visualization community has been working on evaluating and testing techniques as they become more widespread.
 
- \begin{figure}[t]
- 	\centering
-       \includegraphics[width=1\linewidth]{chapter6/figures/ust_kirby}
-   \caption{Comparing visualization methods for steady 2D vector fields \cite{Laidlaw:2005:CVF:1032290.1032538}. Top: standard arrow visualization, jittered arrow, icons using concepts borrowed from oil painting, respectively. Bottom: line-integral convolution, image-guided streamlines, streamlines seeded in a regular grid, respectively. Image used with permission.}
-   \label{fig:user_study}
- \end{figure}
- 
-
-%There are some methods of user study researchers can use such as list of questions and answers for users or define tasks and number of users to test their methods or systems to get the answers. For example, \cite{Comparing 2D Vector Field Visualization Methods: A User Study} published one paper in TVCG of comparing 2D vector field visualization methods by user study. They generated 500 3D vector field data sets from images and defined tasks to compare 6 visualization methods such as GRID, JIT, LIT, LIC, OSTR, and GSTR. The tasks is representative of interactions that users perform with different visualization methods. The authors also interviewed fluid mechanics researches to identify good representative tasks. The users are 5 experts and 12 non-experts. From this user study, they can figure out which technique perform the best. These paper's results will be good recommendation visualization techniques that AIAA community and other communities should use. 
+%There are some methods of user study researchers can use such as list of questions and answers for users or define tasks and number of users to test their methods or systems to get the answers. For example, \cite{Comparing 2D Vector Field Visualization Methods: A User Study} published one paper in TVCG of comparing 2D vector field visualization methods by user study. They generated 500 3D vector field data sets from images and defined tasks to compare 6 visualization methods such as GRID, JIT, LIT, LIC, OSTR, and GSTR. The tasks is representative of interactions that users perform with different visualization methods. The authors also interviewed fluid mechanics researches to identify good representative tasks. The users are 5 experts and 12 nonexperts. From this user study, they can figure out which technique perform the best. These paper's results will be good recommendation visualization techniques that AIAA community and other communities should use. 
 
 % number of user study
 %[We need to talk about this] There is a question on how many users should use in user study? In 50 papers of user study in TVCG from 2008 to 2012, there are only 2 papers use more than 70 users, otherwise use less than 70 users such as  \cite{Evaluating Sketchiness as a Visual Variable for the Depiction of Qualitative Uncertainty} paper user 1136 participants. $93\%$ of these papers conducted their own user study and $7\%$ papers user previous works. These user study papers mentioned less than 7 techniques. 
@@ -630,7 +632,7 @@ The AIAA community is  familiar with both topics. In this chapter, however, we p
 
 % will insert figures and more details of paper [1]
 
-\begin{figure}[t]
+\begin{figure}[b]
 \centering
 \includegraphics[width=1\linewidth]{chapter6/figures/curve.png}
 \caption{The four uncertainty visualization methods used by Sanyal \emph{et al.} \cite{Sanyal:2009:USC:1638611.1639227} in their user study. From left to right: glyphs size, glyphs color mapping, surface color mapping, and error bars.}
@@ -648,15 +650,15 @@ The AIAA community is  familiar with both topics. In this chapter, however, we p
 %\label{fig:uncertain_user_study}
 %\end{figure}
 
-\subsection{Uncertainty visualization}
+\subsection{Uncertainty Visualization}
 
 In the course of scientific inquiry, uncertainty is the norm. The visualization community has recently turned its attention to uncertain data, and is trying to solve problems on how to best compute and convey uncertainty information. Since 2010, around 30 papers were published at {\em TVCG} on the topic, with application on information visualization and scientific visualization. So far, the community has seen several different representation for uncertainty, varying from traditional method such as bars, glyphs, and colors, to texture, multi-layering, animations, and volume rendering. At the AIAA community, we analyzed ten papers since 2010 dealing with material uncertainty, uncertainty in flows, and fluid simulation. The visualization step, on the other hand, is restricted almost exclusively to error bars and charts.
 
 In the user study conducted by Sanyal \emph{et al.} \cite{Sanyal:2009:USC:1638611.1639227},  the authors evaluate the effectiveness of four commonly used uncertainty visualization techniques: namely, glyphs size, glyphs color mapping, surface color mapping, and error bars (see Figure \ref{fig:uncertainty_user_study} for examples). The users performed two search tasks by identifying regions that are least and most uncertain, and two counting tasks where users counted the number of data and uncertainty features. The authors reported that, in general,  users required more time and committed more mistakes when using error bars. The authors conjecture that a possible reasons for the poor performance displayed by error bars is due to the high density of the dataset used in their study. Nevertheless, a similar pattern can be found in the AIAA community (\emph{e.g.}, see Figures 4 and 6 in Chassaing and Lucor \cite{Chassaing:2010:SIF:27267063}). 
 
-Several techniques for uncertainty visualization of vector fields are available. Botchen \emph{et al.} \cite{10.1109/VIS.2005.97} introduces a texture-mapping approach  for uncertainty visualization of 2D vector fields. Hlawatsch \emph{et al.} \cite{hlawatsch:2011:FRGU} introduces a new static visualization of unsteady vector fields with uncertainty based on a new type of glyph. Osorio and Brodlie \cite{allendes2009uncertain} introduce a LIC-based method for uncertainty visualization. The work by Petz \emph{et al.} \cite{CGF:CGF3097} uses Gaussian random fields and takes into account spatial correlation of the data, which affects vector field features. Fout and Ma \cite{Fout2012} presents a framework based on possibility theory for uncertainty visualization and as a case study, the authors use streamlines in 3D steady vector fields.  Because many researchers have recently turned their attention to uncertainty visualization, this area of research is rapidly evolving.
+Several techniques for uncertainty visualization of vector fields are available. Botchen \emph{et al.} \cite{10.1109/VIS.2005.97} introduce a texture-mapping approach  for uncertainty visualization of 2D vector fields. Hlawatsch \emph{et al.} \cite{hlawatsch:2011:FRGU} introduce a new static visualization of unsteady vector fields with uncertainty based on a new type of glyph. Osorio and Brodlie \cite{allendes2009uncertain} introduce a LIC-based method for uncertainty visualization. The work by Petz \emph{et al.} \cite{CGF:CGF3097} uses Gaussian random fields and takes into account spatial correlation of the data, which affects vector field features. Fout and Ma \cite{Fout2012} presents a framework based on possibility theory for uncertainty visualization and as a case study, the authors use streamlines in 3D steady vector fields.  Because many researchers have recently turned their attention to uncertainty visualization, this area of research is rapidly evolving.
 
-\subsection{Verifiable visualization}
+\subsection{Verifiable Visualization}
 
 As Chapter \ref{chap:geometry} and \ref{chap:topology} has shown, there has been work on
 the verification of the implementation of isosurface extraction algorithms.
@@ -717,8 +719,8 @@ the verification of the implementation of isosurface extraction algorithms.
 %to their framework. Any implementation
 %that preserves topology of the trilinear interpolant should be able
 %to reproduce the case 13.5.2 of the extended marching cubes
-%table \cite{lopes:tvcg:2003}. The authors  were able to find non-trivial bugs in the
-%implementation and a non-obvious algorithm detail that is not
+%table \cite{lopes:tvcg:2003}. The authors  were able to find nontrivial bugs in the
+%implementation and a nonobvious algorithm detail that is not
 %discussed in either Chernyaev's or Lewiner's work. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -727,11 +729,11 @@ the verification of the implementation of isosurface extraction algorithms.
 
 Much of the early motivation for flow visualization in the
 visualization community came from the AIAA community, but over the last
-two decades it appears that a major gap has developed, and
+two decades, it appears that a major gap has developed, and
 developments in the visualization community have been done much more
 independently of applications and new developments in the aeronautics
 area. This is in part due to the different needs of the many users of 
-visualization techniques, including, the automotive industry, meteorology, 
+visualization techniques, including the automotive industry, meteorology, 
 medical imaging, geosciences, to cite a few. 
 Summarizing decades of developments in the field of flow visualization and
 related areas is a nontrivial process. As an alternative,
@@ -759,7 +761,7 @@ visualization community to continue to seek out how to be relevant to
 collaborators such as our colleagues in the AIAA community, and
 the challenge of disseminating the advances made by the visualization 
 community to application domains.
-Over the last twenty years, visualization techniques have merged as a
+Over the last 20 years, visualization techniques have merged as a
 key enabling technology for computation science by helping people
 explore and explain data through the creation of both static and
 interactive visual representations. Visualizations libraries such as
@@ -769,17 +771,17 @@ them.
 The most powerful of these algorithms are often based on complex
 mathematical concepts, {\em e.g.}, Morse-Smale complex, spectral
 analysis, and partial differential equations (PDEs). Robust
-implementations of these techniques require the use of non-trivial
+implementations of these techniques require the use of nontrivial
 techniques. The overall complexity and size of these datasets leave no
 room for inefficient code, thus making their implementation even more
 complex. The complexity of the codes coupled with the new
-visualization techniques make it highly non-trivial for non-experts to
+visualization techniques make it highly nontrivial for nonexperts to
 use them, although, in principle, it should be ``easier''. 
 
 We believe better connections between the two communities have the
 chance to improve the adoption of new techniques.  Furthermore, by
 working together, AIAA researchers can also help the Visualization community not
-only by providing new problems and datasets and be a major driver of
+only by providing new problems and datasets and being a major driver of
 problems to the community (such as they were when the visualization
 field was coming of age), but also by making sure the needs of the
 AIAA community are reflected in new research topics in Visualization.
@@ -791,14 +793,14 @@ AIAA community are reflected in new research topics in Visualization.
 
 In this chapter, we have briefly visited two decades worth of flow visualization.
 %
-In particular, we first focused on vector field visualization. In this regard, we presented a classification of flow visualization seen from the perspective of the Visualization community and contrasted it with AIAA publications containing flow visualization over the last three years. By exposing the current advances in visualization, we have a starting point for building a common research agenda that can benefit both communities.
+In particular, we first focused on vector field visualization. In this regard, we presented a classification of flow visualization seen from the perspective of the Visualization community and contrasted it with AIAA publications containing flow visualization over the last 3 years. By exposing the current advances in visualization, we have a starting point for building a common research agenda that can benefit both communities.
 %
 In addition, we have also visited some topics related to flow visualization that have been attracting attention  in the Visualization community, namely, evaluation of visualization techniques, perception, uncertainty visualization, and verifiable visualization.  The common thread in all these topics is the need for improving  visualization techniques in general via error mitigation, and understanding how visualization can improve the user cognitive process. We showed some of the recent work on each of these topics in the context of flow visualization.
 %
 As we mentioned at the start, (computational) flow visualization is a research area that was birthed simultaneously in
 two communities, and early in its development benefited from strong interaction between the communities.  It is our hope
 that a more tight coupling between the research needs/interests of the AIAA community and the research agendas of the
-Visualization community can be developed.  This can only happen through cooperation, collaboration and communication.  
+Visualization community can be developed.  This can only happen through cooperation, collaboration, and communication.  
 In part, we hope that this work is the start of a dialog between the two communities.
 
 %\section*{Acknowledgments}
