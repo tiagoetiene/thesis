@@ -113,42 +113,35 @@ already asserted its need~\cite{Globus:1994:FWS:182452.182465, globus95,kirby-vv
 
 We advocate that all visualization algorithms and implementation should be verified.
 Hence, the main contribution to this dissertation is to advance the theory and practice of verifying visualizations. We do so by extracting important mathematical properties of the algorithms under verification. Then, we verify whether the implementation honors that property by stress testing it. As in the case of falsification of scientific theories, a mismatch reveals a problem; in the case of visualization, the problem will lie in the implementation, algorithm, or verification process. On the other hand, if the implementation honors the property of interest for all performed tests, then nothing can be said about the correctness of the implementation and algorithm, except that it has stood severe stress tests. More specifically, our contribution can be summarized as follows:
-\begin{enumerate}[noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt]
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item Chapter \ref{chap:geometry}: Verifying Geometry of Isosurface Extraction Algorithms \cite{etiene:tvcg:2009}.
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
-\setlength{\topsep}{0pt}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item We introduce a framework for the verification of visualization tools based on the Method of Manufactured Solutions, and show how to apply it for the verification of geometrical properties of isosurface extraction algorithms and implementations;
 \item We provide the required mathematical analysis for the implementation of the verification procedure. The important properties that should be honored are derived from this mathematical analysis;
 \item We show concrete results, and show how this verification procedure helped us to find and fix problems in both algorithm and implementation. Moreover, we show that it is not trivial to find solutions that are both geometrically accurate and honors additional properties (such as triangle quality);
 \item As a by-product of the verification, we detail the behavior of several freely available implementations;
 \end{enumerate}
 \item Chapter \ref{chap:topology}: Verifying Topology of Isosurface Extraction Algorithms \cite{Etiene:2012:TVI:2197070.2197097}.
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
-\setlength{\topsep}{0pt}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item We introduce a framework for verification of topological properties of isosurface extraction algorithms;
 \item We derive a framework based on Digital Topology for the extraction of important invariants (topological properties) that should be honored by topologically correct implmentations;
 \item In addition, we derive a framework based on Stratified Morse Theory for the extraction of important invariants;
 \item We detail the behavior of several freely and commercially available implementations of isosurface extraction; We show that all but one implementation failed our tests;
 \end{enumerate}
 \item Chapter \ref{chap:mc33}: Practical Considerations on the Topological Correctness of Marching Cubes 33 \cite{Lis2013}.
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item We show that both the Marching Cubes 33 algorithm and implementation have problems that prevents its topological correctness. Moreover, one of the problems is traced back to its original publication;
 \item We propose a new and alternative ways to deal with the issues raised;
 \item Building on recent efforts on executable papers, we provide new ways to interact with our work so as to improve understanding and reproducibility of the results shown;
 \end{enumerate}
 \item Chapter \ref{chap:vr}: Verifying Direct Volume Rendering Algorithm~\cite{Etiene:2013}.
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item We introduce a framework for verification of volume rendering algorithms and implementations;
 \item We provide the error analysis of the standard volume rendering integral that is crucial for the verification procedure;
 \item We show how we used this information to find and fix problems in widely used volume rendering  implementations. Moreover, we provide a first attempt to detect the sensitivity of the verification procedure;
 \end{enumerate}
 \item Chapter \ref{chap:aiaa}: flow visualization and reliable visualizations~\cite{Etiene:Flow:2013}.
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item We provide an overview of the some of the topics involved in reliable visualization. We focus on flow visualization and supporting tools.
 \end{enumerate}
 \end{enumerate}
