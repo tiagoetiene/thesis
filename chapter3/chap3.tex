@@ -20,18 +20,7 @@ Unfortunately, the accuracy, reliability, and robustness of visualization
 algorithms and their implementations have not in general fallen under
 such scrutiny as have other components of the scientific computing
 pipeline.
-%
 
-%The main goal of verifiable visualization is to increase confidence in
-%visualization tools~\cite{kirby-vv-08}.
-%%,and is the main motivation of this paper as well.  
-%Verifiable visualization tries to develop systematic mechanisms for
-%identifying and correcting errors in both algorithms and
-%implementations of visualization techniques.  As an example, consider
-%a recent scheme to check geometrical properties of isosurface
-%extraction~\cite{etiene:tvcg:2009}.  By writing down easily checkable
-%convergence properties that the programs should exhibit, the authors
-%identified bugs in isosurfacing codes that had gone undetected.
 
 We strive for verification tools which are both \emph{simple} and
 \emph{effective}. Simple verification methods are less likely to have
@@ -61,24 +50,17 @@ By manufacturing a model whose known behavior should be reproduced by
 the techniques under analysis, MMS can check whether they meet
 expectations.
 
-%Etiene \emph{et al.} have recently used this method to verify geometrical properties of
-%isosurfacing codes~\cite{etiene:tvcg:2009}, and topological
-%verification naturally follows.
-%
 An important contribution of this work is the selection of
 significant topological characteristics that can be verified by
 software methods.
 %
-We use results from two fields in computational topology, namely
+We use results from two fields in computational topology, namely,
 digital topology and stratified Morse theory.
-%
-% The
-% selection of compelling test cases requires not only conceptual insight, but also
-% experimental testing.
+
 
 In summary, the main contributions of this work can be stated as
 follows:
-\begin{enumerate}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item In the spirit of verifiable visualization, we introduce a
   methodology for checking topological properties of publicly and
   commercially available isosurfacing software.
@@ -90,18 +72,10 @@ follows:
   field. The technique relies on stratified Morse theory and allows
   us to verify topological properties of isosurfaces with boundaries.
 \item We propose a mechanism to manufacture isosurfaces with
-  non-trivial topological properties, showing that this simple
+  nontrivial topological properties, showing that this simple
   mechanism effectively stresses isosurfacing programs. As input, we
   also assume a piecewise trilinear scalar field defined on a regular
   grid.
-% cscheid: The sentence below does not belong here.
-%
-% We should clarify that when applying MMS for other techniques (and even in
-% the case of isosurface extraction), the theoretical analysis should be
-% tailored to the particular features of these algorithms.
-%
-%as the same framework 
-%can be adopted to scrutinizing other visualization methods.
 \end{enumerate}
 The verification process produces a comprehensive record of the desired properties
 of the implementations, along with an objective assessment of whether these
@@ -135,8 +109,7 @@ In this section, we focus
 on methods that deal with
 topological issues that naturally appear in isosurfacing. 
 
-%\paragraph*{Topology-aware Isosurfacing}
-\textbf{Topology-aware Isosurfacing}.
+\subsection{Topology-aware Isosurfacing}
 Arguably the most popular isosurface extraction technique, Marching Cubes~\cite{lor87}
 (MC) processes one grid cell 
 at a time and uses the \emph{signs} of each grid node (whether
@@ -177,7 +150,7 @@ interpolant on grid cell faces~\cite{Nielson:1991:ADR:949607.949621}.
 %
 Their method cannot always reproduce the
 topology of trilinear interpolation because there remain  ambiguities
-internal to a grid cell: pairs of non-homeomorphic isosurfaces could
+internal to a grid cell: pairs of nonhomeomorphic isosurfaces could
 be homeomorphic when restricted to the grid cell faces.
 %
 This problem has been recognized by Natarajan~\cite{Natarajan:1994:GTC:205424.205429} and 
@@ -186,8 +159,7 @@ triangulation schemes.
 %
 This line of work has inspired many other ``topology-aware'' triangulation
 methods,
-such as Cignoni \emph{et al.}'s reconstruction
-technique~\cite{Cignoni00reconstructionof}.
+such as the reconstruction technique of Cignoni \emph{et al.}~\cite{Cignoni00reconstructionof}.
 %
 Subsequent work by Lopes and Brodlie~\cite{lopes:tvcg:2003} and
 Lewiner \emph{et al.}~\cite{Lewiner:2003} has finally provided triangulation patterns covering
@@ -199,8 +171,7 @@ has been recently studied by Carr and Snoeyink~\cite{CS08}, and Carr
 and Max~\cite{10.1109/TVCG.2009.10}. A discussion about these can be found in
 Section~\ref{sec:smt}.
 
-% \paragraph*{Verifiable Visualization}
-\textbf{Verifiable Visualization}.
+\subsection{Verifiable Visualization}
 Many of the false steps in the route from the
 original MC algorithm to the recent homeomorphic solutions
 could have been avoided with a systematic procedure to verify the
@@ -286,7 +257,7 @@ the verification as we would in the implementation.
 Therefore, we need properties that are simple to state, easy to check,
 and good at catching bugs.
 
-\textbf{Simple example}. Although the previously mentioned problem
+\subsection{Simple example} Although the previously mentioned problem
 with Marching Cubes~\cite{lor87} is well-known, it is not
 immediately clear what topological properties
 fail to hold. For example, ``the output of Marching Cubes cannot
@@ -346,7 +317,7 @@ their relative strengths and weaknesses, and discuss how to robustly check
 their values.  Figure~\ref{fig:pipeline} shows our pipeline to assess
 topological correctness and also the chapter organization.
 
-\begin{figure}[t]
+\begin{figure}[b]
 \begin{center}
 \includegraphics[width=1.0\linewidth,keepaspectratio=true]{chapter3/figures/pipeline.pdf}
 \caption{Overview of our topology verification pipeline. First step,
@@ -365,7 +336,7 @@ This section describes the mathematical machinery used to derive the
 topology verification tools. More specifically, we provide a summary
 of the results we need from digital topology and stratified Morse
 theory.  A detailed discussion on digital topology can be found in
-Stelldinger \emph{et al.}'s paper~\cite{siqueira:2007}, and Goresky and
+the work by Stelldinger \emph{et al.}~\cite{siqueira:2007}, and Goresky and
 MacPherson give a comprehensive presentation of stratified Morse
 theory~\cite{Goresky:1988:SMT}.
 
@@ -390,12 +361,12 @@ the Betti numbers: the rank of the $i$-th homology group of
 $\mathcal{M}$.
 %$\beta_i = \text{rank} H_i(M)$ is the Betti number and $H_i(M)$ is
 %the $i^{th}$ Homology group.
-Intuitively, for 2-manifolds, $\beta_0$, $\beta_1$ and $\beta_2$
-correspond to the number of connected components, holes and voids
-(regions of the space enclosed by the surface) respectively.  If
+Intuitively, for 2-manifolds, $\beta_0$, $\beta_1$, and $\beta_2$
+correspond to the number of connected components, holes, and voids
+(regions of the space enclosed by the surface), respectively.  If
 $\mathcal{M}$ has many distinct connected components, that is,
 $\mathcal{M} = \bigcup^n_{i = 1} \mathcal{M}^i$ and $\mathcal{M}^i
-\bigcap \mathcal{M}^j = \emptyset$ for $i \neq j$ then
+\bigcap \mathcal{M}^j = \emptyset$ for $i \neq j$, then
 $\chi(\mathcal{M}) = \sum_{i}^n \chi(\mathcal{M}^i)$. More details
 about Betti numbers, the Euler characteristic, and homology groups can
 be found in Edelsbrunner and Harer's text~\cite{edelsbrunner10}. The
@@ -404,7 +375,7 @@ two homeomorphic topological spaces will have the same Euler
 characteristic and Betti numbers whenever these are well-defined.
 
 
-\subsection{Digital topology}
+\subsection{Digital Topology}
 \label{sec:digital-topology}
 
 Let $\mathcal{G}$ be an $n\times n \times n$ cubic regular grid with a
@@ -424,7 +395,7 @@ follows, $t(x)=\alpha$ will be considered a compact, orientable
 %> \alpha$ if $ e(s_i) < \alpha$.
 We say that a cubic cell $c_i$ of $\mathcal{G}$ is \emph{unambiguous}
 if the following two conditions hold simultaneously:
-\begin{enumerate}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item any two vertices $s_a$ and $s_b$ in $c_i$ for which
   $e(s_a)<\alpha$ and $ e(s_b)<\alpha$ are connected by \emph{negative
   edges}, i. e., a sequence of edges $s_as_1,s_1s_2,\ldots,s_ks_b$ in
@@ -441,7 +412,7 @@ if the following two conditions hold simultaneously:
  row in Figure~\ref{fig:topology_preserving} shows all possible
  unambiguous cases.
 
-\begin{figure}[t]
+\begin{figure}[b]
 \begin{center}
 \includegraphics[width=1\linewidth,keepaspectratio=true]{chapter3/figures/mi.pdf}
 \caption{An illustration of the relation between unambiguous
@@ -488,7 +459,7 @@ though, we need a few more definitions.
 \caption{The four distinct groups of vertices $O, F, E, C$, are
   depicted as black, blue, green, and red points. They are the ``Old'',
   ``Face'', ``Edge,'' and ``Corner'' points of a voxel region
-  $V_\mathcal{G}$ (semitransparent cube) respectively. For the sake of
+  $V_\mathcal{G}$ (semitransparent cube), respectively. For the sake of
   clarity, we only show a few points.}  
 \label{fig:voxelgrid}
 \end{figure}
@@ -515,7 +486,7 @@ refined grid $\mathcal{G}^\prime$.  Given a scalar value $\alpha$, the
 \emph{digital object} $\mathcal{O}_\alpha$ is the subset of voxels $v$
 in $V_{\mathcal{G^\prime}}$ such that $v\in\mathcal{O}_\alpha$ if at
 least one of the criteria below are satisfied:
-\begin{itemize}
+\begin{itemize}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item $v\in O$ and $e(v)\leq\alpha$
 \item $v\in F$ and both neighbors of $v$ in $O$ have scalars less than
   (or equal to) $\alpha$
@@ -569,11 +540,11 @@ F)+\mathpzc{N}(s,E)| \geqslant 12$
 The importance of $\mathcal{O}_\alpha$ is two-fold. First, the
 boundary surface of the union of the voxels in $\mathcal{O}_\alpha$,
 denoted by $\partial\mathcal{O}_\alpha$ and called a \emph{digital
-  surface}, is a $2$-manifold (See the proof by Stelldinger et
+  surface}, is a $2$-manifold (see the proof by Stelldinger et
 al.~\cite{siqueira:2007}). Second, the genus of
 $\partial\mathcal{O}_\alpha$ can be computed directly from
 $\mathcal{O}_\alpha$ using the algorithm proposed by Chen and Rong
-\cite{LiChen:2008} (Algorithm~\ref{alg:compute-invariant}). As the
+\cite{LiChen:2008}. As the
 connected components of $\mathcal{O}_\alpha$ can also be easily
 computed and isolated, one can calculate the Euler characteristic of
 each connected component of $\mathcal{O}_\alpha$ from the formula
@@ -603,12 +574,9 @@ where $cl_{\mathbb{R}^3}$ denotes the closure operator. We note that
 $\partial \mathcal{O}_i$ is a 2-manifold for all $i$
 \cite{SPB04,siqueira:2007}.  There are two main parts to the proof
 presented here. For each $i$,
-\begin{enumerate}
-%\vspace{-0.1in}
+\begin{enumerate}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
 \item the 2-manifolds $t_i$ and $\partial \mathcal{O}_i$ are homeomorphic; and
-%\vspace{-0.1in}
 \item both $t_i$ and $\partial \mathcal{O}_i$ cut the same edges and faces of $c_i$.
-%\vspace{-0.1in}
 \end{enumerate}
 
 Since $t$ is trilinear, no level-set of $t$ can intersect an edge more
@@ -684,7 +652,7 @@ differs only if the interval $[\alpha, \alpha + \epsilon]$ contains a
 critical value ($f(p)$ is a critical value iff $p$ is a critical
 point). Moreover, if $\varepsilon_p$ is a small neighborhood around
 $p$ and $L^-(p)$ and $L^+(p)$ are the subset of points on the boundary
-of $\varepsilon_p$ satisfying $f(x)<f(p)$ and $f(x)>f(p)$
+of $\varepsilon_p$ satisfying $f(x)<f(p)$ and $f(x)>f(p)$,
 respectively, then the topological change from the isosurface
 $f(x)=f(p)-\epsilon$ to $f(x)=f(p)+\epsilon$ is characterized by
 removing $L^-(p)$ and attaching $L^+(p)$. Thus, changes in the Euler
@@ -723,7 +691,7 @@ literature~\cite{Weber:2002:ESF}, there are complications. For
 example, the scalar field in a node
 of the regular grid might not have \emph{any} partial
 derivatives. Although one can still argue about the
-intuitive concepts of minima and maxima around a non-differentiable point,
+intuitive concepts of minima and maxima around a nondifferentiable point,
 configurations such as saddles are more problematic, since their
 topological behavior is different depending on whether they are on the
 boundary of the domain. It is 
@@ -783,7 +751,7 @@ $T_\varepsilon(p)$ with scalar values less than that in $p$ (see Figure \ref{fig
 \includegraphics[width=0.15\linewidth]{chapter3/figures/ilustration.png}
 \caption{\label{fig:chap4:smt} Example of tangential and normal link.}
 \end{figure}
-Similarly we can define the \emph{upper tangential} link $T_L^+(p)$ as
+Similarly, we can define the \emph{upper tangential} link $T_L^+(p)$ as
 the set of points in the boundary of $T_\varepsilon(p)$ with scalar
 value higher than that at $p$.  \emph{Lower normal} $N_L^-(p)$ and
 \emph{upper normal} $N_L^+(p)$ links are analogous notions, but the
@@ -799,13 +767,13 @@ given by
 L^-(p) = (T_\varepsilon(p) \times N_L^-(p)) \cup (N_\varepsilon(p)
 \times T_L^-(p)) \label{eq:lowerstratifiedlink}.
 \end{equation}
-These definitions allow us to classify critical points even in the non-smooth scenario.
+These definitions allow us to classify critical points even in the nonsmooth scenario.
 They let us compute topological changes with
 the same methodology used in the smooth case. In other words, when a
 scalar value $\alpha$ crosses a critical value $\alpha_p$ in a
 critical point $p$, the topological change in the isosurface is
 characterized by removing $L^-(p)$ and attaching $L^+(p)$, affecting
-the Euler characteristic as defined in Equation~\ref{eq:deltachi}.%\cite{?}.
+the Euler characteristic as defined in Equation~\eqref{eq:deltachi}.%\cite{?}.
 
 The remaining problem is how to determine $\chi(L^-(p))$ and
 $\chi(L^+(p))$. 
@@ -840,7 +808,7 @@ which gives the final result
 \end{equation}
 
 The same result is valid for $\chi(L^+)$, if we replace the 
-superscript `$-$' by `$+$' in Equation~\ref{eq:lowerchi}. If $T_L^-$ or
+superscript `$-$' by `$+$' in Equation~\eqref{eq:lowerchi}. If $T_L^-$ or
 $T_L^+$ are one-dimensional, then we are done. If not, then we can
 recursively apply the same equation to $T_L^-$ and $T_L^+$ and look at
 progressively lower-dimensional strata until we reach
@@ -857,9 +825,9 @@ points mentioned above.
 %the Euler characteristic of the surface.
 %
 Critical points in the interior of cubic cells are handled by the
-smooth theory, since in that case the normal Morse data is
+smooth theory, since in that case the normal Morse data are
 0-dimensional. This implies that the link will be an empty set with
-Euler characteristic zero. So, by Equation~\ref{eq:lowerchi},
+Euler characteristic zero. So, by Equation~\eqref{eq:lowerchi},
 $\chi(L^-) = \chi(T_L^-)$. Because the restriction of the scalar field
 to a grid edge is a linear function, no critical point can appear
 there. As a result, the new cases are critical points occurring at
@@ -868,7 +836,7 @@ point $p$ in a vertex, stratification can be carried out recursively,
 using the edges of the cubes meeting in $p$ as tangential and normal
 submanifolds. Denoting by $n_{l1},n_{l2},n_{l3}$ the number of
 vertices adjacent to $p$ with scalar value less than that of $p$ in
-each Cartesian coordinate direction, Equation~(\ref{eq:lowerchi})
+each Cartesian coordinate direction, Equation~\eqref{eq:lowerchi}
 gives:
 \begin{equation}
 \chi(L^-(p)) = n_{l1}+n_{l2}+n_{l3} - n_{l1}(n_{l2}+n_{l3})
@@ -884,7 +852,7 @@ two $1$-disks (tangential and normal).  Denote by $n_l$ the number of
 ends of $r^\perp$ with scalar value less than that of $p$. Also,
 recalling that the critical point lying in the face $r$ is necessarily
 a saddle, thus having two face corners with scalar values less and two
-higher than that of $p$, Equation~(\ref{eq:lowerchi}) gives:
+higher than that of $p$, Equation~\eqref{eq:lowerchi} gives:
 \begin{equation}
 \chi(L^-(p)) = n_l+2 - 2\,n_l
 \end{equation}
@@ -950,7 +918,7 @@ tests, we consider the implementation verified.
 % (in the sense of analyzed predicted behavior) for all test cases to which
 % it has been applied, increasing our confidence in the stated properties
 
-\subsection{Verification using Stratified Morse Theory}
+\subsection{Verification Using Stratified Morse Theory}
 \label{subsec:smt-verify}
 
 We can use the formulation described in Section~\ref{sec:smt} to
@@ -974,13 +942,13 @@ t_z = (b \Delta_z \pm \sqrt{\Delta_x \Delta_y \Delta_z})/({a \Delta_z}),
 %% \end{eqnarray*}
 \noindent where $\Delta_x = bc-ae$, $\Delta_y = bd-af$, and $\Delta_z
 = cd-ag$~\cite{Pascucci03}.  Critical points on faces of the cubes are found by setting
-$x,y$ or $z$ to either 0 or 1, and solving
+$x,y$, or $z$ to either 0 or 1, and solving
 the quadratic equation.  
 If the solutions lie outside the unit cube $[0, 1]^3$, they are not
 considered critical points, since they lie outside the domain of the cell. The scalar field
 is regenerated if any degenerate critical point is detected (these
 can happen if either the random values in a cubic cell have, by chance, the same value or when 
-$\Delta_x$, $\Delta_y$ or $\Delta_z$ are zero). In order
+$\Delta_x$, $\Delta_y$, or $\Delta_z$ are zero). In order
 to avoid numerical instabilities, we also regenerate the scalar field
 locally if any internal critical point lies too close to the border of
 the domain (that is, to an edge or to a face of the cube).
@@ -1004,24 +972,24 @@ the domain (that is, to an edge or to a face of the cube).
 \end{codebox}
 \caption{\label{alg:manufactured-solutions-smt}Overview of the method of manufactured solutions (MMS) using
 stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
-\ref{ref:chis}. The method either fails to match the expected topology, in
+\eqref{ref:chis}. The method either fails to match the expected topology, in
 which case $\mathcal{G}$ is provided as a counterexample, or
 succeeds otherwise.}
 \end{algorithm}
 
 The third step computes the Euler characteristic of a set of
 isosurfaces with random isovalues in the interval $[-1, 1]$ using the
-theory previously described, jointly with Equation~\ref{ref:chis}.  In
+theory previously described, jointly with Equation~\eqref{ref:chis}.  In
 the final step, the triangle mesh $M$ approximating the isosurfaces is
 extracted using the algorithm under verification, and $\chi(M) = V(M)
 - E(M) + F(M)$, where $V(M),E(M)$, and $F(M)$ are the number of
 vertices, edges, and triangles. If the Euler characteristic computed
 from the mesh does not match the one calculated via
-Equation~\ref{ref:chis}, the verification fails. We carry out the
+Equation~\eqref{ref:chis}, the verification fails. We carry out the
 process a number of times, and implementations that pass the tests are
 less likely to contain bugs.
 
-\subsection{Verification using Digital Topology}
+\subsection{Verification Using Digital Topology}
 \label{subsec:ds-verify}
 
 Algorithm~\ref{alg:manufactured-solutions-digital-surfaces} shows the
@@ -1058,7 +1026,7 @@ be unambiguous.
 %This shows us that the reliability of this verification process depends 
 %only on key concepts with other steps performed in
 %possibly many different ways. 
-For simplicity, in this work we refine $\mathcal{G}$ uniformly
+For simplicity, in this work, we refine $\mathcal{G}$ uniformly
 doubling the grid resolution in each dimension.
 
 \begin{algorithm}[t]
@@ -1174,15 +1142,14 @@ The authors report an improvement in the minimum triangle angle when compared to
 
 \mclewiner\ was introduced by Chernyaev
 \cite{Chernyaev95marchingcubes} to solve ambiguities in the original MC. It
-extends Marching Cubes table from 15 to 33 cases to account for ambiguous cases
+extends the Marching Cubes table from 15 to 33 cases to account for ambiguous cases
 and to reproduce the topology of the trilinear interpolant inside each cube. The
-original table was later modified to remove two redundant cases which leads to 31
+original table was later modified to remove two redundant cases, which leads to 31
 unique configurations. Chernyaev's MC solves face ambiguity using Nielsen and
 Hamann's \cite{Nielson:1991:ADR:949607.949621} asymptotic decider and internal ambiguity
 by evaluating the bilinear function over a plane parallel to a face. Additional
 points may be inserted to reproduce some configuration requiring subvoxel
-accuracy.  We use Lewiner \emph{et al.}'s implementation \cite{Lewiner:2003} of
-Chernyaev's algorithm.
+accuracy.  We use the implementation provided by Lewiner \emph{et al.} \cite{Lewiner:2003}.
 
 \deliso\ \cite{Dey07} is a Delaunay-based approach for isosurface extraction. 
 It uses the intersection of the 3D Voronoi diagram and the desired surface to 
@@ -1205,7 +1172,7 @@ surfaces must be attached back together. The final mesh is
 topologically correct with respect to the trilinear interpolant.
 
 We believe that the implementation of any of these algorithms in full
-detail is non-trivial. The results reported in the following section
+detail is nontrivial. The results reported in the following section
 support this statement. They show that coding isosurfacing algorithms
 is complex and error-prone, and they reinforce the need for robust
 verification mechanisms.
@@ -1219,10 +1186,10 @@ necessarily mean an implementation is incorrect, as we shall see later
 in this section.  After discussions with the developers, however, we
 did find that there were bugs in some of the implementations.
 
-\subsection{Topology consistency}
+\subsection{Topology Consistency}
 \label{sec:consistency}
 
-\begin{table}[b]
+\begin{table}[t]
 \caption{Rate of invariant mismatches using the PL manifold property, digital
 surfaces, and stratified Morse theory for $1000$ randomly generated
 scalar fields (the lower the rate the better).
@@ -1273,10 +1240,10 @@ All implementations were subject to the consistency test
 (Section \ref{sec:consistency-verification}), resulting in the outputs
 reported in the first column of 
 Table~\ref{tbl:verification-ds-stm}. We observed mismatches for
-\deliso, \snapmc\ (with non-zero snap value), and \matlab\ 
+\deliso, \snapmc\ (with nonzero snap value), and \matlab\ 
 implementations. Now, we detail these results.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.33\linewidth,keepaspectratio=true]
 {chapter3/figures/deliso-case-00.pdf}
@@ -1287,27 +1254,27 @@ implementations. Now, we detail these results.
 \caption{\deliso\ mismatch example. From left to right: holes in $C^0$
   regions; single missing triangle in a smooth region; duplicated
   vertex (the mesh around the duplicated vertex is shown). These
-  behavior induce topology mismatches between the generated mesh and
+  behaviors induce topology mismatches between the generated mesh and
   the expected topology.}
 \label{fig:pproblem-deliso}
 \end{figure}
 
-\paragraph*{\deliso}
+\subsection{\deliso}
 \label{sec:consistency:deliso}
 We analyzed $50$ cases where \deliso's output mismatched the ground
 truth produced by MMS, and we found that: 1) $28$ cases had incorrect
 hole(s) in the mesh, 2) $15$ cases had missing triangle(s), and 3) $7$
 cases had duplicated vertices.  These cases are illustrated in Figure
 \ref{fig:pproblem-deliso}.  The first problem is possibly due to the
-non-smooth nature of the piecewise trilinear interpolant, since in all
-$28$ cases the holes appeared in the faces of the cubic grid. It is
+nonsmooth nature of the piecewise trilinear interpolant, since in all
+$28$ cases, the holes appeared in the faces of the cubic grid. It is
 important to recall that \deliso\ is designed to reproduce the
 topology of the trilinear interpolant inside each grid cube, but the
 underlying algorithm requires the isosurface to be $C^2$ continuous
 everywhere, which does not hold for the piecewise trilinear
 isosurface.
 %are only guranteed to be $C^0$. 
-In practice, real world datasets such as medical images may induce
+In practice, real-world datasets such as medical images may induce
 ``smoother'' piecewise trilinear fields when compared to the extreme
 stressing from the random field, which should reduce the incidence of
 such cases. Missing triangles, however, occurred in the interior of
@@ -1322,19 +1289,19 @@ associated with the initial sampling, ray-surface intersection, and the
 3D Delaunay triangulation construction.
 %may compromises the construction of the restricted delaunay. 
 
-\paragraph*{\snapmc.}
+\subsection{\snapmc}
 
-Table \ref{tbl:verification-ds-stm} shows that \snapmc\ with non-zero snap value
+Table \ref{tbl:verification-ds-stm} shows that \snapmc\ with nonzero snap value
 causes the mesh to be topologically inconsistent (Figure 
-\ref{fig:inconsistencies:snapmc}) in more the 50\% of the performed tests. 
+\ref{fig:inconsistencies:snapmc}) in more than 50\% of the performed tests. 
 The reason for this behavior is in the heart of the technique: the snapping process 
 causes geometrically close vertices to be merged together 
 which may eliminate connected components, or loops, join connected
-components or even create non-manifold surfaces. This is why there was an increase
+components, or even create nonmanifold surfaces. This is why there was an increase
 in the number of mismatches when compared with \snapmc\ with zero snap value.
-Since non-manifold meshes are not desirable in many applications, the authors 
-suggest a post-processing for fixing these topological issues, although no implementation
-or algorithm for this post-processing is provided.
+Since nonmanifold meshes are not desirable in many applications, the authors 
+suggest a postprocessing for fixing these topological issues, although no implementation
+or algorithm for this postprocessing is provided.
 
 \begin{figure}[t]
 \centering
@@ -1351,7 +1318,7 @@ or algorithm for this post-processing is provided.
 \includegraphics[width=0.37\linewidth,keepaspectratio=true]
 {chapter3/figures/our_mc.pdf}}
 \caption{Mismatches in topology and geometry. (a) \snapmc\ generates
-  non-manifold surfaces due to the snap process. (b)
+  nonmanifold surfaces due to the snap process. (b)
   \matlab\ generates some edges (red) that are shared by more than two
   face. (c) \mcsimpleflow before (left) and after (right) fixing a bug
   that causes the code to produce the expected topology, but the wrong
@@ -1359,13 +1326,13 @@ or algorithm for this post-processing is provided.
 \label{fig:inconsistencies}
 \end{figure}
 
-\paragraph*{\matlab}
+\subsection{\matlab}
 
 \matlab\ documentation does not specify the properties of the
 implemented isosurface extraction technique. Consequently, it becomes
 hard to justify the results for the high number of mismatches we see
 in Table \ref{tbl:verification-ds-stm}.  For instance, Figure
-\ref{fig:inconsistencies:matlab} shows an example of a non-manifold
+\ref{fig:inconsistencies:matlab} shows an example of a nonmanifold
 mesh extracted using \matlab. In that figure, the two highlighted
 edges have more than two faces connected to them and the faces between
 these edges are coplanar.  Since we do not have enough information to
@@ -1373,7 +1340,7 @@ explain this behavior, this might be the actual expected behavior or
 an unexpected side effect. An advantage of our tests is the record of
 the observed behavior of mesh topologies generated by \matlab.
 
-\paragraph*{\macet}
+\subsection{\macet}
 
 In our first tests, \macet\ failed in all consistency tests for a $5 \times 5 \times 5$ grid. 
 %resolution because the way it traverse the volume for building the triangulation. 
@@ -1382,7 +1349,7 @@ has not been traversed. Once that bug was fixed, \macet\ started to produce
 PL manifold
 meshes and was successful in the consistency test, as shown in Table~\ref{tbl:verification-ds-stm}.
 
-\subsection{Topology correctness}
+\subsection{Topology Correctness}
 \label{sec:correctness}
 
 The verification tests described in Section \ref{subsec:smt-verify}
@@ -1401,14 +1368,14 @@ says that if the algorithms do not preserve the topology of the
 trilinear interpolant, a mismatch should occur.  Interestingly, with
 this test, we were able to find another code mistake in \macet\ that
 prevented it from terminating safely when the SMT procedure was applied. 
-For all non topology-preserving algorithms, there was a high
+For all nontopology-preserving algorithms, there was a high
 number of mismatches as expected.
 
 One might think that the algorithms described in Algorithms
 \ref{alg:manufactured-solutions-smt} and
 \ref{alg:manufactured-solutions-digital-surfaces} do not cover all
 possible topology configurations because 
-some scalar fields are eventually discarded (lines 7 and 6
+some scalar fields are eventually discarded (lines 7 and 6,
 respectively). This could happen due to the presence of ambiguous cells after
 refining the input grid to the maximum tolerance (digital topology test) or 
 critical points falling too close to edges/faces of the cubic cells (SMT
@@ -1425,7 +1392,7 @@ not discarded.
 Notice that no significant differences can be observed, implying that
 our rejection-sampling method does not bias the case frequencies.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.9\linewidth,keepaspectratio=true]
 {chapter3/figures/random-sampling.pdf}
@@ -1470,7 +1437,7 @@ more focused tests.
 \includegraphics[width=0.3\linewidth,keepaspectratio=true]
 {chapter3/figures/mc33-case-00.pdf} 
 \caption{\mclewiner\ mismatch example. From left to right: problem in
-  the case 4.1.2, 6.1.2, and 13.5.2 of marching cube table (all are
+  the case 4.1.2, 6.1.2, and 13.5.2 of Marching Cubes table (all are
   ambiguous). Each group of three pictures shows the obtained,
   expected, and implicit surfaces. Our verification procedure can
   detect the topological differences between the obtained and expected
@@ -1486,7 +1453,7 @@ obtained and expected tiles for a cube.
 Contacting the author,
 we found that one of the mismatches was due
 to a mistake when coding configuration 13 of the MC table. A
-non-obvious algorithm detail that is not
+nonobvious algorithm detail that is not
 discussed in either Chernyaev's or Lewiner's work is the problem of orientation in
 some of the cube configurations~\cite{Lewiner:2010:PC}. The case 13.5.2 shown in Figure
 \ref{fig:problem-mclewiner} (right) is an example of one such configuration, where
@@ -1529,7 +1496,7 @@ convergence is presented in the supplementary material
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
-\subsection{Quality of manufactured solutions}
+\subsection{Quality of Manufactured Solutions}
 Whenever one uses MMS, one very important question is that of the quality
 of the manufactured solutions, since it reflects directly on the
 quality of the verification process. Using random solutions, for which
@@ -1568,31 +1535,17 @@ example of an output generated in the early stages of development of \mcsimplefl
 (right) fixing the bug. The topology matches the expected one (a
 topological sphere); nevertheless, the geometry does not converge. 
 
-
-% \paragraph*{Interpreting behavior}
-% We have talked to the authors of two of the techniques under verification to
-% understand the behavior shown in Table \ref{tbl:verification-ds-stm}. As
-% explained earlier, \mclewiner\ had a code mistake that prevent it from
-% generate
-% the right topology for configuration 13.5.2 of Marching Cubes table. Even
-% after
-% fixing it, there were still some mismatches that need to be explained which
-% motivates the verification cycle. 
-% \paragraph*{Topology Consistency vs. Correctness}
-
 \subsection{SMT vs. DT}
 The verification approach using digital surfaces generates detailed
 information about the expected topology because it provides $\beta_0$, $\beta_1$, and $\beta_2$. 
 However, verifying isosurfaces with boundaries would require
 additional theoretical results, as the theory supporting our verification
 algorithm is only valid for surfaces without boundary.
-%The current framework does not deal with surfaces touching the
-%boundary of the domain although it can be extended to account for it. 
+%
 In contrast, the verification methodology using stratified Morse theory can handle
 surfaces with boundary. However, SMT only provides information 
 about the Euler characteristic, making it harder to determine when the topological verification process fails.
-%Since many application requires extraction of isosurfaces with boundaries, it is
-%also important they are computed correctly. 
+%
 Another issue with SMT is that if a code incorrectly introduces topological features so as
 to preserve $\chi$, then no failure will be detected. For example, suppose the surface to
 be reconstructed is a torus, but the code produces a torus plus three triangles,
@@ -1609,8 +1562,7 @@ the randomized nature of our tests.
 Verification tools should be as simple as possible while still
 revealing unexpected behavior. The pipeline for geometric
 convergence is straightforward and thus much less error-prone. This is
-mostly because
-Etiene \emph{et al.}'s approach uses analytical manufactured solutions to provide
+mostly because the approach of Etiene \emph{et al.} uses analytical manufactured solutions to provide
 information about function value, gradients, area, and curvature. In topology,
 on the other hand, we can manufacture only simple analytical solutions (e.g., a
 sphere, torus, double-torus, etc.) for which we know topological
@@ -1629,7 +1581,7 @@ correctly. For SMT, one may compute $\chi$ for an isovalue that is
 greater than any other in the grid. In such case, the verification
 tool should result in $\chi = 0$. For DT, we can use the fact that
 Majority Interpolation always produces a 2-manifold. Fortunately, this
-test reduces to check for two invalid cube configurations as described
+test reduces to check for two invalid cube configurations, as described
 by Stelldinger \emph{et al.}~\cite{siqueira:2007}. Obviously, there might
 remain bugs in the verification code. As we have stated before, a
 mismatch between the expected invariants and the computed ones
@@ -1648,14 +1600,14 @@ for each grid cube to determine the digital surface (DS) or critical
 points (SMT).  In this particular context, we highlight the recent
 developments on certifying algorithms, which produce both the
 output and an \emph{efficiently checkable certificate of
-  correctness}\cite{McConnell:2010:CA}.
+  correctness} \cite{McConnell:2010:CA}.
 
 
 \subsection{Contour Trees}
 Contour trees \cite{Hamish03} are powerful structures to describe the
 evolution of level-sets of simply connected domains. It normally
 assumes a simplicial complex as input, but there are extensions to
-handle regular grids\cite{Pascucci03}. Contour trees naturally provide
+handle regular grids \cite{Pascucci03}. Contour trees naturally provide
 $\beta_0$, and they can be extended to report $\beta_1$ and
 $\beta_2$. Hence, for any isovalue, we have information about all
 Betti numbers, even for surfaces with boundaries.  This fact renders
@@ -1665,7 +1617,7 @@ confidence in the algorithm's behavior.  However, the implementation of
 a contour tree is more complicated than the techniques presented here.
 For regular-grids, a divide-and-conquer approach can be used along
 with oracles representing the split and join trees in the deepest
-level of the recursion, which is non-trivial. Also, implementing the
+level of the recursion, which is nontrivial. Also, implementing the
 merging of the two trees to obtain the final contour tree is still
 involving and error-prone.  Our approach, on the other
 hand, is based on regular grid refinement and voxel selection for the DT
@@ -1680,7 +1632,7 @@ mistakes in publicly available implementations.  We believe that the
 simpler methodologies we have presented here are more likely to be
 adopted during development of visualization isosurfacing tools.
 
-\subsection{Topology of the underlying object}
+\subsection{Topology of the Underlying Object}
 In this work, we are interested in how to effectively verify
 topological properties of codes which employ trilinear
 interpolation. In particular, this means that our verification tools
@@ -1707,7 +1659,7 @@ different from the $d$.
 \includegraphics[width=0.4\linewidth]{chapter3/figures/distance-field.pdf}
 \caption{\label{fig:chap4:vtk} Isosurface extracted with VTK Marching Cubes}
 \end{figure}
-Figure \ref{fig:chap4:vtk} on the right shows a typical output produced by VTK
+Figure \ref{fig:chap4:vtk} shows a typical output produced by VTK
 Marching Cubes for the distance field $d = \alpha$. Notice, however,
 that this is not only an issue of sampling rate because if the tube
 keeps going through the diagonals of cubic cells, VTK will not be able

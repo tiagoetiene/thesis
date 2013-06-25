@@ -4,7 +4,7 @@
 In the last several decades, the visualization and graphics communities have developed a wide range of volume rendering techniques. As they are used in several different disciplines of science, and thus form a basis for new scientific insights, it is essential to assess their reliability and identify errors. Furthermore, the increasing complexity of volume rendering algorithms makes the correctness of the algorithm itself as well as its potentially error-prone implementations complementary and equally important issues.  Being that volume rendering is essential in areas such as medical imaging, where accuracy and precision play a crucial role, a formal methodology for assessing correctness is highly desirable~\cite{kirby-vv-08, Pommert2002}. While verification has been widely adopted in many different branches of computer science -- see  model checking~\cite{Clarke08}, fuzzing~\cite{godefroid08}, and convergence analysis~\cite{Roy2005} -- there has not been significant work accomplished on a formalized praxis for asserting the correctness of visualization techniques. 
 %In this article we present a new verification approach for direct volume rendering techniques as well as its theoretical background. 
 We use the word verification in the same sense as Babuska and Oden \cite{babuska04}: ``verification is the process of determining if a computational model, and its corresponding numerical solution, obtained by discretizing the mathematical model (with corresponding exact solution) of a physical event, and the code implementing the computational model can be used to represent the mathematical model of the event with sufficient accuracy''~\cite{babuska04}. 
-The presented methodology is based on order-of-accuracy and convergence analysis~\cite{Roy2005} which we can apply after deriving the expected behavior of the algorithms under observation. 
+The presented methodology is based on order of accuracy and convergence analysis~\cite{Roy2005} which we can apply after deriving the expected behavior of the algorithms under observation. 
 
 To allow the verification of volume rendering algorithms, we start with an analysis of the volume rendering integral and the most common discretization of this continuous model -- Riemman summation. This analysis gives us insight into the expected behavior of the observed algorithms, which is essential to perform verification~\cite{159342}. In this sense, our main assumption, serving as a foundation for the proposed verification approach, is that discretization errors of the implementations under verification should behave as the errors introduced by 
 the discretization of the volume rendering integral. 
@@ -15,25 +15,12 @@ Based on the results of this comparison, we can assess the correctness of the im
 We can demonstrate that our methodology is capable of increasing the confidence in volume rendering algorithms. To our knowledge, the proposed approach is the first step towards the verification of DVR algorithms. Thus, it can be seen as an important contribution towards a formal verification methodology of volume rendering techniques~\cite{roach98}.
 %
 Our main contributions are:
-\begin{itemize}
-\item we derive the theoretical foundations necessary for verifying volume rendering with order-of-accuracy and convergence analysis. We analyze the volume rendering integral and its (common) discretization using Riemann summation to derive an algorithm's expected behavior when being subject to parameter changes;
+\begin{itemize}[topsep=0px,partopsep=0px,itemsep=0px,parsep=0px]
+\item we derive the theoretical foundations necessary for verifying volume rendering with order of accuracy and convergence analysis. We analyze the volume rendering integral and its (common) discretization using Riemann summation to derive an algorithm's expected behavior when being subject to parameter changes;
 \item we explain how to exploit these theoretical foundations to perform a practical verification of implemented volume rendering algorithms, such that it can be easily used for the verification of existing volume rendering frameworks;
 \item we discuss the limitations of the proposed concepts by analyzing frequently occurring errors and by documenting those errors we could identify when applying the presented methodology to two widely used volume rendering frameworks, 
 \text{VTK} \cite{vtk} and Voreen \cite{MRMH09} (see Figure~\ref{chap5:fig:teaser}).
 \end{itemize}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=1\linewidth]{chapter5/figures/teaser.png}
-\caption{\label{chap5:fig:teaser} (a) shows the result of our verification procedure
-  for dataset refinement. The
-  blue line corresponds to the initial behavior, which deviates from
-  the expected slope (solid dark line).  After fixing
-  the issues, we obtain the orange curve, with a slope closer to the
-  expected one (denoted by $k$). (b) and (c) show a
-  human torso, displaying the blood vessels and the spine, before and
-  after our changes.  (d) shows the difference between (b) and (c).}
-\end{figure}
 
 \section{Related Work}
 \label{sec:related-works}
@@ -52,7 +39,22 @@ al.}~\cite{Meissner:2000:PEP:353888.353903} evaluate volume rendering
 techniques using the human visual system as a reference while, more
 recently, Smelyanskiy \emph{et
 al.}~\cite{Smelyanskiy:2009:MHV:1638611.1639155} present a domain expert guided comparison scheme.
-%that uses an evaluation guided by a domain expert.  
+%
+\begin{landscape}
+\begin{figure}[t]
+\centering
+\includegraphics[width=1\linewidth]{chapter5/figures/teaser.png}
+\caption{\label{chap5:fig:teaser} Our verification procedure was applied to the Voreen engine. (a) shows the result of our verification procedure
+  for dataset refinement. The
+  blue line corresponds to the initial behavior, which deviates from
+  the expected slope (solid dark line).  After fixing
+  the issues, we obtain the orange curve, with a slope closer to the
+  expected one (denoted by $k$). (b) and (c) show a
+  human torso, displaying the blood vessels and the spine, before and
+  after our changes.  (d) shows the difference between (b) and (c).}
+\end{figure}
+\end{landscape}
+%
 While those approaches are valuable, the need for a more systematic
 evaluation is discussed in several
 papers~\cite{globus95,Johnson:2004:TSV:1018014.1018051,Johnson:2003:NSV:942583.942610,kirby-vv-08}. See Pommert and
@@ -73,18 +75,9 @@ high-quality, accurate and efficient algorithms using graphics
 hardware~\cite{Engel01,Kye:2008p871,Rottger2000}. Similarly, VTK
 currently uses partial pre-integration, in particular for unstructured
 grids~\cite{Moreland2004}. Note that although there has been work on
-high-order and high-accuracy volume rendering -- to the best of our
+high-accuracy volume rendering -- to the best of our
 knowledge -- none of these approaches attempted to evaluate the convergence
 rate of the standard discretization process of the volume rendering integral. 
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.8\linewidth]{chapter5/figures/torso-image.png}
-\caption{\label{fig:error-quantification-examples}  Left: 
-  the volume rendering of the torso dataset using an incorrect trilinear
-  interpolation. Middle: Same dataset with the correct 
-  interpolation. Right: difference between the two images.}
-\end{figure}
 
 The use of a verification framework has only recently been discussed
 in scientific visualization, despite the vast literature on
@@ -113,24 +106,16 @@ quantification of the discretization errors when compared to an
 analytical solution, a benchmark solution or some ground-truth;
 \emph{convergence analysis}, a procedure in which one evaluates if the
 discretization errors converge to zero as a function of some
-parameter; and \emph{order-of-accuracy}, a procedure where one
+parameter; and \emph{order of accuracy}, a procedure where one
 evaluates if the discretization errors decrease according to the
 expected rate. In this list, the expert judgment is the least rigorous
 test, followed by error quantification and convergence analysis. 
-Order-of-accuracy is widely recognized as the most rigorous code
+Order of accuracy is widely recognized as the most rigorous code
 verification tool~\cite{babuska04, KnuppSalari02, roach98,
   Roy2005}. In this chapter, we focus on the latter two methods, namely,
-convergence analysis and order-of-accuracy. Before we dive into these
+convergence analysis and order of accuracy. Before we dive into these
 methods, let us first consider some of the limitation of the expert
 analysis and error quantification.
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.8\linewidth]{chapter5/figures/refinement.png}
-\caption{\label{fig:verification-procedure} Our verification procedure
-  works by evaluating discretization error during refinement
-  of one of three sampling parameters.%\myspace 
-  }
-\end{figure}
 
 In visualization, expert analysis and error quantification are, to the
 best of our knowledge, the only two verification tools previously employed for
@@ -167,10 +152,29 @@ can also fail to predict code mistakes, even for a severe bug.)
 On the other hand, we will have enough information to make such a
 decision if one observes how errors behave when input parameters
 change instead of quantifying them from one image. The convergence
-and order-of-accuracy tests work in this way, and they are the focus
+and order of accuracy tests work in this way, and they are the focus
 of this chapter.
-
-We advocate the use of convergence and order-of-accuracy verification
+%
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\linewidth]{chapter5/figures/torso-image.png}
+\caption{\label{fig:error-quantification-examples}  Expert analysis and error quantification may fail to detect problems. 
+Left: 
+  the volume rendering of the torso dataset using an incorrect trilinear
+  interpolation. Middle: same dataset with the correct 
+  interpolation. Right: difference between the two images.}
+\end{figure}
+%
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{chapter5/figures/refinement.png}
+\caption{\label{fig:verification-procedure} Our verification procedure
+  works by evaluating discretization error during refinement
+  of one of three sampling parameters.%\myspace 
+  }
+\end{figure}
+%
+We advocate the use of convergence and order of accuracy verification
 not as a replacement but as an extension of the current testing
 pipeline.  
 %Nevertheless, our experiments show that our technique
@@ -230,14 +234,13 @@ assume the well-known \emph{low albedo} \emph{emission} plus
 (VRI) $I$, as described by Engel \emph{et al.}~\cite{Engel01}, is:
 \begin{eqnarray}
 I(x,y) &=& \int_0^D C(s(\mathbf{x}(\lambda)))
-\tau(s(\mathbf{x}(\lambda))) \nonumber \\
-&& \label{eq:emission_absorption}  \qquad \times \exp\left(-\int_0^\lambda
+\tau(s(\mathbf{x}(\lambda))) \times \exp\left(-\int_0^\lambda
 \tau(s(\mathbf{x}(\lambda'))) \mathrm{d}\lambda'\right)\mathrm{d}\lambda,
 \label{eq:volume-rendering-equation}
 \end{eqnarray}
 where $D$ is the ray length, $C(s(\mathbf{x}(\lambda)))$ is the
 reflected/emitted light, $\tau(s(\mathbf{x}(\lambda)))$ is the light
-extinction coefficient, $s(\mathbf{x}(\lambda))$ is the scalar value
+extinction coefficient, and $s(\mathbf{x}(\lambda))$ is the scalar value
 at position $\mathbf{x}$ in the ray parameterized by $\lambda$.  There
 are three natural ways to discretize the equation. We will generate
 progressively denser ray sampling (by refining the integration
@@ -278,14 +281,14 @@ successive ray step refinements (see Figure
 %progressively smaller step size.
 %We then evaluate
 %the error $E_i$.  
-Equation~\eqref{eq:emission_absorption} is commonly
+Equation~\eqref{eq:volume-rendering-equation} is commonly
 discretized using traditional Riemann summation for numerical integration:
 \begin{equation}
 \int_0^D f(s(\mathbf{x}(\lambda))) \mathrm{d}\lambda =
 \sum_{i=0}^{n-1} f(s(\mathbf{x}(i d))) d + O(d),
 \label{eq:rectangle-rule}
 \end{equation}
-where $n$ is the number of sub-intervals and $d = D  /
+where $n$ is the number of subintervals and $d = D  /
 n$. The proof of linear convergence follows from Taylor expansion of
 the integrand over small intervals $d$. 
 %This implies that the errors involved in the Riemann sum decreases linearly with $d$. 
@@ -301,7 +304,7 @@ also the integrand $T(s(\mathbf{x}(\lambda))) =
 approximations: $e^{t(\lambda)}$ and the inner integral. Before we derive the
 convergence rate for the VRI, let us first evaluate the convergence of
 $T$. Throughout the text, we assume that all transfer functions are
-smooth, {\em i.e.,} $C(s), \tau(s) \in C^\infty$. Although
+smooth, {\em i.e.}, $C(s), \tau(s) \in C^\infty$. Although
 this is not the case in practice, this restriction is useful for convergence
 evaluation and verification purposes.
 
@@ -313,7 +316,7 @@ Let $T(\lambda) = T_\lambda = e^{-t(\lambda)}$, where $t(\lambda) = \int_0^{\lam
 will first approximate $t(\lambda)$ and then $T(\lambda)$. Typically, the
 integral is solved using Riemann summation. 
 In the following, $d = D / n$ is the ray sampling distance, 
-$D$ is the ray length and $n$ is the number of sub-intervals along the ray:
+$D$ is the ray length and $n$ is the number of subintervals along the ray:
 \begin{eqnarray}
 \int_0^{\lambda} \tau(\lambda') \mathrm{d}\lambda' & = &
 \sum_{j=0}^{i-1}\tau(j d) d + O(d) \label{eq:order_integral},
@@ -344,13 +347,12 @@ T_\lambda
 & = & \prod_{j=0}^{i-1}\exp\left(-\tau_j d\right) + \prod_{j=0}^{i-1}\exp\left(-\tau_j d\right)O(d).  \label{eq:m}
 \end{eqnarray}
 
-\paragraph*{Part I}
-Let us focus on the second term in the right hand side of Equation \eqref{eq:m}. The first observation is that it contains only approximation errors, which means that we are  interested only in its asymptotic behavior. Let us expand it using first-order Taylor approximation and use the fact that  $\tau_j d = O(d)$: 
+Let us focus on the second term in the right-hand side of Equation \eqref{eq:m}. The first observation is that it contains only approximation errors, which means that we are  interested only in its asymptotic behavior. Let us expand it using first order Taylor approximation and use the fact that  $\tau_j d = O(d)$: 
 \begin{eqnarray}
 \prod_{j=0}^{i-1}\left(1-O(d)\right)O(d) &=& \left(1+O(d)\right)^iO(d), \label{eq:error-q}
 \end{eqnarray}
 %
-where the change in the sign is warranted because the goal is to determine the asymptotic behavior. For $i = 1$, only one step is necessary for computing the volume rendering integral along the ray, and the previous equation will exhibit linear convergence.  Nevertheless, in the general case, the numerical integration requires multiple steps, hence errors accumulate, and the convergence may change. Thus  we set $i = n$. Knowing that $(1 + O(d) )^{n} = O(1)$ (see Appendix) and inserting Equation \eqref{eq:error-q} into Equation \eqref{eq:m} we obtain:
+where the change in the sign is warranted because the goal is to determine the asymptotic behavior. For $i = 1$, only one step is necessary for computing the volume rendering integral along the ray, and the previous equation will exhibit linear convergence.  Nevertheless, in the general case, the numerical integration requires multiple steps, hence errors accumulate, and the convergence may change. Thus,  we set $i = n$. Knowing that $(1 + O(d) )^{n} = O(1)$ (see Appendix) and inserting Equation \eqref{eq:error-q} into Equation \eqref{eq:m}, we obtain:
 \begin{eqnarray}
 T_\lambda
 & = & \prod_{j=0}^{i-1}\exp(-\tau_j d)  + O(d)O(1)\\
@@ -361,7 +363,6 @@ T_\lambda
 & = & \prod_{j=0}^{i-1} \left(1 - \tau_jd + O(d^2)\right) + O(d).\label{eq:partial}
 \end{eqnarray}
 
-\paragraph*{Part II}
 We now show that the first term on the right side of Equation \eqref{eq:partial}
 also converges linearly with respect to $d$. In the course of this section, we omit the presence of the term $O(d)$ in Equation \eqref{eq:partial} for the sake of clarity. Let us define the set $K$ as the set of indices $j$ for which $1-\tau_j d = 0$. The size of $K$ is denoted as $|K| = k$. We also define $\overline{K}$ as the set of indices $j$ for which $1-\tau_j d \neq 0$, and $|\overline{K}|=i-k$.  
 %
@@ -384,9 +385,9 @@ T_\lambda
 & = &\left( \prod_{j \in \overline{K}} 1 - \tau_jd \right) (1 + O(d^2) )^{i-k} O(d^{2k}). \label{eq:k}
 \end{eqnarray}
 
-In real world implementation, $k \neq 0$ implies that at least one of the terms $1 - \tau_j d = 0$. Hence the code accumulating the value of $T$,
+In real-world implementation, $k \neq 0$ implies that at least one of the terms $1 - \tau_j d = 0$. Hence, the code accumulating the value of $T$,
 \texttt{T = T * (1 - t$_j$ * d)},
-will invariably return \texttt{T = 0}. This can also be seen in our theoretical analysis. For $k \neq 0$, the entire right-hand-side of Equation \eqref{eq:k} \emph{is} the approximation error. The larger $k$ is -- \emph{i.e.} the more zeroes in the product of Equation \eqref{eq:k} --  the faster the sequence converges to zero due to the $O(d^{2k})$ factor. So, when $k \neq 0$, one obtains a high-order approximation of $T_\lambda = 0$. Nevertheless, because we want to recover the approximation errors for the general case ($T_\lambda \neq 0$), we set $k = 0$ in Equation \eqref{eq:k}, and $i = n$ (for the same reasons as previously stated):
+will invariably return \texttt{T = 0}. This can also be seen in our theoretical analysis. For $k \neq 0$, the entire right-hand side of Equation \eqref{eq:k} \emph{is} the approximation error. The larger $k$ is -- \emph{i.e.}, the more zeroes in the product of Equation \eqref{eq:k} --  the faster the sequence converges to zero due to the $O(d^{2k})$ factor. So, when $k \neq 0$, one obtains a high order approximation of $T_\lambda = 0$. Nevertheless, because we want to recover the approximation errors for the general case ($T_\lambda \neq 0$), we set $k = 0$ in Equation \eqref{eq:k}, and $i = n$ (for the same reasons as previously stated):
 \begin{eqnarray}
 T_\lambda
 & = &\left( \prod_{j = 0}^{n-1} 1 - \tau_jd \right) (1 + O(d^2) )^{n}.
@@ -424,7 +425,7 @@ Because both $\tau_i$ and $C_i$ are bounded, one can write $C_i \tau_i d O(d) = 
 \begin{eqnarray}
 I(x,y)  &=& \sum_{i=0} ^ {n-1} C(i d) \tau(i d) d \tilde{T}_{i} + O(d).
 \end{eqnarray}
-We have now showed that the dominant error when considering step size
+We have now shown that the dominant error when considering step size
 in the VRI is of order $O(d)$. In other words, when decreasing the step size by half, the
 error should be reduced by a factor of a half.
 
@@ -451,7 +452,7 @@ error should be reduced by a factor of a half.
 % the classic discretization scheme of the VRI, namely, one that assumes that both the inner
   %and outer integral are approximated using Riemann sums. Naturally, one may also be interested
 %  in the effects on the error when using other integration methods. 
-The interplay between the approximation errors of the inner and outer integrals is non-trivial; 
+The interplay between the approximation errors of the inner and outer integrals is nontrivial; 
   here we demonstrate this fact with a simple numerical example.  Table \ref{table:orders} shows the
   result of using different integration methods for the inner and outer integrals along a 
   single ray. We simulate the integration along a single ray to compute these quantities
@@ -462,7 +463,7 @@ The interplay between the approximation errors of the inner and outer integrals 
   we further assume that $\exp(x)$ does not introduce errors.  
   The computation of the convergence rate is detailed in Section \ref{sec:convergence_analysis}. The results shown in Table \ref{table:orders} suggest
   that one needs to improve the accuracy of \emph{both} the inner and outer integrals to obtain a
-  high-order method.  
+  high order method.  
 
 \subsection{Errors Due to Dataset Refinement}
 \label{sec:VerViaDatasetRefinement}
@@ -518,7 +519,7 @@ The interplay between the approximation errors of the inner and outer integrals 
 For the purposes of this chapter, we assume that no additional 
 errors will be created during the refinement of the scalar field. 
 Hence, we need to find an interpolation function that fulfills the 
-so called two-scaling property. Fortunately, B-splines fulfill the 
+so-called two-scaling property. Fortunately, B-splines fulfill the 
 two-scale property~\cite{799930}; we choose the linear B-spline, 
 which results in the well-known trilinear interpolator. Care must 
 be taking on the refinement step. In this chapter, we will choose a 
@@ -573,6 +574,17 @@ center, but evaluates the error \emph{over the entirety of the pixel values}.
 Figure \ref{fig:pixel_size_refinement} illustrates the
 process.
 
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.95\linewidth]{chapter5/figures/pixel-size-convergence.png}
+\caption{\label{fig:pixel_size_refinement} Pixel refinement. Typically, the VRI is evaluated
+only at pixel centers (top). The value at the center is then interpolated in the domain defined by the pixel size (bottom) using
+nearest-neighbor interpolation to obtain $\tilde{I}^i$. In a correct
+implementation, as $i$ increases, $\tilde{I}^i$ approaches the true
+solution $I$.}
+\end{figure}
+
+
 We use the notation $I = I(x,y)$, $I^j_i = I^j(x_i, y_i)$, and $\delta_i =
 (x, y) - (x_i, y_i)$. In what follows, the Taylor expansion assumes a fixed level of detail $j$. 
 We omit the superscript $j$ for the sake of clarity. Let us write
@@ -603,7 +615,7 @@ Section~\ref{sec:convergence_analysis}.
 
 Two practical aspects that are worth noting. 
 In practice, the $\sup(x,y)$ of the error over a pixel $(x,y)$ cannot be computed. 
-Thus we use a finite high-resolution 
+Thus, we use a finite high-resolution 
 image as a proxy for the true solution. This allows us to 
 evaluate the maximum error over a pixel. Note also that colors are evaluated at pixel
 center, as shown in Figure \ref{fig:pixel_size_refinement}.
@@ -617,16 +629,6 @@ verification purposes. Therefore,
 to use the analysis outlined above,
 %when using these approximation errors, 
 one must manufacture scalar fields and transfer functions which yield a smooth function (cf. Section~\ref{chap5:sec:results}).
-
-\begin{figure}[b]
-\centering
-\includegraphics[width=0.95\linewidth]{chapter5/figures/pixel-size-convergence.png}
-\caption{\label{fig:pixel_size_refinement} Pixel refinement. Typically, the VRI is evaluated
-only at pixel centers (top). The value at the center is then interpolated in the domain defined by the pixel size (bottom) using
-nearest-neighbor interpolation to obtain $\tilde{I}^i$. In a correct
-implementation, as $i$ increases, $\tilde{I}^i$ approaches the true
-solution $I$.}
-\end{figure}
 
 %The discretization due to pixel size refinement is similar to the
 %convergence of 2D regular grids. 
@@ -734,7 +736,7 @@ solution $I$.}
 
 The heart of our method is the evaluation of the discretization
 errors. Once we have the discretization errors, we can evaluate the
-order-of-accuracy and convergence rate.  The error computation and
+order of accuracy and convergence rate.  The error computation and
 analysis will proceed differently depending on whether an analytical
 solution for the VRI is available or not. We highlight that previous
 frameworks for verification of visualization algorithms could benefit
@@ -754,12 +756,12 @@ solution $F$ can be written as:
 \begin{eqnarray}
 F(x,y) = I(x,y) + O(r^k) = I(x,y) + \beta r^k + \text{HOT},
 \end{eqnarray}
-where $I$ is the approximated image, $r$ is the discretization parameter 
+where $I$ is the approximated image, $r$ is the discretization parameter, 
 %(step size, grid size, or pixel size) 
 and $\beta \in \mathbb{R}$ is a constant, multiplicative
 factor that is not a function of the dataset. An important assumption
 is that the HOT, or ``higher order terms'', are small enough that they
-do not affect the convergence of order $k \in \mathbb{R}$, {\em i.e.}, high-order
+do not affect the convergence of order $k \in \mathbb{R}$; {\em i.e.}, high order
 derivatives of $F$ must have negligible impact in the asymptotic
 convergence of $I$~\cite{Roy2005}. 
 This formulation implies that not all solutions
@@ -802,10 +804,10 @@ cannot always be computed analytically~\cite{Max95}. In the general
 case, we need an alternative method for determining the error.
 
 
-\subsection{Numerical Errors When The True Solution Is Unknown}
+\subsection{Numerical Errors when the True Solution Is Unknown}
 
 In the case where the true solution is unknown {\em a priori}, using a numerical approximation in
-a high-precision context ({\em i.e.} a gold standard solution) to compute a reference image is a valid
+a high-precision context ({\em i.e.}, a gold standard solution) to compute a reference image is a valid
 approach for verification~\cite{Kronander10}.  The main disadvantage
 of this approach is that it might mask errors which appear in the reference image
 itself.
@@ -845,7 +847,7 @@ all pixels:
 E_i &=& \sup_{x,y}(e_i(x,y))\nonumber\\ 
     &=& \sup_{x,y}(|I_{i+1}(x,y)-I_{i}(x,y)|) = \beta(1-c^k) r_i^k.\label{eq:unknownsolutionerror}
 \end{eqnarray}
-Thus the observed convergence is again computed by taking logarithms
+Thus, the observed convergence is again computed by taking logarithms
 of both sides. We then write $y = \log
 \beta (  1 - c^k )$ to hide the dependency of the term in $k$
 and determine $y$ and $k$ via least-squares:
@@ -864,7 +866,7 @@ approximation errors with respect to $N$ are introduced.
 %logarithm will have a zero term. Notice that in cases where $y \neq 0$
 %and $k = 0$, Equation~\eqref{eq:unknownsolutionerror} would not hold
 %directly. Still, the least-squares solution in logarithmic space
-%nicely recovers the non-convergence trend, as can be seen in
+%nicely recovers the nonconvergence trend, as can be seen in
 %Figure~\ref{fig:convergence} (a), (f), and (i).
 
 Equation~\eqref{eq:observed_convergence} shows us how to compute the
@@ -875,13 +877,13 @@ approximations using reference images. We have generated sequences of
 images based on the refinements in the following section.  The steps
 are shown in Algorithm \ref{alg:verification-procedure}.
 
-\begin{algorithm}[t]
+\begin{algorithm}[b]
 \begin{codebox}
 \Procname{$\proc{Verification Procedure}(G,\tau(s),d_0,N_0,h_0,\rho)$}
 \li \Comment Let $G$ be the scalar field
 \li \Comment Let $\tau(s)$ be a transfer function
-\li \Comment Let $d_0$, $N_0 \times N_0 \times N_0$ and $h_0$ be the initial step size,
-\zi  dataset size and pixel size respectively
+\li \Comment Let $d_0$, $N_0 \times N_0 \times N_0$, and $h_0$ be the initial step size,
+\zi  dataset size and pixel size, respectively
 \li \Comment Let  $\rho \in \{ \textsf{step}, \textsf{dataset}, \textsf{pixel} \}$
 \li $F_0 \gets$ \proc{VolumeRendering($G,\tau(s),d_0,N_0,h_0$)}
 \li \For $i \gets 1$ \To $\#$tests
@@ -896,7 +898,7 @@ are shown in Algorithm \ref{alg:verification-procedure}.
 \eqref{eq:known-solution} or \eqref{eq:observed_convergence}
 \end{codebox}
 \caption{A simple algorithm for verification via step size, dataset
-  size or pixel size.}
+  size, or pixel size.}
 \label{alg:verification-procedure}
 \end{algorithm}
 
@@ -905,7 +907,7 @@ are shown in Algorithm \ref{alg:verification-procedure}.
 \label{chap5:sec:results}
 
 We present the results of applying our verification framework to two
-mature and widely-used libraries, namely VTK and Voreen. We stress
+mature and widely-used libraries, namely, VTK and Voreen. We stress
 that the goal here is first to show that our verification technique is
 very sensitive to changes that cause the output image to deviate from
 the correct solution; secondly, it is very easy to apply and thus can
@@ -916,8 +918,8 @@ implementations.
 
 In what follows, we show all the implementations that will be under scrutiny.
 
-\paragraph*{VTK} 
-The VTK library provides several implementations of the well-known VRI techniques. In our tests we included two modules from
+\subsubsection{VTK} 
+The VTK library provides several implementations of the well-known VRI techniques. In our tests, we included two modules from
 version 5.6.1: \texttt{vtkVolumeRayCast} (RCM) and
 \texttt{vtkFixedPointVolumeRayCast} (FP).  The RCM module
 accepts as input scalar fields with 8- or 16-bit precision and internal
@@ -929,7 +931,7 @@ capture 15 bit and 32 bit precision images for FP and RCM
 respectively.
 
 
-\paragraph*{Voreen} 
+\subsubsection{Voreen} 
 As opposed to the tested modules in VTK, Voreen uses the graphics
 processing unit (GPU) and front-to-back compositing for its
 implementations. From the ray casting processors available within
@@ -949,7 +951,7 @@ along the $z$ axis. We did not include shading since that gives a
 more complex VRI. To verify shaded results, a different
 theoretical analysis is necessary.  The images can be generated using
 both perspective and parallel projections. We only use
-post-classification, which simplifies the analysis. In addition, we
+postclassification, which simplifies the analysis. In addition, we
 assume an identity opacity transfer function (that is, the opacity is
 exactly equal to the sampled scalar). We do this
 because for every pair of scalar field and opacity transfer function,
@@ -973,7 +975,7 @@ low resolution grids with random scalar fields are effective at
 stressing the code for debugging purposes.
 
 Let $l$ be the cell size.
-For verification via dataset refinement we start with $2^3$ grid
+For verification via dataset refinement, we start with $2^3$ grid
 nodes, and we refine grid cells until we reach $513^3$ nodes,
 corresponding to cell sizes $l_{i+1} = \frac{1}{2} l_i$. Step size is
 fixed at $d = 10^{-2}$. This is done to evaluate the effects
@@ -988,10 +990,8 @@ between the rendered image and an analytical solution. In this case,
 we use an analytical solution for the volume rendering integral in the
 domain $[0,1]^2$. We assume the following: $s(x,y,z) = z \cos(xy)$,
 $\tau(s) = \sin(s)$, $\textbf{x}(\lambda) = (x, y, \lambda)$, $C(s)
-= 1$ and ray length $D = 1$. The analytical solution is then:
-\begin{equation}
-I(x,y) = 1-\mathrm{exp}{\left(\frac{\cos(\cos(xy))}{\cos(xy)}-\frac{1}{\cos(xy)}\right)}.
-\end{equation}
+= 1$, and ray length $D = 1$. The analytical solution is then:
+$I(x,y) = 1-\mathrm{exp}{\left(\frac{\cos(\cos(xy))}{\cos(xy)}-\frac{1}{\cos(xy)}\right)}.$
 The dataset size used is $513^3$, and the step size is set at $d =
 10^{-5}$ to mitigate sampling errors. Both step and dataset size are
 fixed to only evaluate errors due to pixel size refinement.
@@ -1032,7 +1032,7 @@ under verification. If a solution $F$ is available, $E_i = \max_{x,y}
 %\label{tab:summary}
 %\end{table}
 
-In the following sections we report the results of applying the
+In the following sections, we report the results of applying the
 verification framework with known and unknown exact solutions to three
 volume rendering implementations. 
 %Table \ref{tab:summary} indicates
@@ -1043,18 +1043,9 @@ volume rendering implementations.
 
 \subsection{Observed Behavior}
 
-The results of our verification procedure are summarized in
-Figure~\ref{fig:convergence}.  We tested both VTK and Voreen and found
-unexpected behaviors.  We emphasize that this \emph{does not}
-immediately translate into a code mistake but only that a deeper
-investigation is needed. To find the reason for the unexpected behavior we
-analyzed the source code of the given systems.  We expect linear
-convergence when step size or pixel size are refined ($k = 1$) and
-constant error when dataset refinement is used.
-
-\begin{figure}
+\begin{figure}[b]
 \centering
-\includegraphics[width=.9\linewidth]{chapter5/figures/convergence_table.png}
+\includegraphics[width=1\linewidth]{chapter5/figures/convergence_table.png}
 \caption{\label{fig:convergence} Each plot shows the convergence
   experiments for one particular implementation and one particular
   type of convergence. The behavior before any changes to the source
@@ -1067,7 +1058,17 @@ constant error when dataset refinement is used.
 }
 \end{figure}
 
-\paragraph*{FP}
+
+The results of our verification procedure are summarized in
+Figure~\ref{fig:convergence}.  We tested both VTK and Voreen and found
+unexpected behaviors.  We emphasize that this \emph{does not}
+immediately translate into a code mistake but only that a deeper
+investigation is needed. To find the reason for the unexpected behavior, we
+analyzed the source code of the given systems.  We expect linear
+convergence when step size or pixel size are refined ($k = 1$) and
+constant error when dataset refinement is used.
+
+\subsubsection{FP}
 The results obtained for the FP module (blue curves in
 Figures~\ref{fig:convergence}(a), (b), and (c)) were different from
 expected for all tests. The 15-bit fixed-point precision could, to
@@ -1079,10 +1080,10 @@ a constant error when using step size refinement and perspective
 projection. We expect the error to decrease for large values of $d$;
 we acknowledge that when $d$ is too small, the errors due to 15-bit fixed-point
 precision will dominate.
-After investigating the reason for this deviation we found that
+After investigating the reason for this deviation, we found that
 depending on the pixel position, some rays might cross only half of
 the volume instead of the full volume. In other words, instead of
-sampling the ray in $n$ locations, for some pixels the ray was only
+sampling the ray in $n$ locations, for some pixels, the ray was only
 sampled $\frac{n}{2}$ times. This is a combination of several factors
 which includes domain size, step size, and ray direction. Details 
 can be found in the supplementary material.
@@ -1096,7 +1097,7 @@ curves in Figures~\ref{fig:convergence}(a), (b), and (c) show the
 convergence results after modifying VTK's source.  Notice that for
 step size refinement using perspective projection, the convergence
 curve changed from $0.02$ to $0.92$ for the first seven samples. For the eight 
-and ninth samples the error slightly increases. A similar phenomenon occur
+and ninth samples, the error slightly increases. A similar phenomenon occur
 in the parallel convergence curve. The curve starts to
 diverge in the high-resolution regime (parallel and perspective projection plot).
 This is likely to be due to the limit of 15-bit fixed point arithmetic.  Although 
@@ -1107,9 +1108,9 @@ which can be explained by the $O(d)$ error.
 %of the discrepancy: the testing suite, the theory or the
 %implementation under verification.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.7\linewidth]{chapter5/figures/fp-fcm-before-after.png}
+\includegraphics[width=0.8\linewidth]{chapter5/figures/fp-fcm-before-after.png}
 \caption{\label{fig:fp-rcm-example} The figure shows images rendered
   using VTK 5.6.1. In our experiments, the `+'  pattern became more evident
   in two cases:  when coarse datasets are used, and/or high number
@@ -1140,13 +1141,13 @@ which can be explained by the $O(d)$ error.
   rendered with VTK 5.6.1 and Fixed-Point Raycast Mapper (FP). On the
   left, we see the artifacts (dark lines) that prevented FP convergence. In the
   middle, we see the results after fixing the issues that prevented
-  convergence. The artifacts are no longer visible. On the right we
+  convergence. The artifacts are no longer visible. On the right, we
   see the difference image.}
 \end{figure}
 
 
 
-\paragraph*{RCM}
+\subsubsection{RCM}
 The RCM module (blue curves in Figures \ref{fig:convergence}(d), (e),
 and (f)) produces nearly linearly converging sequences when refining
 the step size or pixel size.  However, dataset refinement with either
@@ -1194,7 +1195,7 @@ some positive value. This might be due to other sources of error which
 become dominant after sufficient refinement.
 
 
-\paragraph*{Voreen}
+\subsubsection{Voreen}
 
 Our first ray refinement tests did not result in linear convergence
 for Voreen (blue line in Figure~\ref{fig:convergence}(g)) due to the
@@ -1209,18 +1210,18 @@ described in Section \ref{sec:VerViaDatasetRefinement}, rendering the
 same scalar field represented by a different number of voxels should
 not affect the result.  For Voreen, the unexpected behavior was caused
 by sampling at incorrect texture locations.  More specifically,
-internally, Voreen assumed that the texture data is node centered
+internally, Voreen assumed that the texture data are node centered
 when, in fact, OpenGL uses grid centered data. In this case, both the
 volume and transfer function values were affected. In OpenGL, the
 texture coordinates of a texture of resolution $R^m$ lie in the domain
 $[0, 1]^m$, where $m$ is the texture dimension. Since the data values
-are grid centered, this means that the outer most data values are
+are grid centered, this means that the outermost data values are
 located at $[\frac{1}{2R}, 1-\frac{1}{2R}]$ with the settings used in
 Voreen.  We will refer to the domain in which the data values lie as
 the data domain.  For volume rendering, the integration of a ray
 should be done over the data domain, but for Voreen, the entry and
 exit points of the rays went outside of that domain which caused the
-unexpected behavior.  To obtain the expected constant convergence we
+unexpected behavior.  To obtain the expected constant convergence, we
 apply the following transformation to the input texture coordinate $p$
 (see orange line in Figure~\ref{fig:convergence}(i)):
 
@@ -1232,7 +1233,7 @@ apply the following transformation to the input texture coordinate $p$
 Equation~\eqref{eq:correct_texture_sampling} scales and translates the
 texture coordinate to be in the domain $[\frac{1}{2R},
   1-\frac{1}{2R}]^m$, where the data values lie.  The effect of
-transforming the input coordinate for a real world example can be seen
+transforming the input coordinate for a real-world example can be seen
 in Figure~\ref{chap5:fig:teaser}.  We provide an explanation for why this
 does not affect ray entry and exit point sampling, and also discuss
 the implications of different boundary values in the supplementary
@@ -1253,7 +1254,7 @@ We have contacted Voreen developers and the issue found was indeed
 identified as a bug. The proposed solution will be adopted into
 Voreen's next release.
 
-No unexpected behavior could be detected for pixel size convergence as
+No unexpected behavior could be detected for pixel size convergence, as
 shown in Figure~\ref{fig:convergence}(h), neither before nor
 after changing the texture coordinate sampling. Both curves lie near 
 the expected behavior ($0.93$ and $0.94$).
@@ -1308,7 +1309,7 @@ bugs~\cite{Yang:2006:UMC:1189256.1189259};
 Howden~\cite{Howden:1980:ASV:357103.357107} evaluated the efficacy of
 dynamic and static testing for the detection of \emph{known} real bugs
 of a mathematical library; Knupp and Salari \cite{KnuppSalari02}, on
-the other hand, used the order-of-accuracy verification procedure to
+the other hand, used the order of accuracy verification procedure to
 uncover \emph{known} manufactured bugs in a proof-of-concept code.  In
 software engineering, the process of evaluating a testing suite by
 injecting defects into a program is known as \emph{mutation
@@ -1324,59 +1325,21 @@ contain known issues. Table \ref{tab:vs} shows the results of some of
 the performed tests. In our experiments, we observed that some issues
 did not affect the observed behavior.  The reason for this is that an
 incomplete set of tests~\cite{KnuppSalari02} was performed, as shown
-with test $\#10$ in Table \ref{tab:vs}. In that case a bug in the G
+with test $\#10$ in Table \ref{tab:vs}. In that case, a bug in the G
 and B color lookups went unnoticed because our framework only used the
 R channel. Once the verification framework includes all three
 channels, the convergence behavior does not match the expectations, 
 hence revealing an aberrant behavior that should be investigated. For bug $\#9$, we swapped two of the polynomial coefficients,
 but they were equal for the scalar field used and thus the bug was not
 detected. After changing the scalar field to $s(x,y,z) = 1xyz + 2xy +
-3xz + \cdots$ the convergence curve no longer matches the expected one,
+3xz + \cdots$, the convergence curve no longer matches the expected one,
 and thus the bug is detected. Bug $\#11$ was introduced in a
 matrix-vector multiplication routine which turned out to be dead
 code. However, for bug $\#12$, the loop range was slightly incorrect
 and it was not detected, even after additional changes to the
 verification framework.
 
-Aside from the defects injected into VTK, the following is a list of
-details known to affect the convergence curve:
-\emph{ERT}, as explained before;
-\emph{opacity correction}, when using the analytical solution of the volume rendering integral;
-\emph{hardcoded tolerance constants}, the famous ``epsilons'';
-\emph{off-by-one} indexing problems (sometimes VTK does not render pixels in the first or last
-column of an image);
-\emph{improper volume sampling} (cell centered versus grid centered
-scalar fields);
-\emph{high-frequency transfer functions};
-\emph{high-frequency scalar fields};
-\emph{incorrect texture coordinate mapping}, as reported with Voreen;
-\emph{inconsistent number of steps through the volume}, as reported
-with FP and RCM; etc. % hey guys, etc. and \emph{\emph{et al.}.}. are never capitalized :)
-From all the observed situations where the step/dataset/pixel size
-convergence was affected, many of these are deliberate design
-decisions, minor mistakes during the verification procedure or minor
-problems with the implementation itself which can be easily fixed.
-%
-Note that those issues were not all inside the ray integration routine
-itself, but in a variety of locations, spanning from pre-processing
-steps to OpenGL texture sampling of data.
-Our verification procedure was sensitive enough to detect all these
-situations. 
-
-\subsection{Other Volume Rendering Techniques}
-
-While we focus on ray casting, our approach can be extended to other
-techniques. Because the core of our method is a discretization of the
-VRI, the only requirement is to formulate the volume rendering
-algorithm as a numerical approximation to the true integral.
-Splatting~\cite{Westover:1989:IVR:329129.329138}, for instance, uses a
-reconstruction kernel before accumulating the contributions of voxels
-into the final image. This approach is substantially different from
-ray casting in the way it approximates the VRI, and so the asymptotic
-errors involved will have to account for errors in both accumulation
-and filter reconstruction~\cite{Moller:1996:CLE:236226.236235}.
-
-\begin{landscape}
+\afterpage{\clearpage\begin{landscape}
 \begin{table}
 \caption{\label{tab:vs} This table shows the sensitivity of convergence verification
 for different scenarios in a volume renderer.
@@ -1464,8 +1427,45 @@ We applied our step size verification using
 Exact solution & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
 \end{tabular}
 \end{table}
-\end{landscape}
+\end{landscape}}
 
+Aside from the defects injected into VTK, the following is a list of
+details known to affect the convergence curve:
+\emph{ERT}, as explained before;
+\emph{opacity correction}, when using the analytical solution of the volume rendering integral;
+\emph{hardcoded tolerance constants}, the famous ``epsilons'';
+\emph{off-by-one} indexing problems (sometimes VTK does not render pixels in the first or last
+column of an image);
+\emph{improper volume sampling} (cell centered versus grid centered
+scalar fields);
+\emph{high-frequency transfer functions};
+\emph{high-frequency scalar fields};
+\emph{incorrect texture coordinate mapping}, as reported with Voreen;
+\emph{inconsistent number of steps through the volume}, as reported
+with FP and RCM; etc. % hey guys, etc. and \emph{\emph{et al.}.}. are never capitalized :)
+From all the observed situations where the step/dataset/pixel size
+convergence was affected, many of these are deliberate design
+decisions, minor mistakes during the verification procedure or minor
+problems with the implementation itself which can be easily fixed.
+%
+Note that those issues were not all inside the ray integration routine
+itself, but in a variety of locations, spanning from preprocessing
+steps to OpenGL texture sampling of data.
+Our verification procedure was sensitive enough to detect all these
+situations. 
+
+\subsection{Other Volume Rendering Techniques}
+
+While we focus on ray casting, our approach can be extended to other
+techniques. Because the core of our method is a discretization of the
+VRI, the only requirement is to formulate the volume rendering
+algorithm as a numerical approximation to the true integral.
+Splatting~\cite{Westover:1989:IVR:329129.329138}, for instance, uses a
+reconstruction kernel before accumulating the contributions of voxels
+into the final image. This approach is substantially different from
+ray casting in the way it approximates the VRI, and so the asymptotic
+errors involved will have to account for errors in both accumulation
+and filter reconstruction~\cite{Moller:1996:CLE:236226.236235}.
 
 Algorithmic improvements for volume rendering may require a more
 careful approach. For example, pre-integration computes the results of
@@ -1473,7 +1473,7 @@ the integral with high precision over sample intervals and stores them
 in a look-up table. This increases efficiency and quality, since
 fewer steps are typically needed \cite{Engel01}. How the table
 approximates the integral will affect the convergence rate: if there
-is an analytical solution then no error is associated with $d$
+is an analytical solution, then no error is associated with $d$
 intervals; otherwise, a numerical approximation scheme might be used
 which means the error will depend on $d' = d / m$, where $m$ is the
 number of sample points used in that interval and the integration
@@ -1505,9 +1505,9 @@ yet expressive (so that the experiment analysis catches bugs).
  
 Both the discretization and verification procedures have
 limitations. In the discretization of the VRI equation, we assume that
-the solution $I(x,y)$ is smooth. Moreover, we assume that high-order
+the solution $I(x,y)$ is smooth. Moreover, we assume that high order
 terms are negligible. This assumption implies that we can safely
-discard all high-order terms when deriving the errors.  In addition,
+discard all high order terms when deriving the errors.  In addition,
 the verification is done in a controlled fashion to avoid other error
 sources, as shown in 
 Figure \ref{fig:convergence}(a). Additional asymptotic analysis 
