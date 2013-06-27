@@ -22,6 +22,7 @@
 \usepackage{url}
 \usepackage{enumitem}
 \usepackage{afterpage}
+\usepackage{pdfpages}
 
 \definecolor{darkgreen}{rgb}{0.0, 0.4, 0.0}
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
@@ -73,8 +74,9 @@
 \frontmatterformat
 \titlepage
 \copyrightpage
-\committeeapproval
+%\committeeapproval
 %\readingapproval
+\includepdf[pages={1}]{approval_phd.pdf}
 \preface{abstract}{Abstract}
 \dedicationpage
 \begin{epigraph}
