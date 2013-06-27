@@ -921,6 +921,31 @@ tests, we consider the implementation verified.
 \subsection{Verification Using Stratified Morse Theory}
 \label{subsec:smt-verify}
 
+\begin{algorithm}[t]
+\begin{codebox}
+\Procname{$\proc{MMS-SMT}(\mathcal{G})$}
+\li \Comment Let the input $\mathcal{G}$ be $n \times n \times n$ rectilinear grid
+\li \For $i \gets 1$ \To $\#$tests
+\li     \Do $\mathcal{G} \gets$ randomly sampled $n \times n \times n$ grid \label{alg:mms:sampling}
+\li         $\id{CPs} \gets \proc{ComputeCriticalPoints}(\mathcal{G})$
+\li         \If $p \in CPs$ is degenerate \kw{or}
+\li		$p$ is an internal saddle close to edges or faces
+\li         	\Then $\proc{GoTo}$ \ref{alg:mms:sampling} \label{alg:mms:goto-smt}
+\li         \Else $K \gets \proc{Isosurfacing}(\mathcal{G})$
+\li         	  $(\chi^v)_i \gets \proc{InvariantFromCPs}(\mathcal{G})$
+\li         	  $(\chi^k)_i \gets \proc{InvariantFromMesh}(K)$
+	    \End
+\li Compare $(\chi^v)_i$ and $(\chi^k)_i$
+      \End
+\end{codebox}
+\caption{\label{alg:manufactured-solutions-smt}Overview of the method of manufactured solutions (MMS) using
+stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
+\eqref{ref:chis}. The method either fails to match the expected topology, in
+which case $\mathcal{G}$ is provided as a counterexample, or
+succeeds otherwise.}
+\end{algorithm}
+
+
 We can use the formulation described in Section~\ref{sec:smt} to
 verify isosurfacing programs which promise to match the
 topology of the trilinear interpolant.
@@ -952,30 +977,6 @@ $\Delta_x$, $\Delta_y$, or $\Delta_z$ are zero). In order
 to avoid numerical instabilities, we also regenerate the scalar field
 locally if any internal critical point lies too close to the border of
 the domain (that is, to an edge or to a face of the cube).
-
-\begin{algorithm}[b]
-\begin{codebox}
-\Procname{$\proc{MMS-SMT}(\mathcal{G})$}
-\li \Comment Let the input $\mathcal{G}$ be $n \times n \times n$ rectilinear grid
-\li \For $i \gets 1$ \To $\#$tests
-\li     \Do $\mathcal{G} \gets$ randomly sampled $n \times n \times n$ grid \label{alg:mms:sampling}
-\li         $\id{CPs} \gets \proc{ComputeCriticalPoints}(\mathcal{G})$
-\li         \If $p \in CPs$ is degenerate \kw{or}
-\li		$p$ is an internal saddle close to edges or faces
-\li         	\Then $\proc{GoTo}$ \ref{alg:mms:sampling} \label{alg:mms:goto-smt}
-\li         \Else $K \gets \proc{Isosurfacing}(\mathcal{G})$
-\li         	  $(\chi^v)_i \gets \proc{InvariantFromCPs}(\mathcal{G})$
-\li         	  $(\chi^k)_i \gets \proc{InvariantFromMesh}(K)$
-	    \End
-\li Compare $(\chi^v)_i$ and $(\chi^k)_i$
-      \End
-\end{codebox}
-\caption{\label{alg:manufactured-solutions-smt}Overview of the method of manufactured solutions (MMS) using
-stratified Morse theory. \proc{InvariantFromCPs} is computed using Equation
-\eqref{ref:chis}. The method either fails to match the expected topology, in
-which case $\mathcal{G}$ is provided as a counterexample, or
-succeeds otherwise.}
-\end{algorithm}
 
 The third step computes the Euler characteristic of a set of
 isosurfaces with random isovalues in the interval $[-1, 1]$ using the
