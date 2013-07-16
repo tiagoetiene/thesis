@@ -168,7 +168,7 @@ This is due to the Catmull-Rom spline that is being used for surface
 approximation on the voxelized grid. Since it has cubic-order of accuracy, 
 even for large values of $\rho$  it can approximate with high precision 
 the manufactured solution $f$. The next section shows that this is due to a poor 
-choice for a manufactured solution. DelIso implementation has non-zero order 
+choice for a manufactured solution. DelIso implementation has nonzero order 
 of accuracy due to an outlier. Large values of $\iota$ causes bad approximations 
 of the manufactured solution.
 
@@ -191,16 +191,16 @@ assumed before (see Section \ref{chap1:sec:mms-complexity}).
 \centering
 \subfigure{
 \label{fig:meshconver}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv-bug.pdf}}
 \subfigure{
 \label{fig:normconver}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv-bug.pdf}}
 \subfigure{
 \label{fig:areaconv}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv-bug.pdf}}
 \subfigure{
 \label{fig:curvatureconv}
-\includegraphics[width=0.48\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv-bug.pdf}}
 \caption{Observed order of accuracy. The implementations of 
 Macet and Dual Contouring have a bug that causes the deviation on errors. The black 
 continuous line represents the expected behavior. $p$ is the slope of the linear 
@@ -213,16 +213,16 @@ regression for each curve.}
 \centering
 \subfigure{
 \label{fig:meshconver-fixed}
-\includegraphics[width=0.487\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_meshconv.pdf}}
 \subfigure{
 \label{fig:normconver-fixed}
-\includegraphics[width=0.488\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_normalconv.pdf}}
 \subfigure{
 \label{fig:areaconv-fixed}
-\includegraphics[width=0.49\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_areaconv.pdf}}
 \subfigure{
 \label{fig:curvatureconv-fixed}
-\includegraphics[width=0.485\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
+\includegraphics[width=0.43\linewidth,keepaspectratio=true]{chapter2/figures/all_curvconv.pdf}}
 \caption{Observed order of accuracy after fixing Macet and Dual Contouring code (other curves remain the same). The black continuous line represents the expected behavior. $p$ is the slope of the linear regression for each curve.}
 \label{fig:allconv-fixed}
 \end{figure}

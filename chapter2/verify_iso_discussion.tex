@@ -9,9 +9,9 @@ limited information (source code and algorithmic details) is
 available.  In this section, we present a more thorough discussion 
 of the use of MMS, particularly for isosurface extraction.
 
-\subsection{On the implementation and use of MMS.}
+\subsection{On the Implementation and Use of MMS}
 One of the primary advantages of verifying simulation codes using MMS
-is that it is a non-intrusive method. MMS treats the code being
+is that it is a nonintrusive method. MMS treats the code being
 verified as a blackbox, and so can be easily integrated into an existing
 test suite with little to no impact.
 %
@@ -53,7 +53,7 @@ the results available within the literature.
 % easy-to-code test. All that is needed is to run the desired code as a
 % blackbox and compute the error relative to a manufactured solution.
 
-\subsection{On the complexity of the manufactured solution.}
+\subsection{On the Complexity of the Manufactured Solution}
 \label{chap1:sec:mms-complexity}
 The complexity of the manufactured solution can have a large influence
 on the effectiveness of verification. 
@@ -63,7 +63,7 @@ sphere. Since MC-based techniques use linear interpolation,
 one expects the approximation
 to be exact regardless of any discretization
 parameter $h$, {\em i.e.}, $p = 0$ (notice that the evaluated error might
-be non-zero, implying there is some other error source that
+be nonzero, implying there is some other error source that
 does not depend on $h$).
 %
 Since such a function $f$ is extremely simple,
@@ -103,7 +103,7 @@ Both have the expected convergence rate for all but the last two values.}
 \end{figure}
 
 
-\subsection{On the order of accuracy.}
+\subsection{On the Order of Accuracy}
 In this chapter, we have chosen to make our formal analysis as generic
 as possible to accommodate as many implementations under verification
 as possible. Although we are able to evaluate many codes using the same 
@@ -150,7 +150,7 @@ have experienced) bugs only manifest themselves on sufficiently small
 values of $h$.
 
 
-\subsection{On the limitations of the test.}
+\subsection{On the Limitations of the Test}
 MMS does not cover every aspect of verification for
 isosurface extraction. For example, an important aspect we do not
 know how to test with MMS is the topological correctness of an

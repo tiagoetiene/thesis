@@ -421,7 +421,7 @@ I(x,y) &=& \sum_{i=0} ^ {n-1} C(i d) \tau(i d) T_i d + O(d)\\
 &=& \sum_{i=0}^{n-1} C_i \tau_i d \left(\tilde{T}_{i} + O(d)\right) + O(d)\\
 &=& \sum_{i=0}^{n-1} C_i \tau_i \tilde{T}_{i} d + \sum_{i=0}^{n-1} C_i \tau_i d O(d) + O(d).
 \end{eqnarray}
-Because both $\tau_i$ and $C_i$ are bounded, one can write $C_i \tau_i d O(d) = O(d^2)$ and $\sum_i O(d^2) = n O(d^2) = \frac{D}{d}O(d^2) = O(d)$. The above equation can be re-written as:
+Because both $\tau_i$ and $C_i$ are bounded, one can write $C_i \tau_i d O(d) = O(d^2)$ and $\sum_i O(d^2) = n O(d^2) = \frac{D}{d}O(d^2) = O(d)$. The above equation can be rewritten as:
 \begin{eqnarray}
 I(x,y)  &=& \sum_{i=0} ^ {n-1} C(i d) \tau(i d) d \tilde{T}_{i} + O(d).
 \end{eqnarray}
@@ -430,7 +430,7 @@ in the VRI is of order $O(d)$. In other words, when decreasing the step size by 
 error should be reduced by a factor of a half.
 
 
-\begin{table}[b]
+\begin{table}[t]
 \normalsize
   \caption{Effects of the different integration methods.}
   \centering

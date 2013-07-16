@@ -186,7 +186,7 @@ Although flow visualization using both curves and surface dates back over two de
 %Some of the challenges that have been tackled are the problems of occlusion, seeding and placement of primitives, and rendering.
 %
 % Curves
-For curves, the main contributions of the past decade are related to rendering, seeding and placement of curves.
+For curves, the main contributions of the past decade are related to rendering, seeding, and placement of curves.
 %
 % Surface
 Edmunds \emph{et al.} \cite{Edmunds2012974} classify the surface-based flow visualization into surface construction and rendering. 
@@ -455,7 +455,7 @@ the saturated colors are ``easier to see'', and it is the ``most aesthetically p
 Another possible reason  for its widespread use is that it is default in many popular simulation and 
 visualization tools. Paraview is one of the tools that no longer uses the rainbow color map as the
 default option since the publication of ``Rainbow Color Map (Still) Considered 
-Harmful'' \cite{paraview} by Borland \emph{et al.}. The author even suggest that a better name for it would be ``misleading color map''.
+Harmful'' \cite{paraview} by Borland \emph{et al.} The author even suggest that a better name for it would be ``misleading color map''.
 %
 In light of the many pitfalls of the rainbow color map, the visualization community has, in the past few 
 years, been moving away from it. 
@@ -630,7 +630,7 @@ The authors built a collection of 500 vector fields for evaluation of the tasks.
 Uncertainty visualization  and  visualization verification  are two important topics in the pursuit for reliable visualizations. 
 The AIAA community is  familiar with both topics. In this chapter, however, we present some of the recent advancements in this area from the point of view of the Visualization community. The goal is to increase the user confidence in the results of the visualization by answering questions such as: how can one visualize the inherent error sources in the visualization? or, how can one increase her/his confidence that an implementation of a visualization algorithm  does what was intended? In the following sections we present some of the recent developments in uncertainty visualization and the verification of isosurface extraction techniques.
 
-%Amidst the several available techniques, many questions are asked by the diligent practitioner: how techniques compare to each other? What are the best techniques available for a given scenario? How can we measure and visualize the different error sources? How can one make sure that the results of the visualization are actually showing what it was intended? The AIAA community has already a tradition of carefully handling some of these topics in their domain. Nevertheless, the visualization is often considered as a post-processing and many times experts and practitioners are not fully aware of the ideas used behind the scenes along with its limitations and guarantees. Recently, the visualization community has undertaken many of these tasks in order to improve reliability of visualization procedures. In this section, we briefly review some of the advances in the reliability of visualization techniques. 
+%Amidst the several available techniques, many questions are asked by the diligent practitioner: how techniques compare to each other? What are the best techniques available for a given scenario? How can we measure and visualize the different error sources? How can one make sure that the results of the visualization are actually showing what it was intended? The AIAA community has already a tradition of carefully handling some of these topics in their domain. Nevertheless, the visualization is often considered as a postprocessing and many times experts and practitioners are not fully aware of the ideas used behind the scenes along with its limitations and guarantees. Recently, the visualization community has undertaken many of these tasks in order to improve reliability of visualization procedures. In this section, we briefly review some of the advances in the reliability of visualization techniques. 
 
 % will insert figures and more details of paper [1]
 
@@ -654,7 +654,7 @@ The AIAA community is  familiar with both topics. In this chapter, however, we p
 
 \subsection{Uncertainty Visualization}
 
-In the course of scientific inquiry, uncertainty is the norm. The visualization community has recently turned its attention to uncertain data, and is trying to solve problems on how to best compute and convey uncertainty information. Since 2010, around 30 papers were published at {\em TVCG} on the topic, with application on information visualization and scientific visualization. So far, the community has seen several different representation for uncertainty, varying from traditional method such as bars, glyphs, and colors, to texture, multi-layering, animations, and volume rendering. At the AIAA community, we analyzed ten papers since 2010 dealing with material uncertainty, uncertainty in flows, and fluid simulation. The visualization step, on the other hand, is restricted almost exclusively to error bars and charts.
+In the course of scientific inquiry, uncertainty is the norm. The visualization community has recently turned its attention to uncertain data, and is trying to solve problems on how to best compute and convey uncertainty information. Since 2010, around 30 papers were published at {\em TVCG} on the topic, with application on information visualization and scientific visualization. So far, the community has seen several different representation for uncertainty, varying from traditional method such as bars, glyphs, and colors, to texture, multilayering, animations, and volume rendering. At the AIAA community, we analyzed ten papers since 2010 dealing with material uncertainty, uncertainty in flows, and fluid simulation. The visualization step, on the other hand, is restricted almost exclusively to error bars and charts.
 
 In the user study conducted by Sanyal \emph{et al.} \cite{Sanyal:2009:USC:1638611.1639227},  the authors evaluate the effectiveness of four commonly used uncertainty visualization techniques: namely, glyphs size, glyphs color mapping, surface color mapping, and error bars (see Figure \ref{fig:uncertainty_user_study} for examples). The users performed two search tasks by identifying regions that are least and most uncertain, and two counting tasks where users counted the number of data and uncertainty features. The authors reported that, in general,  users required more time and committed more mistakes when using error bars. The authors conjecture that a possible reasons for the poor performance displayed by error bars is due to the high density of the dataset used in their study. Nevertheless, a similar pattern can be found in the AIAA community (\emph{e.g.}, see Figures 4 and 6 in Chassaing and Lucor \cite{Chassaing:2010:SIF:27267063}). 
 
@@ -662,7 +662,7 @@ Several techniques for uncertainty visualization of vector fields are available.
 
 \subsection{Verifiable Visualization}
 
-As Chapter \ref{chap:geometry} and \ref{chap:topology} has shown, there has been work on
+As Chapter \ref{chap:geometry} and \ref{chap:topology} have shown, there has been work on
 the verification of the implementation of isosurface extraction algorithms.
 %Algorithm verification has recently attracted attention in the Visualization community.
 %Although the need for verifying and validating image results dates back almost two decades,
