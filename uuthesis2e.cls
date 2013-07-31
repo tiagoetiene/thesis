@@ -1333,7 +1333,7 @@
       }
       \@degree \\
       \vspace{0.5cm} in \\
-      \vspace{0.5cm} Computer Science \\
+      \vspace{0.5cm} Computing \\
       \vskip 7\baselineskip
       \expandafter{\@department}\\
       \mbox{} \\
